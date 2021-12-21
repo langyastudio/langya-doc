@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>程序员知识完全扫盲 - 郎涯工作室</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />  
-  <meta name="keywords" content="java,spring,jvm,srs,api,interview,高并发,langya-doc,langya" />
+  <meta name="keywords" content="java,spring,jvm,srs,api,interview,高并发,高可用,分布式,微服务,langya-doc,langya" />
   <meta name="description" content="程序员知识完全扫盲，项目维护者: 郎涯">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
@@ -24,16 +24,82 @@
 </head>
 
 <body>
-  <div id="app">加载中</div>
+  <div id="app">本系列知识由 郎涯工作室 总结发布</div>
   <script>
     window.$docsify = {
-      name: '',
-      repo: ''
+      name: "langya-doc",
+      maxLevel: 4,
+      auto2top: true,      
+      loadSidebar: "summary.md",
+      alias: {
+        "/.*/.*/summary": "summary.md",
+        "/.*/summary.md": "summary.md",
+      },
+      pagination: {
+        previousText: "上一篇",
+        nextText: "下一篇",
+        crossChapter: true,
+        crossChapterText: true,
+      },
+      search: {
+        maxAge: 1800000,
+        paths: [
+          "/docs/architecture/",
+          "/docs/cs-basic/",
+          "/docs/database/",
+          "/docs/devops/",
+          "/docs/issue/",
+          "/docs/java/",
+          "/docs/manage/",
+          "/docs/middleware/",
+          "/docs/open/",
+          "/docs/video/",
+          "/docs/web/",
+        ],
+        depth: 4,
+      },
+      count:{
+        countable: true,
+        fontsize: '0.9em',
+        color: 'rgb(90,90,90)',
+        language: 'chinese'
+      },
+      darklightTheme: {
+        defaultTheme: 'light',
+        siteFont: 'Source Sans Pro,Helvetica Neue,Arial,sans-serif',
+        codeFontFamily: 'Roboto Mono, Monaco, courier, monospace',
+        bodyFontSize: '15px',
+        dark: {
+          background: 'rgb(28,32,34)',
+          highlightColor: '#e96900',
+          codeBackgroundColor: 'rgb(34,39,46)',
+          codeTextColor: '#b4b4b4',
+        },
+        light: {
+          highlightColor: '#e96900',
+        }
+      },
+      plugins: [
+       
+      ]
     }
   </script>
 
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  
+  <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-c.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-cpp.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-json.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-python.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-php.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code@2.1.1/dist/docsify-copy-code.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"></script>
+  <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
 </body>
 </html>
