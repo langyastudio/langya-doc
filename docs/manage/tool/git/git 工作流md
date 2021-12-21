@@ -1,0 +1,234 @@
+git 作为一个源码管理系统，不可避免涉及到多人协作。
+
+协作必须有一个规范的工作流程，让大家有效地合作，使得项目井井有条地发展下去。"工作流程"在英语里，叫做"workflow"或者"flow"，原意是水流，比喻项目像水流那样，顺畅、自然地向前流动，不会发生冲击、对撞、甚至漩涡。最早诞生、并得到广泛采用的一种工作流程，就是**[Git flow](https://www.atlassian.com/git/tutorials/comparing-workflows)** （除此之外，还有Github flow、Gitlab flow等）。
+
+采用"**功能驱动式开发**"（Feature-driven development，简称FDD）。它指的是：
+
+>需求是开发的起点，先有需求再有功能分支（feature branch）或者补丁分支（hotfix branch）。完成开发后，该分支就合并到主分支，然后被删除。
+
+>Git flow的优点是清晰可控，缺点是相对复杂，需要同时维护两个长期分支。大多数工具都将master当作默认分支，可是开发是在develop分支进行的，这导致经常要切换分支，非常烦人。
+
+>更大问题在于，这个模式是基于"版本发布"的，目标是一段时间以后产出一个新版本。但是，很多网站项目是"持续发布"，代码一有变动，就部署一次。这时，master分支和develop分支的差别不大，没必要维护两个长期分支。
+
+
+
+## 特点
+
+- **1.1 项目存在两个长期分支**
+
+主分支master
+开发分支develop
+
+> 前者用于存放对外发布的版本，任何时候在这个分支拿到的，都是稳定的分布版；后者用于日常开发，存放最新的开发版。
+
+- **1.2 项目存在三种短期分支**
+
+功能分支（feature branch）
+补丁分支（hotfix branch）
+预发分支（release branch）
+
+>一旦完成开发，它们就会被合并进develop或master，然后被删除。
+
+
+
+## 工作方式
+
+Gitflow工作流通过为**功能开发**、**发布准备**和**维护分配**独立的分支，让发布迭代过程更流畅。严格的分支模型也为大型项目提供了一些非常必要的结构。
+
+![这里写图片描述](https://img-note.langyastudio.com/20210708141315.png?x-oss-process=style/watermark)
+
+
+Gitflow工作流定义了一个围绕项目发布的严格分支模型。虽然比功能分支工作流复杂几分，但提供了用于一个健壮的用于管理大型项目的框架。
+
+Gitflow工作流没有用超出功能分支工作流的概念和命令，而是为不同的分支分配一个很明确的角色，并定义分支之间如何和什么时候进行交互。
+
+除了使用功能分支，在做准备、维护和记录发布也使用各自的分支。
+当然你可以用上功能分支工作流所有的好处：Pull Requests、隔离实验性开发和更高效的协作。
+
+> Gitflow工作流仍然用中央仓库作为所有开发者的交互中心。和其它的工作流一样，开发者在本地工作并push分支到要中央仓库中。
+
+
+
+- **2.1 历史分支**
+
+
+相对使用仅有的一个master分支，Gitflow工作流使用2个分支来记录项目的历史。master分支存储了正式发布的历史，而develop分支作为功能的集成分支。
+这样也方便master分支上的所有提交分配一个版本号。
+
+![这里写图片描述](https://img-note.langyastudio.com/20210708141041.png?x-oss-process=style/watermark)
+
+
+
+- **2.2 功能分支**
+
+每个新功能位于一个自己的分支，这样可以push到中央仓库以备份和协作。
+但功能分支不是从master分支上拉出新分支，而是使用develop分支作为父分支。当新功能完成时，合并回develop分支。
+**新功能提交应该从不直接与master分支交互。**
+
+![这里写图片描述](https://img-note.langyastudio.com/20210708141046.png?x-oss-process=style/watermark)
+
+> 注意，从各种含义和目的上来看，功能分支加上develop分支就是功能分支工作流的用法。但Gitflow工作流没有在这里止步。
+
+
+
+- **2.3 发布分支**
+
+![这里写图片描述](https://img-note.langyastudio.com/20210708141048.png?x-oss-process=style/watermark)
+
+一旦develop分支上有了做一次发布（或者说快到了既定的发布日）的足够功能，就从develop分支上fork一个发布分支。
+
+新建的分支用于开始发布循环，所以从这个时间点开始之后新的功能不能再加到这个分支上——
+**这个分支只应该做Bug修复、文档生成和其它面向发布任务**。
+
+一旦对外发布的工作都完成了，发布分支合并到master分支并分配一个版本号打好Tag。
+另外，这些从新建发布分支以来的做的修改要合并回develop分支。
+
+使用一个用于发布准备的专门分支，使得一个团队可以在完善当前的发布版本的同时，另一个团队可以继续开发下个版本的功能。
+这也打造定义良好的开发阶段（比如，可以很轻松地说，『这周我们要做准备发布版本4.0.1』，并且在仓库的目录结构中可以实际看到）。
+
+
+
+- **2.4 维护分支**
+
+![这里写图片描述](https://img-note.langyastudio.com/20210708141053.png?x-oss-process=style/watermark)
+
+维护分支或说是热修复（hotfix）分支用于生成快速给产品发布版本（production releases）**打补丁**，这是**唯一可以直接从master分支fork出来的分支**。
+
+修复完成，修改应该马上合并回master分支和develop分支（当前的发布分支），master分支应该用新的版本号打好Tag。
+为Bug修复使用专门分支，让团队可以处理掉问题而不用打断其它工作或是等待下一个发布循环。
+你可以把维护分支想成是一个直接在master分支上处理的临时发布。
+
+
+
+## 示例
+
+下面的示例演示本工作流如何用于管理单个发布循环。假设你已经创建了一个中央仓库。
+
+- **3.1 创建开发分支**
+
+![这里写图片描述](https://img-note.langyastudio.com/20210708141106.png?x-oss-process=style/watermark)
+
+第一步为master分支配套一个develop分支。简单来做可以本地创建一个空的develop分支，push到服务器上。
+以后这个分支将会包含了项目的全部历史，而master分支将只包含了部分历史。其它开发者这时应该克隆中央仓库，建好develop分支的跟踪分支。
+现在每个开发都有了这些历史分支的本地拷贝。
+
+
+
+- **3.2 小红和小明开始开发新功能**
+
+![这里写图片描述](https://img-note.langyastudio.com/20210708141109.png?x-oss-process=style/watermark)
+
+这个示例中，小红和小明开始各自的功能开发。他们需要为各自的功能创建相应的分支。新分支不是基于master分支，而是应该基于develop分支。他们用老套路添加提交到各自功能分支上：编辑、暂存、提交。
+
+```
+git checkout -b some-feature develop
+```
+
+```
+git status
+git add <some-file>
+git commit
+```
+
+
+
+- **3.3 小红完成功能开发**
+
+![这里写图片描述](https://img-note.langyastudio.com/20210708141112.png?x-oss-process=style/watermark)
+
+添加了提交后，小红觉得她的功能OK了。如果团队使用Pull Requests，这时候可以发起一个用于合并到develop分支。
+否则她可以直接合并到她本地的develop分支后push到中央仓库。
+
+```
+git pull origin develop
+git checkout develop
+git merge some-feature
+git push
+git branch -d some-feature
+```
+
+第一条命令在合并功能前确保develop分支是最新的。注意，功能决不应该直接合并到master分支。
+冲突解决方法和集中式工作流一样。
+
+
+
+- **3.4 小红开始准备发布**
+
+![这里写图片描述](https://img-note.langyastudio.com/20210708141116.png?x-oss-process=style/watermark)
+
+这个时候小明正在实现他的功能，小红开始准备她的第一个项目正式发布。
+像功能开发一样，她用一个新的分支来做发布准备。这一步也确定了发布的版本号：
+
+```
+git checkout -b release-0.1.1 develop
+```
+
+这个分支是清理发布、执行所有测试、更新文档和其它为下个发布做准备操作的地方，像是一个专门用于改善发布的功能分支。
+只要小红创建这个分支并push到中央仓库，**这个发布就是功能冻结的**。**任何不在develop分支中的新功能都推到下个发布循环中**。
+
+
+
+- **3.5 小红完成发布**
+
+![这里写图片描述](https://img-note.langyastudio.com/20210708141119.png?x-oss-process=style/watermark)
+
+一旦准备好了对外发布，小红合并修改到master分支和develop分支上，删除发布分支。合并回develop分支很重要，因为在发布分支中已经提交的更新需要在后面的新功能中也要是可用的。
+另外，如果小红的团队要求Code Review，这是一个发起Pull Request的理想时机。
+
+```
+git checkout master
+git merge release-0.1.1
+git push
+
+git checkout develop
+git merge release-0.1
+git push
+
+git branch -d release-0.1.1
+```
+
+发布分支是作为功能开发（develop分支）和对外发布（master分支）间的缓冲。只要有合并到master分支，就应该打好Tag以方便跟踪。
+
+```
+git tag -a 0.1.1 -m "Initial public release" master
+git push --tags
+```
+
+Git有提供各种勾子（hook），即仓库有事件发生时触发执行的脚本。
+可以配置一个勾子，在你push中央仓库的master分支时，自动构建好对外发布。
+
+
+
+- **3.6 最终用户发现BUG**
+
+![这里写图片描述](https://img-note.langyastudio.com/20210708141123.png?x-oss-process=style/watermark)
+
+对外发布后，小红回去和小明一起做下个发布的新功能开发，直到有最终用户开了一个Ticket抱怨当前版本的一个Bug。
+为了处理Bug，小红（或小明）从master分支上拉出了一个维护分支，提交修改以解决问题，然后直接合并回master分支。
+
+```
+git checkout -b issue-#001 master
+# Fix the bug
+git checkout master
+git merge issue-#001
+git push
+```
+
+就像发布分支，维护分支中新加这些重要修改需要包含到develop分支中，所以小红要执行一个合并操作。然后就可以安全地删除这个分支了。
+
+```
+git checkout develop
+git merge issue-#001
+git push
+git branch -d issue-#001
+```
+
+到了这里，但愿你对集中式工作流、功能分支工作流和Gitflow工作流已经感觉很舒适了。
+你应该也牢固的掌握了本地仓库的潜能，push/pull模式和Git健壮的分支和合并模型。
+
+记住，这里演示的工作流只是可能用法的例子，而不是在实际工作中使用Git不可违逆的条例。
+所以不要畏惧按自己需要对工作流的用法做取舍。不变的目标就是让Git为你所用。
+
+
+
+> 原文链接： [https://github.com/oldratlee/translations/tree/master/git-workflows-and-tutorials](https://github.com/oldratlee/translations/tree/master/git-workflows-and-tutorials)
