@@ -1,3 +1,11 @@
+本项目很多内容来自廖雪峰、JavaGuide、advanced-java、CS-Notes、srs等开源库，进行简单排版与补充整理，内容涵盖 java、php、c++、jvm、cs、redis、mysql、高并发、高可用、分布式、微服务、海量数据处理等领域知识。
+
+本项目基于 [Docsify](https://docsify.js.org/#/zh-cn/) 进行构建，目前支持以下 GitHub 站点访问：
+
+GitHub Pages：https://langyastudio.github.io/langya-doc
+
+
+
 ##  java
 
 [java 后端开发最全知识点](http://mp.weixin.qq.com/s?__biz=Mzg5MjYzNTA4Ng==&mid=2247484666&idx=1&sn=af2994b8b33ec4712464e3d5199c56b5&chksm=c03a565bf74ddf4d379ba675628aa323605c04806fec8edfe8ea7858126dc9f85b52f41e6a22&scene=21#wechat_redirect)
