@@ -239,7 +239,7 @@ class Broker {
 
 #### 其它
 
-![][1]
+![](https://img-note.langyastudio.com/202112221243227.png?x-oss-process=style/watermark)
 
 加分项咯 
 1. 包括组件通信间使用 Netty 的自定义协议
@@ -258,6 +258,3 @@ class Broker {
 4. 分布式事务的种类以及 RocketMQ 支持的分布式消息：https://www.infoq.cn/article/2018/08/rocketmq-4.3-release
 5. 滴滴出行基于RocketMQ构建企业级消息队列服务的实践：https://yq.aliyun.com/articles/664608
 6. 基于《RocketMQ技术内幕》源码注释：https://github.com/LiWenGu/awesome-rocketmq
-
-[1]: https://leran2deeplearnjavawebtech.oss-cn-beijing.aliyuncs.com/somephoto/RocketMQ%E6%B5%81%E7%A8%8B.png
-[2]: http://rocketmq.apache.org/release_notes/release-notes-4.5.0/
