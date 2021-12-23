@@ -2,7 +2,12 @@
 
 | 技术                 | 说明                | 官网                                           |
 | -------------------- | ------------------- | ---------------------------------------------- |
-| Spring Boot          | 容器+MVC框架        | https://spring.io/projects/spring-boot         |
+| Spring Cloud         | 微服务框架           | https://spring.io/projects/spring-cloud          |
+| Spring Cloud Alibaba | 微服务框架           | https://github.com/alibaba/spring-cloud-alibaba  |
+|                      |                      |                                                  |
+|                      |                      |                                                  |
+|                      |                      |                                                  |
+| Spring Boot | 容器+MVC框架 | https://spring.io/projects/spring-boot |
 | Spring Security      | 认证和授权框架      | https://spring.io/projects/spring-security     |
 | JWT | JWT登录支持 | https://github.com/jwtk/jjwt |
 | MyBatis              | ORM框架             | http://www.mybatis.org/mybatis-3/zh/index.html |
@@ -25,11 +30,13 @@
 | Hibernator-Validator | 验证框架            | http://hibernate.org/validator                 |
 |                      |                     |                                                |
 | Swagger-UI | 文档生成工具 | https://github.com/swagger-api/swagger-ui |
+| Knife4j | 文档生产工具 | https://github.com/xiaoymin/swagger-bootstrap-ui |
 | arthas | 诊断工具 | https://github.com/alibaba/arthas |
 | LogStash             | 日志收集工具        | https://github.com/elastic/logstash            |
 | Kibina               | 日志可视化查看工具  | https://github.com/elastic/kibana              |
 | Nginx                | 静态资源服务器      | https://www.nginx.com/                         |
 | Docker               | 应用容器引擎        | https://www.docker.com                         |
+| Portainer | 可视化Docker容器管理 | https://github.com/portainer/portainer |
 | Jenkins              | 自动化部署工具      | https://github.com/jenkinsci/jenkins           |
 
 
