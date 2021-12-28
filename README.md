@@ -143,7 +143,13 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [spring boot 如何解决跨域问题](./docs/java/framework/spring/spring-boot/11--跨域.md)
 - [spring boot validation 数据校验](./docs/java/framework/spring/spring-boot/12--validation-数据校验.md)
 
-  
+
+
+**打包**
+
+- [spring boot 利用 docker 自动化打包](https://mp.weixin.qq.com/s/3X6vVdWmjmWCyiLm35jpVw)
+
+
 
 **工具集**
 
