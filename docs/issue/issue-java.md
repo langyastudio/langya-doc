@@ -25,45 +25,16 @@ new ArrayList<V>( Collection<V> )
 
 > spring boot 在 `SpringApplication.run` 启动后才会执行组件、bean 的扫码组装操作
 
-#### maven 镜像仓库
+#### Unable to start LiveReload server
 
-在用户主目录下进入`.m2`目录，创建一个`settings.xml`配置文件，内容如下：
+在使用 SpringBoot 热部署插件 `devtools` ，同时启动多个 Application 时，控制台会报这个警告
 
-```xml
-<settings>
-    <mirrors>
-        <mirror>
-            <id>aliyun</id>
-            <name>aliyun</name>
-            <mirrorOf>central</mirrorOf>
-            <!-- 国内推荐阿里云的Maven镜像 -->
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-        </mirror>
-    </mirrors>
-</settings>
+```yaml
+spring:
+    devtools:
+       livereload:
+          port: 35739
 ```
-
-
-
-#### org.apache.maven.plugin.MojoExecutionException: Input length = 1
-
-在于 SpringBoot 2.4.0 升级了 maven-resources-plugin 到 3.2.0 版本，且工程中的 `application.properties `不是`UTF-8 `编码，在编译时出现异常。
-
-**解决方案：**
-
-修改 `application.properties` 文件的编码方式，选用 UTF-8 编码方式，idea中设置如下
-
-![在这里插入图片描述](https://img-note.langyastudio.com/20210406160232.png?x-oss-process=style/watermark)
-
-
-
-#### POST 请求字段值null
-
-由于错误使用注解，导致 RequestBody 实体类的字段 null，无法赋值
-
-**解决方案：**
-
-在 dto 的实体类中，移除 `org.jetbrains.annotations.NotNull` 等错误的注解
 
 
 
@@ -176,6 +147,48 @@ then add the following but do not remove any Commons Logging 1.x dependencies.--
 
 
 
+#### maven 镜像仓库
+
+在用户主目录下进入`.m2`目录，创建一个`settings.xml`配置文件，内容如下：
+
+```xml
+<settings>
+    <mirrors>
+        <mirror>
+            <id>aliyun</id>
+            <name>aliyun</name>
+            <mirrorOf>central</mirrorOf>
+            <!-- 国内推荐阿里云的Maven镜像 -->
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </mirror>
+    </mirrors>
+</settings>
+```
+
+
+
+#### org.apache.maven.plugin.MojoExecutionException: Input length = 1
+
+在于 SpringBoot 2.4.0 升级了 maven-resources-plugin 到 3.2.0 版本，且工程中的 `application.properties `不是`UTF-8 `编码，在编译时出现异常。
+
+**解决方案：**
+
+修改 `application.properties` 文件的编码方式，选用 UTF-8 编码方式，idea中设置如下
+
+![在这里插入图片描述](https://img-note.langyastudio.com/20210406160232.png?x-oss-process=style/watermark)
+
+
+
+#### POST 请求字段值null
+
+由于错误使用注解，导致 RequestBody 实体类的字段 null，无法赋值
+
+**解决方案：**
+
+在 dto 的实体类中，移除 `org.jetbrains.annotations.NotNull` 等错误的注解
+
+
+
 ##  Mybatis
 
 #### There is neither 'privateLookupIn(Class, Lookup)' nor 'Lookup(Class, int)' method in java.lang.invoke.MethodHandles
@@ -195,6 +208,20 @@ Mapper 类型映射错误导致，例如将 `java.lang.String` 映射为 `result
 **解决方案：**
 
 keyProperty 定义的主键名称与 Model 层定义的主键字段名称严格一致
+
+
+
+#### com.mysql.jdbc.MysqlDataTruncation: Data truncation: Data too long for column 'column_name'
+
+数据过长导致存储失败
+
+**解决方案：**
+
+自动截取
+
+```ini
+spring.datasource.url=jdbc:mysql://localhost:3306/conweb?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false
+```
 
 
 
@@ -225,54 +252,6 @@ keyProperty 定义的主键名称与 Model 层定义的主键字段名称严格�
 **解决方案：**
 
 将数据表放入首位
-
-
-
-## IDEA
-
-#### Debug模式启动慢或无法启动
-
-压根儿就没有改过代码，但突然无法启动。应该是一个设置的小问题，于是通过 run 按钮启动项目验证一下，果然启动成功了。这也就说明项目和代码没有任何问题，肯定是 IDEA 某个设置项的问题
-
-**解决方案：**
-
-因为在项目中有断点打在了方法上，因此导致的 debug 变慢。解决方法也简单，将打在方法上的断点去掉即可
-
-![image-20210428152911765](https://img-note.langyastudio.com/20210428152915.png?x-oss-process=style/watermark)
-
-> 使用方法断点会使得正在debug调试的程序变慢
-
-
-
-#### 无法初始化主类 Main  java.lang.NoClassDefFoundError: org/apache/catalina/WebResourceRoot
-
-在IDEA中，maven配置 `<scope>provided</scope>`，就告诉了 IDEA 程序会在运行的时候提供这个依赖，但是实际上却并没有提供这个依赖。
-
-**解决方案：**
-
-1. 打开 idea 的 Run/Debug Configurations:
-
-2. 选择 Application - Main
-
-3. 右侧 Configuration：Use classpath of module
-
-4. 钩上 ☑︎Include dependencies with "Provided" scope
-
-![image-20210330205542852](https://img-note.langyastudio.com/20210330205543.png?x-oss-process=style/watermark)
-
-
-
-#### 多端口启动
-
-![img](https://img.kancloud.cn/36/52/3652e9df361497b8de51eb07e2bc244f_1372x895.png)
-
-- 点击 edit configuration ，取消勾选 single instance only（只允许单节点运行）。在比较新的版本中这个勾选框变成了 Allow parallel run (允许多实例并发运行)，那你就给它勾选上
-- 复制一份当前配置，在 environment 选项中的 vm options 中设置不同的端口号
-
-```ini
--Dserver.port=8889 -Dserver.httpPort=89 -Dspring.profiles.active=dev -Ddebug
--Dserver.port=8888 -Dserver.httpPort=88 -Dspring.profiles.active=dev -Ddebug
-```
 
 
 

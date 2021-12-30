@@ -1,3 +1,49 @@
+### Debug模式启动慢或无法启动
+
+压根儿就没有改过代码，但突然无法启动。应该是一个设置的小问题，于是通过 run 按钮启动项目验证一下，果然启动成功了。这也就说明项目和代码没有任何问题，肯定是 IDEA 某个设置项的问题
+
+**解决方案：**
+
+因为在项目中有断点打在了方法上，因此导致的 debug 变慢。解决方法也简单，将打在方法上的断点去掉即可
+
+![image-20210428152911765](https://img-note.langyastudio.com/20210428152915.png?x-oss-process=style/watermark)
+
+> 使用方法断点会使得正在debug调试的程序变慢
+
+
+
+### 无法初始化主类 Main  java.lang.NoClassDefFoundError: org/apache/catalina/WebResourceRoot
+
+在IDEA中，maven配置 `<scope>provided</scope>`，就告诉了 IDEA 程序会在运行的时候提供这个依赖，但是实际上却并没有提供这个依赖。
+
+**解决方案：**
+
+1. 打开 idea 的 Run/Debug Configurations:
+
+2. 选择 Application - Main
+
+3. 右侧 Configuration：Use classpath of module
+
+4. 钩上 ☑︎Include dependencies with "Provided" scope
+
+![image-20210330205542852](https://img-note.langyastudio.com/20210330205543.png?x-oss-process=style/watermark)
+
+
+
+### 多端口启动
+
+![img](https://img.kancloud.cn/36/52/3652e9df361497b8de51eb07e2bc244f_1372x895.png)
+
+- 点击 edit configuration ，取消勾选 single instance only（只允许单节点运行）。在比较新的版本中这个勾选框变成了 Allow parallel run (允许多实例并发运行)，那你就给它勾选上
+- 复制一份当前配置，在 environment 选项中的 vm options 中设置不同的端口号
+
+```ini
+-Dserver.port=8889 -Dserver.httpPort=89 -Dspring.profiles.active=dev -Ddebug
+-Dserver.port=8888 -Dserver.httpPort=88 -Dspring.profiles.active=dev -Ddebug
+```
+
+
+
 ### run / debug 灰色
 
 问题描述：

@@ -521,7 +521,11 @@ private void method1() {
 >
 > 避免同一个类中调用 `@Transactional` 注解的方法，这样会导致事务失效
 >
-> 正确的设置 `@Transactional` 的 rollbackFor 和 propagation 属性，否则事务可能会回滚失败
+> 正确的设置 `@Transactional` 的 `rollbackFor` 和 `propagation` 属性，否则事务可能会回滚失败
+>
+> 被 `@Transactional` 注解的方法所在的类必须被 Spring 管理，否则不生效
+>
+> 底层使用的数据库必须支持事务机制，否则不生效
 
 
 

@@ -4,6 +4,8 @@
 
 GitHub Pages：https://langyastudio.github.io/langya-doc
 
+> 下载到本地查看，推荐 Markdown 编辑器 [Typora](https://typora.io/)    
+
 
 
 ##  Java
@@ -143,7 +145,13 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [spring boot 如何解决跨域问题](./docs/java/framework/spring/spring-boot/11--跨域.md)
 - [spring boot validation 数据校验](./docs/java/framework/spring/spring-boot/12--validation-数据校验.md)
 
-  
+
+
+**打包**
+
+- [spring boot 利用 docker 自动化打包](https://mp.weixin.qq.com/s/3X6vVdWmjmWCyiLm35jpVw)
+
+
 
 **工具集**
 
@@ -323,6 +331,8 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 > 调用链推荐 jaeger or **skywalking**
 > 配置中心推荐 **apollo**
 > 对于 spring cloud 来说，zuul 系列推荐使用 zuul2，zuul1 是多线程阻塞的有硬伤。spring-cloud-gateway 是 spring cloud 亲生的，但目前用的不是很广泛
+
+- [spring cloud 入门总结](https://juejin.cn/post/6844904007975043079)
 
 
 

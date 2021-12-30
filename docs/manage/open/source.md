@@ -4,8 +4,8 @@
 | -------------------- | ------------------- | ---------------------------------------------- |
 | Spring Cloud         | 微服务框架           | https://spring.io/projects/spring-cloud          |
 | Spring Cloud Alibaba | 微服务框架           | https://github.com/alibaba/spring-cloud-alibaba  |
-|                      |                      |                                                  |
-|                      |                      |                                                  |
+| Spring Security Oauth2 | 认证和授权框架 | https://spring.io/projects/spring-security-oauth |
+| Seata | 全局事务管理框架 | https://github.com/seata/seata |
 |                      |                      |                                                  |
 | Spring Boot | 容器+MVC框架 | https://spring.io/projects/spring-boot |
 | Spring Security      | 认证和授权框架      | https://spring.io/projects/spring-security     |
@@ -37,7 +37,7 @@
 | Nginx                | 静态资源服务器      | https://www.nginx.com/                         |
 | Docker               | 应用容器引擎        | https://www.docker.com                         |
 | Portainer | 可视化Docker容器管理 | https://github.com/portainer/portainer |
-| Jenkins              | 自动化部署工具      | https://github.com/jenkinsci/jenkins           |
+| Jenkins             | 自动化部署工具      | https://github.com/jenkinsci/jenkins           |
 
 
 
