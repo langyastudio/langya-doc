@@ -338,6 +338,16 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 > 对于 spring cloud 来说，zuul 系列推荐使用 zuul2，zuul1 是多线程阻塞的有硬伤。spring-cloud-gateway 是 spring cloud 亲生的
 
 - [spring cloud 入门总结](https://juejin.cn/post/6844904007975043079)
+- [Spring Cloud Alibaba 介绍](./docs/architecture/microservice/cloud-alibaba-intro.md)
+- [nacos 服务注册与发现 看这一篇就够了](./docs/architecture/microservice/cloud-alibaba-nacos-0-服务注册&发现.md)
+- [nacos 配置管理 这样用就对了](./docs/architecture/microservice/cloud-alibaba-nacos-1-配置管理.md)
+- [openfeign 结合 nacos 进行声明式服务调用](./docs/architecture/microservice/cloud-openfeign&nacos-声明式服务调用.md)
+- [sentinel 实现熔断与限流 原来这么简单](./docs/architecture/microservice/cloud-alibaba-sentinel-熔断&限流.md)
+- [gateway 新一代API网关服务](./docs/architecture/microservice/cloud-gateway-api网关服务.md)
+- [Spring Cloud Gateway + OAuth2 + JWT 实现统一认证与鉴权](./docs/architecture/microservice/cloud-security-jwt&gateway.md)
+- [RocketMQ 如何快速实现微服务消息机制](./docs/architecture/microservice/cloud-alibaba-rocketmq.md)
+- [Seata 彻底解决分布式事务问题](./docs/architecture/microservice/cloud-alibaba-seata-分布式事务.md)
+- [Spring Boot Admin 最简单的微服务应用监控](./docs/architecture/microservice/boot-admin-微服务应用监控.md)
 
 
 
