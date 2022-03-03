@@ -92,7 +92,7 @@ private:
 
 **`insert` 时的数据初始状态：**
 
-![](https://ddmcc-1255635056.file.myqcloud.com/317e91e1-1ee1-42ad-9412-9098d5c6a9ad.png)
+![](https://img-note.langyastudio.com/202202231519375.png?x-oss-process=style/watermark)
 
 2. **`update undo log`** ：`update` 或 `delete` 操作中产生的 `undo log`。该 `undo log`可能需要提供 `MVCC` 机制，因此不能在事务提交时就进行删除。提交时放入 `undo log` 链表，等待 `purge线程` 进行最后的删除
 
@@ -100,11 +100,11 @@ private:
 
 **数据第一次被修改时：**
 
-![](https://ddmcc-1255635056.file.myqcloud.com/c52ff79f-10e6-46cb-b5d4-3c9cbcc1934a.png)
+![](https://img-note.langyastudio.com/202202231519402.png?x-oss-process=style/watermark)
 
 **数据第二次被修改时：**
 
-![](https://ddmcc-1255635056.file.myqcloud.com/6a276e7a-b0da-4c7b-bdf7-c0c7b7b3b31c.png)
+![](https://img-note.langyastudio.com/202202231519277.png?x-oss-process=style/watermark)
 
 不同事务或者相同事务的对同一记录行的修改，会使该记录行的 `undo log` 成为一条链表，链首就是最新的记录，链尾就是最早的旧记录。
 
@@ -116,7 +116,7 @@ private:
 
 [具体的比较算法](https://github.com/facebook/mysql-8.0/blob/8.0/storage/innobase/include/read0types.h#L161)如下：[图源](https://leviathan.vip/2019/03/20/InnoDB%E7%9A%84%E4%BA%8B%E5%8A%A1%E5%88%86%E6%9E%90-MVCC/#MVCC-1)
 
-![](https://ddmcc-1255635056.file.myqcloud.com/8778836b-34a8-480b-b8c7-654fe207a8c2.png)
+![](https://img-note.langyastudio.com/202202231519615.png?x-oss-process=style/watermark)
 
 1. 如果记录 DB_TRX_ID < m_up_limit_id，那么表明最新修改该行的事务（DB_TRX_ID）在当前事务创建快照之前就提交了，所以该记录行的值对当前事务是可见的
 
@@ -149,7 +149,7 @@ private:
 
 举个例子：
 
-![](https://ddmcc-1255635056.file.myqcloud.com/6fb2b9a1-5f14-4dec-a797-e4cf388ed413.png)
+![](https://img-note.langyastudio.com/202202231519980.png?x-oss-process=style/watermark)
 
 
 
@@ -157,7 +157,7 @@ private:
 
 1. **`假设时间线来到 T4 ，那么此时数据行 id = 1 的版本链为`：**
 
-   ![](https://ddmcc-1255635056.file.myqcloud.com/a3fd1ec6-8f37-42fa-b090-7446d488fd04.png)
+   ![](https://img-note.langyastudio.com/202202231519715.png?x-oss-process=style/watermark)
 
 由于 RC 级别下每次查询都会生成`Read View` ，并且事务 101、102 并未提交，此时 `103` 事务生成的 `Read View` 中活跃的事务 **`m_ids` 为：[101,102]** ，`m_low_limit_id`为：104，`m_up_limit_id`为：101，`m_creator_trx_id` 为：103
 
@@ -167,7 +167,7 @@ private:
 
 2. **`时间线来到 T6 ，数据的版本链为`：**
 
-   ![markdown](https://ddmcc-1255635056.file.myqcloud.com/528559e9-dae8-4d14-b78d-a5b657c88391.png)
+   ![markdown](https://img-note.langyastudio.com/202202231519960.png?x-oss-process=style/watermark)
 
 因为在 RC 级别下，重新生成 `Read View`，这时事务 101 已经提交，102 并未提交，所以此时 `Read View` 中活跃的事务 **`m_ids`：[102]** ，`m_low_limit_id`为：104，`m_up_limit_id`为：102，`m_creator_trx_id`为：103
 
@@ -177,7 +177,7 @@ private:
 
 3. **`时间线来到 T9 ，数据的版本链为`：**
 
-![markdown](https://ddmcc-1255635056.file.myqcloud.com/6f82703c-36a1-4458-90fe-d7f4edbac71a.png)
+![markdown](https://img-note.langyastudio.com/202202231519639.png?x-oss-process=style/watermark)
 
 重新生成 `Read View`， 这时事务 101 和 102 都已经提交，所以 **m_ids** 为空，则 m_up_limit_id = m_low_limit_id = 104，最新版本事务 ID 为 102，满足 102 < m_low_limit_id，可见，查询结果为 `name = 赵六`
 
@@ -191,7 +191,7 @@ private:
 
 1. **`在 T4 情况下的版本链为`：**
 
-![markdown](https://ddmcc-1255635056.file.myqcloud.com/0e906b95-c916-4f30-beda-9cb3e49746bf.png)
+![markdown](https://img-note.langyastudio.com/202202231519927.png?x-oss-process=style/watermark)
 
 在当前执行 `select` 语句时生成一个 `Read View`，此时 **`m_ids`：[101,102]** ，`m_low_limit_id`为：104，`m_up_limit_id`为：101，`m_creator_trx_id` 为：103
 
@@ -203,7 +203,7 @@ private:
 
 2. **`时间点 T6 情况下`：**
 
-   ![markdown](https://ddmcc-1255635056.file.myqcloud.com/79ed6142-7664-4e0b-9023-cf546586aa39.png)
+   ![markdown](https://img-note.langyastudio.com/202202231519902.png?x-oss-process=style/watermark)
 
    在 RR 级别下只会生成一次`Read View`，所以此时依然沿用 **`m_ids` ：[101,102]** ，`m_low_limit_id`为：104，`m_up_limit_id`为：101，`m_creator_trx_id` 为：103
 
@@ -217,7 +217,7 @@ private:
 
 3. **时间点 T9 情况下：**
 
-![markdown](https://ddmcc-1255635056.file.myqcloud.com/cbbedbc5-0e3c-4711-aafd-7f3d68a4ed4e.png)
+![markdown](https://img-note.langyastudio.com/202202231519618.png?x-oss-process=style/watermark)
 
 此时情况跟 T6 完全一样，由于已经生成了 `Read View`，此时依然沿用 **`m_ids` ：[101,102]** ，所以查询结果依然是 `name = 菜花`
 

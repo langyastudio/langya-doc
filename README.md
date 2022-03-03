@@ -130,6 +130,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 **spring boot**
 
+- [spring boot 常见知识点](./docs/java/framework/spring/spring-boot/springboot-常见知识点&面试题汇总.md)
 - [spring boot 零基础快速入门](./docs/java/framework/spring/spring-boot/01--springboot-快速入门.md)
 - [spring boot restful web 应用](./docs/java/framework/spring/spring-boot/02--restful-web-应用.md)
 - [spring boot properties 配置文件详解](./docs/java/framework/spring/spring-boot/03--springboot-配置文件.md)
@@ -198,6 +199,8 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 ### Mongodb
 
+[mongodb 实战入门](./docs/database/mongodb/mongodb-实战入门.md)
+
 
 
 ### 数据仓库
@@ -228,6 +231,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [redis 缓存读写策略](./docs/middleware/cache/redis/redis-缓存读写策略.md)
 - [redis 除了做缓存，还可以怎么用？](http://mp.weixin.qq.com/s?__biz=Mzg5MjYzNTA4Ng==&mid=2247484620&idx=1&sn=ac71f68713aa2a1bec3bf7382f2198b8&chksm=c03a566df74ddf7b5572b92756746e5758ab17fe28062a015272c150c8e1387ddab3b68c3897&scene=21#wechat_redirect)
 - [缓存如何确保数据的一致性](http://mp.weixin.qq.com/s?__biz=Mzg5MjYzNTA4Ng==&mid=2247484329&idx=1&sn=032f2ffb00ee9dd24de51d958fed789a&chksm=c03a5108f74dd81e4ac9712b4e89c4fb3c331bba3bb8adf39a79b904a342e52028f0835b8231&scene=21#wechat_redirect)
+- [redis 内存碎片是什么](./docs/middleware/cache/redis/redis-内存碎片.md)
 - [redis停止服务报错 NOAUTH Authentication required 导致关机异常慢](https://langyastudio.blog.csdn.net/article/details/88555828)
 
 
@@ -270,7 +274,6 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 **Dubbo**
 
 - [dubbo 基础知识](./docs/middleware/rpc/dubbo/dubbo-知识点总结.md)
-- [dubbo 实战演练](./docs/middleware/rpc/dubbo/dubbo-实战.md)
 
 
 
@@ -300,11 +303,13 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 **Tomcat**
 
 - [Tomcat 对应 Servlet、JSP、JDK 版本问题](https://langyastudio.blog.csdn.net/article/details/85265030)
+- [Tomcat 重要参数优化](./docs/middleware/server/tomcat/tomcat-重要参数调优.md)
 
 
 
 **nginx**
 
+- [nginx 入门](./docs/middleware/server/nginx/nginx-intro.md)
 - [nginx 如何配置反向代理](./docs/middleware/server/nginx/nginx-proxy.md)
 
 
@@ -330,7 +335,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 > 熔断组件官方的 hystrix 不再维护，推荐阿里的 **sentinel** or  resilience4j
 > 调用链推荐 jaeger or **skywalking**
 > 配置中心推荐 **apollo**
-> 对于 spring cloud 来说，zuul 系列推荐使用 zuul2，zuul1 是多线程阻塞的有硬伤。spring-cloud-gateway 是 spring cloud 亲生的，但目前用的不是很广泛
+> 对于 spring cloud 来说，zuul 系列推荐使用 zuul2，zuul1 是多线程阻塞的有硬伤。spring-cloud-gateway 是 spring cloud 亲生的
 
 - [spring cloud 入门总结](https://juejin.cn/post/6844904007975043079)
 
@@ -382,6 +387,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 - [认证&授权基础知识](./docs/architecture/system-design/security/认证授权.md)
 - [隐私信息保护](./docs/architecture/system-design/security/隐私信息.md)
+- [敏感词过滤](./docs/architecture/system-design/security/敏感词过滤.md)
 - [jwt 身份认证](./docs/architecture/system-design/security/jwt-身份认证.md)
 - [web 常见安全漏洞](./docs/architecture/system-design/security/web-常见安全漏洞.md)
 
@@ -475,6 +481,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 > 内存溢出排查、堆内外层排查、网络排查、IO排查、高负载排查等
 
 - [java 性能问题排查](./docs/devops/troubleshoot/java-性能问题排查.md)
+- [jadx 反编译工具](./docs/devops/troubleshoot/jadx.md)
 
 
 
@@ -520,7 +527,13 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 
 
-**platform**
+**监控**
+
+[监控入门](./docs/devops/monitor/monitor-intro.md)
+
+
+
+**Platform**
 
 - [aliyun 钉钉开发平台配置](./docs/devops/platform/aliyun-钉钉开发平台配置.md)
 - [aliyun 短信配置](./docs/devops/platform/aliyun-短信配置.md)
@@ -598,6 +611,8 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 -  [新入职一家公司如何快速进入工作状态](./docs/manage/team/articles/新入职一家公司如何快速进入工作状态.md)
 -  [高级别开发同学的七条建议](./docs/manage/team/articles/高级别开发同学的七条建议.md)
 -  [大龄程序员所经历的面试的历炼和思考](./docs/manage/team/articles/大龄程序员所经历的面试的历炼和思考.md)
+-  [java 如何高薪](./docs/manage/team/interview/java如何高薪.md)
+-  [35 岁出路](./docs/manage/team/articles/35岁出路.md)
 
 
 

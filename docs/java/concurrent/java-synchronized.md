@@ -255,7 +255,11 @@ public class SynchronizedDemo {
 
 在执行 `monitorenter` 时，会尝试获取对象的锁，如果锁的计数器为 0 则表示锁可以被获取，获取后将锁计数器设为 1 也就是加 1。
 
+![执行 monitorenter 获取锁](https://img-note.langyastudio.com/202203022148326.png?x-oss-process=style/watermark)
+
 在执行 `monitorexit` 指令后，将锁计数器设为 0，表明锁被释放。如果获取对象锁失败，那当前线程就要阻塞等待，直到锁被另外一个线程释放为止。
+
+![执行 monitorexit 释放锁](https://img-note.langyastudio.com/202203022149080.png?x-oss-process=style/watermark)
 
 
 

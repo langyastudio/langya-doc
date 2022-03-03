@@ -64,7 +64,7 @@ Hash 索引**不支持顺序和范围查询** ：
 假如我们要对表中的数据进行排序或者进行范围查询，那 Hash 索引可就不行了。试想一种情况:
 
 ```java
-SELECT * FROM tb1 WHERE id < 500;Copy to clipboardErrorCopied
+SELECT * FROM tb1 WHERE id < 500;
 ```
 
 在这种范围查询中，优势非常大，直接遍历比 500 小的叶子节点就够了。而 Hash 索引是根据 hash 算法来定位的，难不成还要把 1 - 499 的数据，每个都进行一次 hash 计算来定位吗?这就是 Hash 最大的缺点了。

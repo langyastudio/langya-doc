@@ -41,7 +41,7 @@ System.out.println(a == b);// false
 
 《阿里巴巴 Java 开发手册》中提到：**浮点数之间的等值判断，基本数据类型不能用==来比较，包装数据类型不能用 equals 来判断。**
 
-![](https://guide-blog-images.oss-cn-shenzhen.aliyuncs.com/javaguide/image-20211213101646884.png)
+![](https://img-note.langyastudio.com/202202181452868.png?x-oss-process=style/watermark)
 
 
 
@@ -157,7 +157,7 @@ System.out.println(n);// 1.255
 
 《阿里巴巴 Java 开发手册》对这部分内容也有提到，如下图所示。
 
-![](https://guide-blog-images.oss-cn-shenzhen.aliyuncs.com/javaguide/image-20211213102222601.png)
+![](https://img-note.langyastudio.com/202202181453027.png?x-oss-process=style/watermark)
 
 
 
