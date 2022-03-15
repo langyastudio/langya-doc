@@ -1,5 +1,58 @@
 ## Linux
 
+### Could not resolve host: mirrorlist.centos.org; 未知的错误
+
+无法访问网络导致的该问题
+
+```
+vi /etc/sysconfig/network-scripts/ifcfg-ensxxx
+```
+
+ONBOOT 属性改成 yes，并且加一个 DNS1=114.114.114.114
+
+![image-20220312145628873](https://img-note.langyastudio.com/202203121456952.png?x-oss-process=style/watermark)
+
+
+
+再执行 `systemctl restart network`  or `nmcli c reload` 命令即可
+
+
+
+### 为 repo ‘base’ 下载元数据失败
+
+```bash
+#查看版本号
+rpm -qi centos-release 
+
+#1.备份现有源
+mv /etc/yum.repos.d /etc/yum.repos.d.backup
+
+#2.设置新的yum目录
+mkdir /etc/yum.repos.
+
+#3.安装wget（我没安装，也没事，可能是我以前安装过）
+yum install -y wget
+
+#4.就是坑了我一晚上的下载配置(大家一定要区分自己的系统版本，不然肯定不通过)
+#CentOS 5
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-5.repo
+
+#CentOS 6
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo
+
+#CentOS 7
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+
+#CentOS 8
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo
+
+#5.清除文件并重建元数据缓存
+yum clean all
+yum makecache
+```
+
+
+
 ### 坏的解释器
 
 执行 shell 脚本时报错：`/bin/bash^M: 坏的解释器: 没有那个文件或目录`
