@@ -896,7 +896,7 @@ public class UserController{
 
 ![image-20220118174115511](https://img-note.langyastudio.com/202201181741628.png?x-oss-process=style/watermark)
 
-- 使用获取到的JWT令牌访问获取当前登录用户信息的接口，访问地址：http://localhost:9201/api/user/currentUser
+- 使用获取到的JWT令牌访问获取当前登录用户信息的接口，访问地址：http://localhost:9201/admin/user/currentUser
 
 ![image-20220118174148483](https://img-note.langyastudio.com/202201181741589.png?x-oss-process=style/watermark)
 

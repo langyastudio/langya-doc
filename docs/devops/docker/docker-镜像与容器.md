@@ -195,10 +195,19 @@ $ docker inspect <CONTAINER ID or NAME>
 $ docker stats
 ```
 
-
-
 已经运行的容器，可以通过 `docker update 更新配置参数 <CONTAINER ID or NAME>`（需要先停止容器的运行）
 或者通过 `/var/lib/docker/containers/容器ID` 下的 hostconfig.json 等文件，修改启动配置参数
+
+
+
+### 容器启动参数
+
+```bash
+pip install runlike
+runlike -p  <容器名>|<容器ID>
+```
+
+![image-20220311122719395](https://img-note.langyastudio.com/202203111227592.png?x-oss-process=style/watermark)
 
 
 
