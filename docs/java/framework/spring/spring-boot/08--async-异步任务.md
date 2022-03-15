@@ -197,4 +197,144 @@ public class SampleBeanInitializer {
 
 
 
+### 案例分析
+
+> 来自 https://mp.weixin.qq.com/s/CqwgrvzIUrpa987kNx3eRg
+
+在很久很久之前，我有一段痛苦的记忆。那种被故障所驱使的感觉，在我脑海里久久无法驱散。
+
+原因无它，有小伙伴开启了线程池的暴力使用模式。没错，就是下面这篇文章。
+
+[夺命故障 ! 炸出了投资人！](https://mp.weixin.qq.com/s?__biz=MzA4MTc4NTUxNQ==&mid=2650523924&idx=1&sn=b247bae74ccea19290cbbc7b3b43edbc&scene=21#wechat_redirect)
+
+我有必要简单的复述一下。其主要原因，就是开发人员，在每一次方法调用里，都创建了一个单独的线程池去处理。这样的话，如果请求量一增加，整个操作系统的压力就会耗尽，最终所有的业务都无法响应。
+
+![图片](https://img-note.langyastudio.com/202203041018455.png?x-oss-process=style/watermark)
+
+我一直认为这是一个非常偶发的低级错误，发生频率非常的低。但随着这样的故障越来越多，xjjdog 认识到这是一个普遍的现象。
+
+以异步性能优化为目的，反而带来的整体业务不可用的结果，是非常打脸的一种优化。
+
+
+
+#### Spring 的异步代码
+
+Spring 作为 Java 届的杠把子框架，其过度封装的 API 深得开发人员的喜爱。根据语义化编程的逻辑，只要某些关键字在语言层面上过得去，我们就可以把它给加上去。比如 `@Async` 注解。
+
+我永远想不通是什么给了开发人员勇气，去加上这个 `@Async` 注解，因为这种涉及到多线程的东西，即使是自己去创建线程，也是心怀敬畏，唯恐扰了操作系统的安宁。`@Async` 这样的黑盒，真的可以那么顺畅的使用么？
+
+我们不妨 debug 一下代码，让子弹飞一会儿。
+
+首先，生成一个小小的项目，然后在主类上加上必须的注解。嗯，别忘了这一环，否则你后面加的注解将没什么用处
+
+```java
+@SpringBootApplication
+@EnableAsync
+public class DemoApplication {}
+```
+
+创造一个带 @Async 注解的方法
+
+```java
+@Component
+public class AsyncService {
+    @Async
+    public void async(){
+        try {
+            Thread.sleep(1000);
+            System.out.println(Thread.currentThread());
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+}
+```
+
+然后，做一个对应的 test 接口，访问时会调用这个 async 方法
+
+```java
+@ResponseBody
+@GetMapping("test")
+public void test(){
+    service.async();
+}
+```
+
+访问时，直接打个断点，即可获取执行异步线程的线程池
+
+![图片](https://img-note.langyastudio.com/202203041018902.png?x-oss-process=style/watermark)
+
+可以看到，异步任务使用了一个线程池，它的 corePoolSize=8, **阻塞队列采用了无界队列 LinkedBlockingQueue**。一旦采用了这样的组合，最大线程数就会形同虚设，因为超出 8 个线程的任务，将全部会被放到无界队列里。使得下面的代码变成了摆设。
+
+```java
+throw new TaskRejectedException("Executor [" + executor + "] did not accept task: " + task, var4);
+```
+
+如果你的访问量非常大，这些任务将全部堆积在 LinkedBlockingQueue 里。情况好一点的，这些任务的执行会变得延迟很大；情况坏一点的，任务太多将直接造成内存溢出 OOM！
+
+你可能会说，我可以自己指定另外一个 ThreadPoolExceute，然后使用 @Async 注解来声明啊。说这话的同学，一定是能力比较强，或者 Review 的代码比较少，没有经过猪队友的洗礼。
+
+
+
+#### SpringBoot 救了你
+
+SpringBoot 是个好东西。
+
+在 TaskExecutionAutoConfiguration中，通过生成 ThreadPoolTaskExecutor 的Bean，来提供默认的 Executor。
+
+```java
+@ConditionalOnMissingBean({Executor.class})
+public ThreadPoolTaskExecutor applicationTaskExecutor(TaskExecutorBuilder builder) {
+    return builder.build();
+}
+```
+
+也就是我们上面所说的那个。如果**没有 SpringBoot 的助力，Spring 将默认使用 SimpleAsyncTaskExecutor**。
+
+参见 org.springframework.aop.interceptor.AsyncExecutionInterceptor
+
+```java
+@Override
+@Nullable
+protected Executor getDefaultExecutor(@Nullable BeanFactory beanFactory) {
+ Executor defaultExecutor = super.getDefaultExecutor(beanFactory);
+ return (defaultExecutor != null ? defaultExecutor : new SimpleAsyncTaskExecutor());
+}
+```
+
+这就是 Spring 大仙所干的事。
+
+**SimpleAsyncTaskExecutor 类设计的非常操蛋，因为它每执行一次，都会创建一个单独的线程**，根本没有共用线程池。比如你的 TPS 是1000，异步执行了任务，那么你每秒将会生成 1000 个线程！
+
+这明显是想要累死操作系统的节奏。
+
+```java
+protected void doExecute(Runnable task) {
+ Thread thread = (this.threadFactory != null ? this.threadFactory.newThread(task) : createThread(task));
+ thread.start();
+}
+```
+
+
+
+#### End
+
+明眼人一看，这种使用 new 线程的处理方式将会是非常可怕的。但就拿 Spring 本身来说，引用SimpleAsyncTaskExecutor 这个类的地方还不少，包括比较流行的 AsyncRestTemplate。
+
+![图片](https://img-note.langyastudio.com/202203041018576.png?x-oss-process=style/watermark)
+
+这暴露了很多风险，尤其是竟然在这些列表中看到了 redis 的身影。这个类的设计，使得任务的执行变的非常的不可控。
+
+看这个 API，我感觉 Spring 是进入了设计的魔怔状态。
+
+这个东西的隐藏 bug 可能还会更深！比如 org.springframework.context.event.EventListener 注解，用于实现 DDD 那套所谓的事件驱动模式，有不少框架直接 set 了 SimpleAsyncTaskExecutor，那么就等死吧。
+
+赶紧把 SimpleAsyncTaskExecutor 加入你的API黑名单，或者埋坑清单吧！
+
+创建线程有那么难么？需要使用 Spring 创建的线程？有时候我实在是想不通，暴露出这样的接口目的是为了什么。
+
+就连原生的线程池我们还没搞明白呢，你还给包了一层，这是方便我们甩锅啊！
+
+
+
 > 参考文档：廖雪峰、《从企业级开发到云原生微服务：Spring Boot实战 》等
