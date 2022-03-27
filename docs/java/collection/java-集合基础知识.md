@@ -162,6 +162,8 @@ Java 集合的设计有几个特点：
 - 一致性（Consistent）：对于非`null`的`x`和`y`来说，只要`x`和`y`状态不变，则`x.equals(y)`总是一致地返回`true`或者`false`
 - 对`null`的比较：即`x.equals(null)`永远返回`false`
 
+> 在使用 Objects.equals 方法，判断两个值是否相等时，一定要保证**两个入参的类型要一致**。否则即使两个值相同，但其结果仍然会返回 false，这是一个大坑。
+
 
 
 ## List

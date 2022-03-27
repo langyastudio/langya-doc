@@ -400,6 +400,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [敏感词过滤](./docs/architecture/system-design/security/敏感词过滤.md)
 - [jwt 身份认证](./docs/architecture/system-design/security/jwt-身份认证.md)
 - [web 常见安全漏洞](./docs/architecture/system-design/security/web-常见安全漏洞.md)
+- [代码混淆](./docs/architecture/system-design/security/代码混淆.md)
 
 
 
