@@ -177,6 +177,12 @@ GET    /classes?page=1&size=10 //指定第1页，每页10个数据
 
 
 
+## 只用POST
+
+[公司规定所有接口都用 post 请求，这是为什么？](https://www.zhihu.com/question/336797348)
+
+
+
 ## 参考
 
 - https://RESTfulapi.net/

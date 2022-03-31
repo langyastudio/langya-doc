@@ -1049,6 +1049,9 @@ Cache Aside Pattern 中遇到写请求是这样的：更新 DB，然后直接删
 
 
 相关文章推荐：
+
+[如何保证数据库和缓存双写一致性](https://mp.weixin.qq.com/s/4hP-T0h8QPyjcpH8m0cbsA)
+
 [分布式缓存 10 问，你能坚持几个？](https://mp.weixin.qq.com/s/8lSASEmSSCIiUldkM0KaXw)
 
 [缓存和数据库一致性问题，看这篇就够了 - 水滴与银弹](https://mp.weixin.qq.com/s?__biz=MzIyOTYxNDI5OA==&mid=2247487312&idx=1&sn=fa19566f5729d6598155b5c676eee62d&chksm=e8beb8e5dfc931f3e35655da9da0b61c79f2843101c130cf38996446975014f958a6481aacf1&scene=178&cur_album_id=1699766580538032128#rd)
@@ -1075,6 +1078,7 @@ Cache Aside Pattern 中遇到写请求是这样的：更新 DB，然后直接删
 
 - 《redis 开发与运维》
 - 《redis 设计与实现》
+- [实战！Redis 突然变慢了如何排查并解决？](https://mp.weixin.qq.com/s/tFnfT2AkghfZkGpKBBb1vg)
 - redis 命令总结：http://redisdoc.com/string/set.html
 - 通俗易懂的 redis 数据结构基础教程：[https://juejin.im/post/5b53ee7e5188251aaa2d2e16](https://juejin.im/post/5b53ee7e5188251aaa2d2e16)
 - WHY redis choose single thread (vs multi threads): [https://medium.com/@jychen7/sharing-redis-single-thread-vs-multi-threads-5870bd44d153](https://medium.com/@jychen7/sharing-redis-single-thread-vs-multi-threads-5870bd44d153)
