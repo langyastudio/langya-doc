@@ -284,6 +284,26 @@ git commit -m "comment"
 
 
 
+## sourcetree克隆代码失败
+
+报错如下：
+
+```bash
+remote: HTTP Basic: Access denied fatal: Authentication failed for 
+```
+
+解决方案：
+
+```bash
+#清除密码
+git config --system --unset credential.helper
+
+#使用命令行clone
+git clone xxxx
+```
+
+
+
 ## 推荐
 
 **在线演示学习工具：**

@@ -65,6 +65,56 @@ sed -i 's/\r$//' mocha.sh
 
 
 
+### curl 无法访问
+
+```bash
+[root@centos ~]# yum -y install curl
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+Package curl-7.29.0-57.el7_8.1.x86_64 already installed and latest version
+Nothing to do
+[root@centos ~]# rpm -qa|grep curl
+python-pycurl-7.19.0-19.el7.x86_64
+libcurl-7.29.0-57.el7_8.1.x86_64
+curl-7.29.0-57.el7_8.1.x86_64
+[root@centos ~]# curl --version
+-bash: curl: command not found
+```
+
+
+
+解决方案：卸载[curl](https://so.csdn.net/so/search?q=curl&spm=1001.2101.3001.7020)重新安装
+
+```sql
+[root@centos ~]# rpm -e --nodeps curl
+warning: file /usr/bin/curl: remove failed: No such file or directory
+ 
+[root@centos ~]# yum remove curl
+Loaded plugins: fastestmirror, langpacks
+No Match for argument: curl
+No Packages marked for removal
+ 
+[root@centos ~]# rpm -qa|grep curl
+python-pycurl-7.19.0-19.el7.x86_64
+libcurl-7.29.0-57.el7_8.1.x86_64
+ 
+[root@centos ~]# yum -y install curl
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+Resolving Dependencies
+--> Running transaction check
+---> Package curl.x86_64 0:7.29.0-57.el7_8.1 will be installed
+--> Finished Dependency Resolution
+ 
+[root@centos ~]# curl --version
+curl 7.29.0 (x86_64-redhat-linux-gnu) libcurl/7.29.0 NSS/3.44 zlib/1.2.7 libidn/1.28 libssh2/1.8.0
+Protocols: dict file ftp ftps gopher http https imap imaps ldap ldaps pop3 pop3s rtsp scp sftp smtp smtps telnet tftp 
+Features: AsynchDNS GSS-Negotiate IDN IPv6 Largefile NTLM NTLM_WB SSL libz unix-sockets 
+[root@centos ~]#
+```
+
+
+
 ### U盘安装 no caching mode page found
 
 #### 错误描述
