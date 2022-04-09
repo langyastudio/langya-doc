@@ -163,8 +163,16 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 ## 数据库
 
 - [字符编码有哪些种类](./docs/database/字符编码.md)
+
 - [数据库基础知识](./docs/database/database-intro.md)
+
 - [SQLite 数据类型和如何添加注释](./docs/database/sqlite/sqlite-数据类型和注释.md)
+
+- [大数据有哪些](./docs/database/大数据有哪些.md)
+
+- [国产数据库适配](./docs/database/国产数据库适配.md)
+
+  
 
 ### MySQL
 
@@ -528,6 +536,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [/bin/bash^M: 坏的解释器: 没有那个文件或目录](https://langyastudio.blog.csdn.net/article/details/81195982)
 - [Linux 时间如何同步](./docs/devops/centos/linux-centos-时间同步.md)
 - [Linux 最大打开文件数和进程数](./docs/devops/centos/linux-centos-最大打开文件数和进程数.md)
+- [CentOS 磁盘空间修改](./docs/devops/centos/linux-centos-磁盘扩容.md)
 
 
 
@@ -562,6 +571,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [IDEA 常用插件推荐](./docs/tool/idea/idea-插件推荐.md)
 - [IDEA 如何快速的进行代码重构](./docs/tool/idea/idea-代码重构.md)
 - [IDEA 源码阅读技巧](./docs/tool/idea/idea-源码阅读技巧.md)
+- [IDEA Maven配置](./docs/tool/idea/idea-maven配置.md)
 - [IDEA Tomcat 配置详解](http://mp.weixin.qq.com/s?__biz=Mzg5MjYzNTA4Ng==&mid=2247484228&idx=1&sn=0b5b5856f645dcd99c6289a5953c306b&chksm=c03a51e5f74dd8f3687ef6398764a55b60f96bd8bfba6c93aff24a9b497d7a2b98ddd53c41ea&scene=21#wechat_redirect)
 - [IDEA 配置XDebug 远程调试 PHP 代码 详细教程](https://langyastudio.blog.csdn.net/article/details/47005477)
 
