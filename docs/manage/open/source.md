@@ -94,12 +94,16 @@
 | 工具          | 说明                | 官网                                                  |
 | ------------- | ------------------- | ----------------------------------------------------- |
 | IDEA          | 开发IDE             | https://www.jetbrains.com/idea/download               |
+| SourceTree    | Git 管理工具        | https://www.sourcetreeapp.com/                        |
 | RedisDesktop  | redis客户端连接工具 | https://github.com/qishibo/AnotherRedisDesktopManager |
 | Robomongo     | mongo客户端连接工具 | https://robomongo.org/download                        |
 | SwitchHosts   | 本地host管理        | https://oldj.github.io/SwitchHosts/                   |
-| X-shell       | Linux远程连接工具   | http://www.netsarang.com/download/software.html       |
+| XShell        | Linux远程连接工具   | https://www.xshell.com/zh/free-for-home-school/       |
+| Xftp          | Linux ftp工具       | https://www.xshell.com/zh/free-for-home-school/       |
 | Navicat       | 数据库连接工具      | http://www.formysql.com/xiazai.html                   |
+| DBeaver       | 数据库连接工具      | https://dbeaver.io/download/                          |
 | PowerDesigner | 数据库设计工具      | http://powerdesigner.de/                              |
+| Chiner        | 数据库设计工具      | https://gitee.com/robergroup/chiner/releases          |
 | Axure         | 原型设计工具        | https://www.axure.com/                                |
 | MindMaster    | 思维导图设计工具    | http://www.edrawsoft.cn/mindmaster                    |
 | XMind         | 思维导图设计工具    | https://www.xmind.cn/                                 |

@@ -265,7 +265,43 @@ git push origin
 
 
 
-## .gitingnore
+## 提交格式规范
+
+### Header 
+
+Header 部分只有一行，包括三个字段：type（必需）、scope（可选）和 subject（必需）
+
+`<type>(<scope>): <subject>`，例如:
+
+```
+feat: 新增财务报表
+```
+
+ **type**
+
+用于说明本次commit的类别，只允许使用下面 7 个标识
+
+- `feat`：新功能（feature）
+- `fix`：修补bug
+- `docs`：文档（documentation）
+- `style`： 格式（不影响代码运行的变动）
+- `refactor`：重构（即不是新增功能，也不是修改 bug 的代码变动）
+- `test`：增加测试
+- `chore`：构建过程或辅助工具的变动
+
+注意: 如果type 为 feat 和 fix，则该 commit 将肯定出现在 Change log 之中。其他情况（docs、chore、style、refactor、test）由你决定，要不要放入 Change log，建议是不要。 
+
+**scope**
+
+用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同
+
+**subject**
+
+是 commit 目的的简短描述，不超过50个字符
+
+
+
+## gnore
 
 在工程中很容易出现.gitignore并没有忽略掉我们已经添加的文件，那是因为.gitignore对已经追踪(track)的文件是无效的，需要清除缓存，清除缓存后文件将以未追踪的形式出现，这时重新添加(add)并提交(commit)就可以了。**所以要尽量避免这种情况！**
 
@@ -318,3 +354,4 @@ git clone xxxx
 - https://git-scm.com/book/en/v2
 - [Generating a new SSH key and adding it to the ssh-agent](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 - [一个好的 Git 提交消息，出自 Linus 之手](https://github.com/torvalds/subsurface-for-dirk/blob/a48494d2fbed58c751e9b7e8fbff88582f9b2d02/README#L88)
+- [git commit 规范指南](https://www.jianshu.com/p/201bd81e7dc9)
