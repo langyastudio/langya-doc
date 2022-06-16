@@ -22,6 +22,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [java reflection 反射详解](./docs/java/jdk/reflection.md)
 - [java generics 泛型详解](./docs/java/jdk/generics.md)
 - [java enum 枚举详解](./docs/java/jdk/enum.md)
+- [java 常见设计模式](./docs/java/jdk/java-常见设计模式.md)
 
 
 
@@ -185,6 +186,9 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [mysql 索引详解](./docs/database/mysql/mysql-索引详解.md)
 - [mysql 事务隔离级别](./docs/database/mysql/mysql-事务隔离级别.md)
 - [mysql 高性能优化指南](./docs/database/mysql/mysql-高性能优化规范.md)
+
+- [mysql 常见函数](./docs/database/mysql/mysql-函数.md)
+- [mysql 使用技巧](./docs/database/mysql/mysql-技巧.md)
 - [mysql 日志详解](./docs/database/mysql/mysql-日志详解.md)
 - [mysql 如何执行 SQL 语句](./docs/database/mysql/mysql-如何执行sql语句.md)
 - [mysql innodb-存储引擎对mvcc的实现](./docs/database/mysql/innodb-存储引擎对mvcc的实现.md)
@@ -602,6 +606,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 ### Database
 
+- [Dbeaver 数据库管理](./docs/tool/database/dbeaver-数据库管理.md)
 - [chiner 数据库建模工具](./docs/tool/database/chiner-数据库建模工具.md)
 - [screw 一键生成数据库文档](./docs/tool/database/screw-一键生成数据库文档.md)
 - [datagrip idea官方数据库管理](./docs/tool/database/datagrip-idea官方数据库管理.md)
@@ -623,14 +628,11 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [Maven 使用详解](./docs/tool/maven/maven-intro.md)
 - [TreeNMS 好用的 Redis Memcached 可视化管理及监控工具](https://langyastudio.blog.csdn.net/article/details/80221975)
 - [最强抓包神器 Fiddler 手机抓包详解](http://mp.weixin.qq.com/s?__biz=Mzg5MjYzNTA4Ng==&mid=2247484011&idx=1&sn=e0f4bf9c5a033de39b5bc04d105273bc&chksm=c03a50caf74dd9dc8044a9b306c4efe0b0f4610c00cdd31b7d74deca995957ae28a1724d756d&scene=21#wechat_redirect)
+- [ApiPost 前后端协作开发神器](./docs/tool/api/ApiPost-前后端协作开发神器.md)
 
 
 
 ## 管理
-
-- [个人简历](./docs/manage/team/interview/langyastudio.md)
-
-
 
 ### 开源
 

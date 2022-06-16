@@ -51,9 +51,14 @@ git config --global --unset https.proxy
 可以通过如下步骤解决：
 
 - 升级 Git 版本
-- 重新 OAuth 授权
 
+- github 现在只能使用 personal access token 登录
 
+  把原本的 `https://github.com/<USERNAME>/<REPO>.git` 修改成 `https://<your_token>@github.com/<USERNAME>/<REPO>.git`
+
+  ![image-20220616212625319](https://img-note.langyastudio.com/202206162126397.png?x-oss-process=style/watermark)
+
+  
 
 ## Github 简历
 
