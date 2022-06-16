@@ -11,8 +11,8 @@
 使用 IP 127.0.0.1 + 端口8080进行代理
 
 ```bash
-$ git config --global http.https://github.com.proxy http://127.0.0.1:8080
-$ git config --global https.https://github.com.proxy http://127.0.0.1:8080
+git config --global http.https://github.com.proxy http://127.0.0.1:8080
+git config --global https.https://github.com.proxy http://127.0.0.1:8080
 ```
 
 第一个是设置 Git在采用HTTP连接时的代理地址
@@ -38,8 +38,8 @@ git config --global https.https://raw.githubusercontent.com.proxy socks5://127.0
 ### Git 取消代理
 
 ```bash
-$ git config --global --unset http.proxy
-$ git config --global --unset https.proxy
+git config --global --unset http.proxy
+git config --global --unset https.proxy
 ```
 
 > 建议使用Git安装包安装Git客户端

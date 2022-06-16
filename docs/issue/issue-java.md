@@ -189,6 +189,16 @@ then add the following but do not remove any Commons Logging 1.x dependencies.--
 
 
 
+#### 调试正常打包异常
+
+引入包中的 yml 文件与当前执行模块的 yml 文件冲突
+
+**解决方案：**
+
+引入的 jar 包，**不可含有**同目录的 yml 文件
+
+
+
 ##  Mybatis
 
 #### There is neither 'privateLookupIn(Class, Lookup)' nor 'Lookup(Class, int)' method in java.lang.invoke.MethodHandles

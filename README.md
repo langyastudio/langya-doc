@@ -156,7 +156,9 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 **工具集**
 
-> fastjson、Hutool 等
+> json 方面，国内使用 fastjson 最多，三天两头冒出个漏洞；国外则使用 jackson 多一些
+>
+> 工具包方面，有 Hutool、guava 等
 
 
 
@@ -199,7 +201,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 ### Druid
 
-> 数据库连接池方面，国内使用 druid 最多
+> 数据库连接池方面，国内使用 druid 最多。目前有号称速度最快的 hikari 数据库连接池，以及老掉牙的 dbcp 和c3p0
 
 - [Druid 实战](./docs/database/druid/druid-intro.md)
 
@@ -213,16 +215,21 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 ### 数据仓库
 
-> 现在的企业，数据量都非常大，数据仓库是必须的。
-> 搜索方面，solr 比较成熟，稳定性更好一些，但实时搜索方面不如 es。
-> 列式存储方面，基于 Hadoop 的 hbase，使用最是广泛；基于 LSM 的 leveldb 写入性能优越，但目前主要是作为嵌入式引擎使用多一些。
-> 时序数据库方面，opentsdb 用在超大型监控系统多一些
+> 现在的企业，数据量都非常大，数据仓库是必须的
+> 搜索方面，solr 比较成熟，稳定性更好一些，但实时搜索方面不如 es
+> 列式存储方面，基于 Hadoop 的 hbase，使用最是广泛；基于 LSM 的 leveldb 写入性能优越，但目前主要是作为嵌入式引擎使用多一些
+>
+> tidb 是国产新贵，兼容 mysql 协议；时序数据库方面，opentsdb 用在超大型监控系统多一些
 
 
 
 ### 数据同步
 
-> 实时数据同步工具，都是把自己模拟成一个从库，进行数据拉取和解析。 mysql 通过 binlog 进行同步；canal、maxwell 等工具，都支持将要同步的数据写入到 mq 中进行后续处理。对于ETL（抽取、清洗、转换）来说，datax、logstash、sqoop 等，都是这样的工具。
+> 实时数据同步工具，都是把自己模拟成一个从库，进行数据拉取和解析
+>
+> mysql 通过 binlog 进行同步，对 mysql 来说 canal 是国内用的最多的方案。canal、maxwell 等工具，都支持将要同步的数据写入到 mq 中进行后续处理，方便了很多
+>
+> 对于 ETL（抽取、清洗、转换）来说，datax、logstash、sqoop 等，都是这样的工具
 
 
 
@@ -230,8 +237,11 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 ### 缓存
 
-> 分布式缓存来说，优先选择的就是 `redis`。由于 redis 是单线程的，并不适合高耗时操作。所以对于一些数据量比较大的缓存，比如图片、视频等，使用老牌的 memcached 效果会好的多。
-> redis、caffeine、vernemq等
+> 数据缓存是减少数据库压力的有效途径，有单机 java 内缓存，和分布式缓存之分
+>
+> 堆内缓存使用默认的 caffeine。guava 的 LoadingCache、ehcache、JetCache 都是些熟面孔
+>
+> 分布式缓存来说，优先选择的就是 `redis`（cluster集群）。由于 redis 是单线程的，并不适合高耗时操作。所以对于一些数据量比较大的缓存，比如图片、视频等，使用老牌的 memcached 效果会好的多
 
 **Redis**
 
@@ -246,10 +256,10 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 ### 消息队列
 
-> 一个大型的分布式系统，通常都会异步化，走消息总线。
-> kafka 有着极高的吞吐量
-> rocketmq 和 rabbitmq 都是电信级别的消息队列，在业务上用的比较多
-> mqtt 具体来说是一种协议，主要用在物联网方面
+> 一个大型的分布式系统，通常都会异步化，走消息总线
+> kafka 是目前最常用的消息队列，尤其是在大数据方面，有着极高的吞吐量
+> 稳定性优先选择 RocketMQ，RocketMQ 和 RabbitMQ 都是电信级别的消息队列，在业务上用的比较多
+> mqtt 具体来说是一种协议，主要用在物联网方面，能够双向通信，如 VerneMQ
 
 - [消息队列基础知识](./docs/middleware/msg-queue/msg-queue-intro.md)
 
@@ -267,7 +277,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 ### 任务调度
 
-> quartz 是 java 中比较古老的调度方案，分布式调度采用数据库锁的方式，管理界面需要自行开发。相对来说 xxl-job 更加轻量好用
+> quartz 是 java 中比较古老的调度方案，分布式调度采用数据库锁的方式，管理界面需要自行开发。相对来说 xxl-job 更加轻量好用；elastic-job-cloud 应用比较广泛，但系统运维复杂，学习成本较高
 
 - [定时任务 你了解吗](./docs/middleware/task-scheduling/定时任务.md)
 
@@ -275,7 +285,9 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 ### RPC框架
 
-> thrift、dubbo、gRPC 默认都是二进制序列化方式的 socket 通讯框架；feign、hessian 都是 onhttp 的远程调用框架。
+> thrift、dubbo、gRPC 默认都是二进制序列化方式的 socket 通讯框架
+>
+> feign、hessian 都是 onhttp 的远程调用框架
 
 - [rpc 基础知识](./docs/middleware/rpc/rpc-intro.md)
 
@@ -287,7 +299,11 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 ### 通讯框架
 
-> Java 中，netty 已经成为当之无愧的网络开发框架，包括其上的 socketio。服务的响应时间主要耗费在业务逻辑以及数据库上，**通讯层耗时在其中的占比很小**。
+> 服务的响应时间主要耗费在业务逻辑以及数据库上，**通讯层耗时在其中的占比很小**
+>
+> Java 中，netty 已经成为当之无愧的网络开发框架，包括其上的 socketio
+>
+> 对于 http 协议，有 common-httpclient，以及更加轻量级的工具 okhttp 来支持
 
 
 
@@ -326,7 +342,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 ### 分布式
 
-> 分布式系统 zookeeper 能用在很多场景，与其类似的还有基于 raft 协议的 etcd 和 consul。
+> 分布式系统 zookeeper 能用在很多场景，与其类似的还有基于 raft 协议的 etcd 和 consul
 > CAP/BASE、Paxos/Raft、分布式锁、API网关、CC、分布式文件系统、分布式Id、分布式事务等
 
 - [cap&base 理论](./docs/architecture/distributed-system/theory/cap&base-理论.md)
@@ -341,9 +357,9 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 > 注册中心默认的 eureka 不再维护，consul 已经成为首选，**nacos** 带有后台，比较适合国人使用习惯
 > 熔断组件官方的 hystrix 不再维护，推荐阿里的 **sentinel** or  resilience4j
-> 调用链推荐 jaeger or **skywalking**
-> 配置中心推荐 **apollo**
-> 对于 spring cloud 来说，zuul 系列推荐使用 zuul2，zuul1 是多线程阻塞的有硬伤。spring-cloud-gateway 是 spring cloud 亲生的
+> 调用链推荐 jaeger or **skywalking**，spring cloud 集成的 sleuth+zipkin 功能稍弱，甚至不如传统侵入式的 cat
+> 配置中心推荐 nacos or apollo
+> 网关方面，使用最多的就是 nginx；对于 spring cloud 来说，zuul 系列推荐使用 zuul2，zuul1 是多线程阻塞的有硬伤。spring-cloud-gateway 是 spring cloud 亲生的
 
 - [spring cloud 入门总结](https://juejin.cn/post/6844904007975043079)
 - [Spring Cloud Alibaba 介绍](./docs/architecture/microservice/cloud-alibaba-intro.md)
@@ -361,7 +377,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 ### 高并发
 
-> 读写分离、负载均衡、分库分表（推荐使用驱动层的`sharding-jdbc`，或者代理层的`mycat`，**方案一旦确定，几乎无法回退**）进行垂直拆分、水平拆分、不停机切换、HA&FailOver等
+> 负载均衡、读写分离、分库分表（推荐使用驱动层的 `sharding-jdbc`，或者代理层的 `mycat`，如果分库分表涉及的项目不多，spring 的动态数据源是一个非常好的选择。**但方案一旦确定，几乎无法回退**）进行垂直拆分、水平拆分、不停机切换、HA&FailOver等
 
 - [读写分离&分库分表](./docs/architecture/high-performance/读写分离&分库分表.md)
 - [负载均衡](./docs/architecture/high-performance/负载均衡.md)
@@ -498,6 +514,8 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 ### 故障排查
 
 > 内存溢出排查、堆内外层排查、网络排查、IO排查、高负载排查等
+>
+> 如果在线上实时分析，有 arthas 和 perf 两款工具
 
 - [java 性能问题排查](./docs/devops/troubleshoot/java-性能问题排查.md)
 - [jadx 反编译工具](./docs/devops/troubleshoot/jadx.md)
@@ -507,7 +525,10 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 ### 运维
 
 > 服务器一般采用稳定性较好的 centos，并配备 ansible工具进行支持
-> haproxy、lvs、keepalived、APM、Docker、CI/CD、jenkins、自动化（ansible）、监控（zabbix、prometheus + grafana + telegraf、es/logstash/kibana）等
+>
+> 入口工具为了统一用户的访问路口，lvs、haproxy、keepalived 使用非常广泛
+>
+> APM、Docker+Harbor、CI/CD、jenkins（打包发布）、自动化（ansible）
 
 **Docker**
 
@@ -548,6 +569,8 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 
 **监控**
+
+> zabbix 在主机数量不多的情况下，是非常好的选择；influxdata 的 influxdb 和 telegraf 组件，都比较好用，主要是功能很全；prometheus 来势凶猛，大有一统天下的架势（prometheus + grafana + telegraf、es/logstash/kibana）
 
 [监控入门](./docs/devops/monitor/monitor-intro.md)
 
