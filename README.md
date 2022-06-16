@@ -175,6 +175,8 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 - [国产数据库适配](./docs/database/国产数据库适配.md)
 
+- [SQL 优化文章汇总](./docs/database/sql-优化)
+
   
 
 ### MySQL
@@ -182,16 +184,24 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 > 数据库范式、字符集、索引（聚集索引、非聚集索引、复合索引、自适应哈希索引）、事务（ACID、隔离级别、MVCC）、锁（锁与同步锁、公开锁、非公平锁、悲观锁、乐观锁、互斥锁、共享锁、死锁）等
 
 - [mysql 基础知识](./docs/database/mysql/mysql-intro.md)
+
 - [mysql 常见必知必会的 SQL 语句操作](./docs/database/mysql/mysql-sql语句操作.md)
+
 - [mysql 索引详解](./docs/database/mysql/mysql-索引详解.md)
+
 - [mysql 事务隔离级别](./docs/database/mysql/mysql-事务隔离级别.md)
-- [mysql 高性能优化指南](./docs/database/mysql/mysql-高性能优化规范.md)
 
 - [mysql 常见函数](./docs/database/mysql/mysql-函数.md)
+
 - [mysql 使用技巧](./docs/database/mysql/mysql-技巧.md)
+
 - [mysql 日志详解](./docs/database/mysql/mysql-日志详解.md)
+
 - [mysql 如何执行 SQL 语句](./docs/database/mysql/mysql-如何执行sql语句.md)
+
 - [mysql innodb-存储引擎对mvcc的实现](./docs/database/mysql/innodb-存储引擎对mvcc的实现.md)
+
+- [mysql 高性能优化指南](./docs/database/mysql/mysql-高性能优化规范.md)
 
   
 
@@ -601,6 +611,12 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [IDEA Maven配置](./docs/tool/idea/idea-maven配置.md)
 - [IDEA Tomcat 配置详解](http://mp.weixin.qq.com/s?__biz=Mzg5MjYzNTA4Ng==&mid=2247484228&idx=1&sn=0b5b5856f645dcd99c6289a5953c306b&chksm=c03a51e5f74dd8f3687ef6398764a55b60f96bd8bfba6c93aff24a9b497d7a2b98ddd53c41ea&scene=21#wechat_redirect)
 - [IDEA 配置XDebug 远程调试 PHP 代码 详细教程](https://langyastudio.blog.csdn.net/article/details/47005477)
+
+
+
+### Eclipse
+
+- [Eclipse 使用入门](./docs/tool/eclipse/eclipse-intro.md)
 
 
 
