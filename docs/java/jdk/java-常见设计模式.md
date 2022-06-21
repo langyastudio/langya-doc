@@ -2,7 +2,7 @@
 
 平时我们写代码呢，多数情况都是**流水线式**写代码，基本就可以实现业务逻辑了。**如何在写代码中找到乐趣呢**，我觉得，最好的方式就是：**使用设计模式优化自己的业务代码**。今天跟大家聊聊日常工作中，我都使用过哪些设计模式。
 
-![工作中常用到哪些设计模式](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0acf483bc8624ee2b9fd509c5075acff~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp)
+![工作中常用到哪些设计模式](https://img-note.langyastudio.com/202206162223066.webp?x-oss-process=style/watermark)
 
 
 
@@ -225,7 +225,7 @@ public class Order {
 
 责任链模式实际上是一种处理请求的模式，它让多个处理器（对象节点）都有机会处理该请求，直到其中某个处理成功为止。责任链模式把多个处理器串成链，然后让请求在链上传递：
 
-![责任链模式](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0a0b19d1e4f94f62b8c9c990dcaee46f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp)
+![责任链模式](https://img-note.langyastudio.com/202206162223194.webp?x-oss-process=style/watermark)
 
 打个比喻：
 
@@ -409,7 +409,7 @@ check rule
 
 假设我们有这么一个业务场景：内部系统不同商户，调用我们系统接口，去跟外部第三方系统交互（http方式）。走类似这么一个流程，如下：
 
-![img](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2834cfe2651f4e4889fa61a1f1227f85~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp)
+![img](https://img-note.langyastudio.com/202206162224727.webp?x-oss-process=style/watermark)
 
 一个请求都会经历这几个流程：
 

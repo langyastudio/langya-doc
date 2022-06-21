@@ -1,3 +1,11 @@
+### 依赖管理
+
+选择 File -> Project Structure 菜单，在弹框中选择 Modules 标签，再选择对应的的项目。在依赖管理中添加项目依赖，如下图所示：选择依赖的项目即可
+
+![image-20220620172055359](https://img-note.langyastudio.com/202206201720425.png?x-oss-process=style/watermark)
+
+
+
 ### Debug模式启动慢或无法启动
 
 压根儿就没有改过代码，但突然无法启动。应该是一个设置的小问题，于是通过 run 按钮启动项目验证一下，果然启动成功了。这也就说明项目和代码没有任何问题，肯定是 IDEA 某个设置项的问题

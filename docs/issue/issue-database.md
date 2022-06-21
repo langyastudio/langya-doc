@@ -42,3 +42,27 @@ CREATE INDEX uidx_ums_file_f_id
 
     存储空间占用：65535/1024=64K的数据；
 
+
+
+## 其他
+
+### 违反检查约束条件
+
+例如执行语句时，报错
+
+```sql
+SQL 错误 [2290] [23000]: ORA-02290: 违反检查约束条件 (GL_OSP65.SYS_C00101490)
+Error position: line: 3
+```
+
+**解决方案：**
+
+首先要确定约束在哪一字段上，使用 sql：，(这里要注意 TABELNAME 必须是大写,表示业务表名称)
+
+```sql
+select * from user_constraints where table_name ='TABLENAME'
+```
+
+也可以通过客户端查看该表的约束条件
+
+![image-20220617145540064](https://img-note.langyastudio.com/202206171455101.png?x-oss-process=style/watermark)
