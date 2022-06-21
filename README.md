@@ -596,6 +596,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [aliyun 短信配置](./docs/devops/platform/aliyun-短信配置.md)
 - [aliyun 直播配置](./docs/devops/platform/aliyun-直播.md)
 - [weixin 公众号配置](./docs/devops/platform/weixin-公众号配置.md)
+- [亚马逊 memorydb 如何上手](./docs/devops/platform/aws-memorydb.md)
 
 
 
@@ -626,6 +627,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [chiner 数据库建模工具](./docs/tool/database/chiner-数据库建模工具.md)
 - [screw 一键生成数据库文档](./docs/tool/database/screw-一键生成数据库文档.md)
 - [datagrip idea官方数据库管理](./docs/tool/database/datagrip-idea官方数据库管理.md)
+- [navicat 常见问题](./docs/issue/issue-navicat.md)
 
   
 
