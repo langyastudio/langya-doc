@@ -180,9 +180,9 @@ Maven并不会每次都从中央仓库下载jar包。一个jar包一旦被下载
 - artifactId：该jar包自身的名称，类似Java的类名；
 - version：该jar包的版本。
 
-Maven通过对jar包进行PGP签名确保任何一个jar包一经发布就无法修改。修改已发布jar包的唯一方法是发布一个新版本。
+Maven通过对jar包进行PGP签名确保任何一个jar包**一经发布就无法修改**。修改已发布jar包的唯一方法是发布一个新版本。
 
-> 只有以`-SNAPSHOT`结尾的版本号会被Maven视为开发版本，开发版本每次都会重复下载，这种SNAPSHOT版本只能用于内部私有的Maven repo，公开发布的版本不允许出现SNAPSHOT。
+> 只有以**`-SNAPSHOT`**结尾的版本号会被Maven视为开发版本，开发版本每次都会重复下载，这种SNAPSHOT版本只能用于内部私有的Maven repo，公开发布的版本不允许出现SNAPSHOT。
 
 
 
@@ -279,8 +279,8 @@ Maven的生命周期（lifecycle）由一系列阶段（phase）构成，以内�
 - integration-test
 - post-integration-test
 - verify
-- install
-- deploy
+- **install**
+- **deploy**
 
 如果我们运行`mvn package`，Maven就会执行`default`生命周期，它会从开始一直运行到`package`这个phase为止：
 
@@ -617,7 +617,7 @@ multiple-project
 
 #### 本地仓库
 
-本地仓库是指把本地开发的项目“发布”在本地，这样其他项目可以通过本地仓库引用它。但是我们不推荐把自己的模块安装到Maven的本地仓库，因为每次修改某个模块的源码，都需要重新安装，非常容易出现版本不一致的情况。
+本地仓库是指把本地开发的项目“发布”在本地，这样其他项目可以通过本地仓库引用它。但是我们**不推荐把自己的模块安装到Maven的本地仓库，因为每次修改某个模块的源码，都需要重新安装**，非常容易出现版本不一致的情况。
 
 更好的方法是使用模块化编译，在编译的时候，告诉Maven几个模块之间存在依赖关系，需要一块编译，Maven就会自动按依赖顺序编译这些模块。
 
