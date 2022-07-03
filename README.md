@@ -363,6 +363,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 - [cap&base 理论](./docs/architecture/distributed-system/theory/cap&base-理论.md)
 - [paxos&raft 算法](./docs/architecture/distributed-system/theory/cap&base-理论.md)
+- [gossip](./docs/architecture/distributed-system/theory/gossip.md)
 - [分布式 id](./docs/architecture/distributed-system/分布式-id.md)
 - [分布式事务](./docs/architecture/distributed-system/分布式-transactions.md)
 - [网关](./docs/architecture/distributed-system/网关.md)
@@ -470,6 +471,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [剑指 offer 编程题](./docs/cs-basic/algorithm/剑指offer编程题.md)
 - [链表算法题](./docs/cs-basic/algorithm/链表算法题.md)
 - [字符串算法题](./docs/cs-basic/algorithm/字符串算法题.md)
+- [十大经典排序算法](./docs/cs-basic/algorithm/十大经典排序算法.md)
 
 
 
