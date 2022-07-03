@@ -132,6 +132,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 **spring boot**
 
 - [spring boot 常见知识点](./docs/java/framework/spring/spring-boot/springboot-常见知识点&面试题汇总.md)
+- [springboot-自动装配原理详解](./docs/java/framework/spring/spring-boot/springboot-自动装配原理详解)
 - [spring boot 零基础快速入门](./docs/java/framework/spring/spring-boot/01--springboot-快速入门.md)
 - [spring boot restful web 应用](./docs/java/framework/spring/spring-boot/02--restful-web-应用.md)
 - [spring boot properties 配置文件详解](./docs/java/framework/spring/spring-boot/03--springboot-配置文件.md)
