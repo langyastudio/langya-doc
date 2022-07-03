@@ -189,6 +189,8 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 - [mysql 索引详解](./docs/database/mysql/mysql-索引详解.md)
 
+- [mysql-隐式转换导致的索引失效](./docs/database/mysql/mysql-隐式转换导致的索引失效.md)
+
 - [mysql 事务隔离级别](./docs/database/mysql/mysql-事务隔离级别.md)
 
 - [mysql 常见函数](./docs/database/mysql/mysql-函数.md)
