@@ -677,21 +677,29 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - 高级程序员
 
   - [高级别开发同学的七条建议](./docs/manage/team/advanced-programmer/高级别开发同学的七条建议.md)
+  - [糟糕程序员的 N 个坏习惯](./docs/manage/team/advanced-programmer/糟糕程序员的坏习惯.md)
 
 - 好文系列
 
   -  [程序员职业发展三重门](./docs/manage/team/articles/程序员职业发展三重门.md)
   -  [新入职一家公司如何快速进入工作状态](./docs/manage/team/articles/新入职一家公司如何快速进入工作状态.md)
   -  [大龄程序员所经历的面试的历炼和思考](./docs/manage/team/articles/大龄程序员所经历的面试的历炼和思考.md)
-  -  [35 岁出路](./docs/manage/team/articles/35岁出路.md)
+  -  [35 岁出路在哪里](./docs/manage/team/articles/35岁出路.md)
 
 - 面试
 
-  [如何面试程序员](./docs/manage/team/interview/如何面试程序员.md)
+  - [如何面试程序员](./docs/manage/team/interview/如何面试程序员.md)
 
-  [java 如何高薪](./docs/manage/team/interview/java如何高薪.md)
+  - [如何通过初级面试考察程序员的技术能力](./docs/manage/team/interview/如何考察程序员的技术能力.md)
+  - [如何甄别应聘者的包装程度](./docs/manage/team/interview/如何甄别应聘者的包装程度.md)
+  - [如何准备技术初试](./docs/manage/team/interview/如何准备技术初试.md)
+  - [斩获大厂 20+ 的offer的面试经验](./docs/manage/team/interview/斩获大厂offer的面试经验.md)
+  - [java 如何实现高薪](./docs/manage/team/interview/java如何实现高薪.md)
 
-- 出书
+- 撰写
+
+  - [程序员高效出书避坑和实践指南](./docs/manage/team/programmer/程序员高效出书避坑和实践指南.md)
+  - [程序员怎样出版一本技术书](./docs/manage/team/programmer/程序员怎样出版一本技术书.md)
 
 
 
