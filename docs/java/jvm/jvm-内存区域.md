@@ -69,37 +69,36 @@ Java 虚拟机在执行 Java 程序的过程中会把它管理的内存划分成
 
 ### 虚拟机栈
 
-与程序计数器一样，Java 虚拟机栈也是**线程私有**的，它的生命周期和线程相同，描述的是 Java **方法执行的内存模型**，每次方法调用的数据都是通过栈传递的。
+与程序计数器一样，Java 虚拟机栈（后文简称栈）也是线程私有的，它的生命周期和线程相同，随着线程的创建而创建，随着线程的死亡而死亡。
 
-Java 内存可以粗糙的区分为堆内存（Heap）和栈内存 (Stack)，其中栈就是现在说的虚拟机栈，或者说是虚拟机栈中局部变量表部分。 局部变量表主要存放了编译期可知的**各种数据类型**（boolean、byte、char、short、int、float、long、double）、**对象引用**（reference 类型，它不同于对象本身，可能是一个指向对象起始地址的引用指针，也可能是指向一个代表对象的句柄或其他与此对象相关的位置）。
+栈绝对算的上是 JVM 运行时数据区域的一个核心，除了一些 Native 方法调用是通过本地方法栈实现的(后面会提到)，其他所有的 Java 方法调用都是通过栈来实现的（也需要和其他运行时数据区域比如程序计数器配合）。
 
+方法调用的数据需要通过栈进行传递，每一次方法调用都会有一个对应的栈帧被压入栈中，每一个方法调用结束后，都会有一个栈帧被弹出。
 
+栈由一个个栈帧组成，而每个栈帧中都拥有：局部变量表、操作数栈、动态链接、方法返回地址。和数据结构上的栈类似，两者都是先进后出的数据结构，只支持出栈和入栈两种操作。
 
-Java 虚拟机栈会出现两种错误：`StackOverFlowError` 和 `OutOfMemoryError`。
+![栈](https://img-note.langyastudio.com/202207031904210.png?x-oss-process=style/watermark)
 
-- `StackOverFlowError`
+**局部变量表** 主要存放了编译期可知的各种数据类型（boolean、byte、char、short、int、float、long、double）、对象引用（reference 类型，它不同于对象本身，可能是一个指向对象起始地址的引用指针，也可能是指向一个代表对象的句柄或其他与此对象相关的位置）。
 
-  若 Java 虚拟机栈的内存大小不允许动态扩展，那么当线程请求**栈的深度超过当前虚拟机栈的最大深度**的时候，就抛出 StackOverFlowError 错误
+**操作数栈** 主要作为方法调用的中转站使用，用于存放方法执行过程中产生的中间计算结果。另外，计算过程中产生的临时变量也会放在操作数栈中。
 
-- `OutOfMemoryError`
+**动态链接** 主要服务一个方法需要调用其他方法的场景。在 Java 源文件被编译成字节码文件时，所有的变量和方法引用都作为符号引用（Symbilic Reference）保存在 Class 文件的常量池里。当一个方法要调用其他方法，需要将常量池中指向方法的符号引用转化为其在内存地址中的直接引用。动态链接的作用就是为了将符号引用转换为调用方法的直接引用。
 
-  Java 虚拟机栈的内存大小可以动态扩展， 如果虚拟机在动态扩展栈时**无法申请到足够的内存**空间，则抛出`OutOfMemoryError`异常
+![](https://img-note.langyastudio.com/202207031904730.png?x-oss-process=style/watermark)
 
-![](https://img-note.langyastudio.com/202111091446901.png?x-oss-process=style/watermark)
+栈空间虽然不是无限的，但一般正常调用的情况下是不会出现问题的。不过，如果函数调用陷入无限循环的话，就会导致栈中被压入太多栈帧而占用太多空间，导致栈空间过深。那么当线程请求栈的深度超过当前 Java 虚拟机栈的最大深度的时候，就抛出 `StackOverFlowError` 错误。
 
+Java 方法有两种返回方式，一种是 return 语句正常返回，一种是抛出异常。不管哪种返回方式，都会导致栈帧被弹出。也就是说， **栈帧随着方法调用而创建，随着方法结束而销毁。无论方法正常完成还是异常完成都算作方法结束。**
 
+除了 `StackOverFlowError` 错误之外，栈还可能会出现`OutOfMemoryError`错误，这是因为如果栈的内存大小可以动态扩展， 如果虚拟机在动态扩展栈时无法申请到足够的内存空间，则抛出`OutOfMemoryError`异常。
 
-**扩展：那么方法/函数如何调用？**
+简单总结一下程序运行中栈可能会出现两种错误：
 
-Java 栈可以类比数据结构中栈，Java 栈中保存的主要内容是栈帧，每一次函数调用都会有一个对应的栈帧被压入 Java 栈，每一个函数调用结束后，都会有一个栈帧被弹出。
+- **`StackOverFlowError`：** 若栈的内存大小不允许动态扩展，那么当线程请求栈的深度超过当前 Java 虚拟机栈的最大深度的时候，就抛出 `StackOverFlowError` 错误。
+- **`OutOfMemoryError`：** 如果栈的内存大小可以动态扩展， 如果虚拟机在动态扩展栈时无法申请到足够的内存空间，则抛出`OutOfMemoryError`异常。
 
-Java 方法有两种返回方式：
-
-- return 语句
-
-- 抛出异常
-
-不管哪种返回方式都会导致栈帧被弹出。
+![](https://img-note.langyastudio.com/202207031904216.png?x-oss-process=style/watermark)
 
 
 
@@ -399,7 +398,27 @@ System.out.println(str4 == str5);//false
  System.out.println(aa==bb);// true
  ```
 
-JDK1.7 之前运行时常量池逻辑包含字符串常量池存放在方法区。JDK1.7 的时候，字符串常量池被从方法区拿到了堆中。
+
+
+JDK1.7 之前，字符串常量池存放在永久代。JDK1.7 字符串常量池和静态变量从永久代移动了 Java 堆中。
+
+![](https://img-note.langyastudio.com/202207031907895.png?x-oss-process=style/watermark)
+
+![](https://img-note.langyastudio.com/202207031907900.png?x-oss-process=style/watermark)
+
+![](https://img-note.langyastudio.com/202207031907905.png?x-oss-process=style/watermark)
+
+
+
+**JDK 1.7 为什么要将字符串常量池移动到堆中？**
+
+主要是因为永久代（方法区实现）的 GC 回收效率太低，只有在整堆收集 (Full GC)的时候才会被执行 GC。Java 程序中通常会有大量的被创建的字符串等待回收，将字符串常量池放到堆中，能够更高效及时地回收字符串内存。
+
+相关问题：[JVM 常量池中存储的是对象还是引用呢？ - RednaxelaFX - 知乎](https://www.zhihu.com/question/57109429/answer/151717241)
+
+最后再来分享一段周志明老师在[《深入理解 Java 虚拟机（第 3 版）》样例代码&勘误](https://github.com/fenixsoft/jvm_book) Github 仓库的 [issue#112](https://github.com/fenixsoft/jvm_book/issues/112) 中说过的话：
+
+> **运行时常量池、方法区、字符串常量池这些都是不随虚拟机实现而改变的逻辑概念，是公共且抽象的，Metaspace、Heap 是与具体某种虚拟机实现相关的物理概念，是私有且具体的。**
 
 
 

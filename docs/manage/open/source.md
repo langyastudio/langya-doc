@@ -28,16 +28,19 @@
 | fastjson            | Json 工具类库           |https://github.com/alibaba/fastjson  |
 | easyexcel | excel操作工具库 |https://github.com/alibaba/easyexcel |
 | Hibernator-Validator | 验证框架            | http://hibernate.org/validator                 |
-|                      |                     |                                                |
+|                        |                      |                                                  |
 | Swagger-UI | 文档生成工具 | https://github.com/swagger-api/swagger-ui |
 | Knife4j | 文档生产工具 | https://github.com/xiaoymin/swagger-bootstrap-ui |
 | arthas | 诊断工具 | https://github.com/alibaba/arthas |
-| LogStash             | 日志收集工具        | https://github.com/elastic/logstash            |
+| JADX                   | 反编译工具           | https://github.com/skylot/jadx                   |
+| Recaf                  | 字节码编辑器         | https://github.com/Col-E/Recaf                   |
+| LogStash | 日志收集工具 | https://github.com/elastic/logstash |
 | Kibina               | 日志可视化查看工具  | https://github.com/elastic/kibana              |
+|  |  |  |
 | Nginx                | 静态资源服务器      | https://www.nginx.com/                         |
 | Docker               | 应用容器引擎        | https://www.docker.com                         |
-| Portainer | 可视化Docker容器管理 | https://github.com/portainer/portainer |
 | Jenkins             | 自动化部署工具      | https://github.com/jenkinsci/jenkins           |
+| PrettyZoo | ZooKeeper 可视化管理 | https://github.com/vran-dev/PrettyZoo |
 
 
 
@@ -91,28 +94,31 @@
 
 ## 开发工具
 
-| 工具          | 说明                | 官网                                                  |
-| ------------- | ------------------- | ----------------------------------------------------- |
-| IDEA          | 开发IDE             | https://www.jetbrains.com/idea/download               |
-| SourceTree    | Git 管理工具        | https://www.sourcetreeapp.com/                        |
-| RedisDesktop  | redis客户端连接工具 | https://github.com/qishibo/AnotherRedisDesktopManager |
-| Robomongo     | mongo客户端连接工具 | https://robomongo.org/download                        |
-| SwitchHosts   | 本地host管理        | https://oldj.github.io/SwitchHosts/                   |
-| XShell        | Linux远程连接工具   | https://www.xshell.com/zh/free-for-home-school/       |
-| Xftp          | Linux ftp工具       | https://www.xshell.com/zh/free-for-home-school/       |
-| Navicat       | 数据库连接工具      | http://www.formysql.com/xiazai.html                   |
-| DBeaver       | 数据库连接工具      | https://dbeaver.io/download/                          |
-| PowerDesigner | 数据库设计工具      | http://powerdesigner.de/                              |
-| Chiner        | 数据库设计工具      | https://gitee.com/robergroup/chiner/releases          |
-| Axure         | 原型设计工具        | https://www.axure.com/                                |
-| MindMaster    | 思维导图设计工具    | http://www.edrawsoft.cn/mindmaster                    |
-| XMind         | 思维导图设计工具    | https://www.xmind.cn/                                 |
-| ScreenToGif   | gif录制工具         | https://www.screentogif.com/                          |
-| ProcessOn     | 流程图绘制工具      | https://www.processon.com/                            |
-| PicPick       | 图片处理工具        | https://picpick.app/zh/                               |
-| Snipaste      | 屏幕截图工具        | https://www.snipaste.com/                             |
-| Postman       | API接口调试工具     | https://www.postman.com/                              |
-| Typora        | Markdown编辑器      | https://typora.io/                                    |
+| 工具          | 说明                   | 官网                                                  |
+| ------------- | ---------------------- | ----------------------------------------------------- |
+| IDEA          | 开发IDE                | https://www.jetbrains.com/idea/download               |
+| SourceTree    | Git 管理工具           | https://www.sourcetreeapp.com/                        |
+| RedisDesktop  | redis客户端连接工具    | https://github.com/qishibo/AnotherRedisDesktopManager |
+| Redis Manager | 管理平台管理平台       | https://github.com/ngbdf/redis-manager                |
+| Robomongo     | MongoDB 客户端连接工具 | https://robomongo.org/download                        |
+| Mongood       | MongoDB 客户端连接工具 | https://github.com/RenzHoly/Mongood                   |
+| SwitchHosts   | 本地host管理           | https://oldj.github.io/SwitchHosts/                   |
+| XShell        | Linux远程连接工具      | https://www.xshell.com/zh/free-for-home-school/       |
+| Xftp          | Linux ftp工具          | https://www.xshell.com/zh/free-for-home-school/       |
+| Navicat       | 数据库连接工具         | http://www.formysql.com/xiazai.html                   |
+| DBeaver       | 数据库连接工具         | https://dbeaver.io/download/                          |
+| Portainer     | 可视化Docker容器管理   | https://github.com/portainer/portainer                |
+| PowerDesigner | 数据库设计工具         | http://powerdesigner.de/                              |
+| Chiner        | 数据库设计工具         | https://gitee.com/robergroup/chiner/releases          |
+| Axure         | 原型设计工具           | https://www.axure.com/                                |
+| MindMaster    | 思维导图设计工具       | http://www.edrawsoft.cn/mindmaster                    |
+| XMind         | 思维导图设计工具       | https://www.xmind.cn/                                 |
+| ScreenToGif   | gif录制工具            | https://www.screentogif.com/                          |
+| ProcessOn     | 流程图绘制工具         | https://www.processon.com/                            |
+| PicPick       | 图片处理工具           | https://picpick.app/zh/                               |
+| Snipaste      | 屏幕截图工具           | https://www.snipaste.com/                             |
+| Postman       | API接口调试工具        | https://www.postman.com/                              |
+| Typora        | Markdown编辑器         | https://typora.io/                                    |
 
 
 

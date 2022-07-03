@@ -39,7 +39,7 @@ Paxos 算法诞生于 1990 年，这是一种解决分布式系统一致性的�
 
 > 对于 `Learner` 来说如何去学习 `Acceptor` 批准的提案内容，这有很多方式，读者可以自己去了解一下，这里不做过多解释。
 
-
+![](https://img-note.langyastudio.com/202207031854735.png?x-oss-process=style/watermark)
 
 ### `paxos` 算法的死循环问题
 

@@ -248,6 +248,84 @@ public OneService getService(status) {
 
 
 
+Spring 内置的 `@Autowired` 以及 JDK 内置的 `@Resource` 和 `@Inject` 都可以用于注入 Bean。
+
+| Annotaion    | Package                            | Source       |
+| ------------ | ---------------------------------- | ------------ |
+| `@Autowired` | `org.springframework.bean.factory` | Spring 2.5+  |
+| `@Resource`  | `javax.annotation`                 | Java JSR-250 |
+| `@Inject`    | `javax.inject`                     | Java JSR-330 |
+
+ `@Autowired` 和`@Resource`使用的比较多一些。
+
+
+
+### @Autowired vs @Resource
+
+`Autowired` 属于 Spring 内置的注解，默认的注入方式为`byType`（根据类型进行匹配），也就是说会优先根据接口类型去匹配并注入 Bean （接口的实现类）。
+
+**这会有什么问题呢？** 当一个接口存在多个实现类的话，`byType`这种方式就无法正确注入对象了，因为这个时候 Spring 会同时找到多个满足条件的选择，默认情况下它自己不知道选择哪一个。
+
+这种情况下，注入方式会变为 `byName`（根据名称进行匹配），这个名称通常就是类名（首字母小写）。就比如说下面代码中的 `smsService` 就是我这里所说的名称，这样应该比较好理解了吧。
+
+```java
+// smsService 就是我们上面所说的名称
+@Autowired
+private SmsService smsService;
+```
+
+举个例子，`SmsService` 接口有两个实现类: `SmsServiceImpl1`和 `SmsServiceImpl2`，且它们都已经被 Spring 容器所管理。
+
+```java
+// 报错，byName 和 byType 都无法匹配到 bean
+@Autowired
+private SmsService smsService;
+// 正确注入 SmsServiceImpl1 对象对应的 bean
+@Autowired
+private SmsService smsServiceImpl1;
+// 正确注入  SmsServiceImpl1 对象对应的 bean
+// smsServiceImpl1 就是我们上面所说的名称
+@Autowired
+@Qualifier(value = "smsServiceImpl1")
+private SmsService smsService;
+```
+
+我们还是建议通过 `@Qualifier` 注解来显示指定名称而不是依赖变量的名称。
+
+`@Resource`属于 JDK 提供的注解，默认注入方式为 `byName`。如果无法通过名称匹配到对应的实现类的话，注入方式会变为`byType`。
+
+`@Resource` 有两个比较重要且日常开发常用的属性：`name`（名称）、`type`（类型）。
+
+```java
+public @interface Resource {
+    String name() default "";
+    Class<?> type() default Object.class;
+}
+```
+
+如果仅指定 `name` 属性则注入方式为`byName`，如果仅指定`type`属性则注入方式为`byType`，如果同时指定`name` 和`type`属性（不建议这么做）则注入方式为`byType`+`byName`。
+
+```java
+// 报错，byName 和 byType 都无法匹配到 bean
+@Resource
+private SmsService smsService;
+// 正确注入 SmsServiceImpl1 对象对应的 bean
+@Autowired
+private SmsService smsServiceImpl1;
+// 正确注入 SmsServiceImpl1 对象对应的 bean（比较推荐这种方式）
+@Autowired
+@Resource(name = "smsServiceImpl1")
+private SmsService smsService;
+```
+
+简单总结一下：
+
+- `@Autowired` 是 Spring 提供的注解，`@Resource` 是 JDK 提供的注解
+- `Autowired` 默认的注入方式为`byType`（根据类型进行匹配），`@Resource`默认注入方式为 `byName`（根据名称进行匹配）
+- 当一个类存在多个实现类的情况下，`@Autowired` 和`@Resource`都需要通过名称进行匹配才能正确匹配到对应的 Bean。`Autowired` 可以通过 `@Qualifier` 注解来显示指定名称，`@Resource`可以通过 `name` 属性来显示指定名称
+
+
+
 ### bean 的生命周期
 
 > 下面的内容整理自：<https://yemengying.com/2016/07/14/spring-bean-life-cycle/> ，除了这篇文章，再推荐一篇很不错的文章 ：<https://www.cnblogs.com/zrtqsk/p/3735273.html> 。
@@ -378,55 +456,387 @@ Spring/SpringBoot 模块下专门有一篇是讲 Spring 事务的，总结的非
 
   在代码中硬编码(不推荐使用) ：通过 `TransactionTemplate` 或者 `TransactionManager` 手动管理事务，实际应用中很少使用，但是对于你理解 Spring 事务管理原理有帮助
 
+  使用`TransactionTemplate` 进行编程式事务管理的示例代码如下：
+
+  ```java
+  @Autowired
+  private TransactionTemplate transactionTemplate;
+  public void testTransaction() {
+  
+          transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+              @Override
+              protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+  
+                  try {
+  
+                      // ....  业务代码
+                  } catch (Exception e){
+                      //回滚
+                      transactionStatus.setRollbackOnly();
+                  }
+  
+              }
+          });
+  }
+  ```
+
+  使用 `TransactionManager` 进行编程式事务管理的示例代码如下：
+
+  ```java
+  @Autowired
+  private PlatformTransactionManager transactionManager;
+  
+  public void testTransaction() {
+  
+    TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
+            try {
+                 // ....  业务代码
+                transactionManager.commit(status);
+            } catch (Exception e) {
+                transactionManager.rollback(status);
+            }
+  }
+  ```
+
+  
+
 - **声明式事务** 
 
   在 XML 配置文件中配置或者直接基于注解（推荐使用） : 实际是通过 AOP 实现（基于 `@Transactional` 的全注解方式使用最多）
 
+  使用 `@Transactional`注解进行事务管理的示例代码如下：
+
+  ```java
+  @Transactional(propagation = Propagation.REQUIRED)
+  public void aMethod {
+    //do something
+    B b = new B();
+    C c = new C();
+    b.bMethod();
+    c.cMethod();
+  }
+  ```
 
 
-### Spring 事务传播行为
+
+
+### Spring 事务管理接口介绍
+
+Spring 框架中，事务管理相关最重要的 3 个接口如下：
+
+- PlatformTransactionManager： （平台）事务管理器，Spring 事务策略的核心
+- TransactionDefinition： 事务定义信息(事务隔离级别、传播行为、超时、只读、回滚规则)
+- TransactionStatus： 事务运行状态
+
+我们可以把 `PlatformTransactionManager` 接口可以被看作是事务上层的管理者，而 `TransactionDefinition` 和 `TransactionStatus`  这两个接口可以看作是事务的描述。
+
+`PlatformTransactionManager` 会根据 `TransactionDefinition` 的定义比如事务超时时间、隔离级别、传播行为等来进行事务管理 ，而 `TransactionStatus` 接口则提供了一些方法来获取事务相应的状态比如是否新事务、是否可以回滚等等。
+
+
+
+#### PlatformTransactionManager 事务管理接口
+
+**Spring 并不直接管理事务，而是提供了多种事务管理器** 。Spring 事务管理器的接口是： `PlatformTransactionManager`
+
+通过这个接口，Spring 为各个平台如 JDBC (`DataSourceTransactionManager`)、Hibernate(`HibernateTransactionManager`)、JPA(`JpaTransactionManager`) 等都提供了对应的事务管理器，但是具体的实现就是各个平台自己的事情了。
+
+
+
+`PlatformTransactionManager` 接口的具体实现如下:
+
+![](https://img-note.langyastudio.com/202207031755359.png?x-oss-process=style/watermark)
+
+`PlatformTransactionManager`接口中定义了三个方法：
+
+```java
+package org.springframework.transaction;
+
+import org.springframework.lang.Nullable;
+
+public interface PlatformTransactionManager {
+    //获得事务
+    TransactionStatus getTransaction(@Nullable TransactionDefinition var1) throws TransactionException;
+    //提交事务
+    void commit(TransactionStatus var1) throws TransactionException;
+    //回滚事务
+    void rollback(TransactionStatus var1) throws TransactionException;
+}
+
+```
+
+
+
+#### TransactionDefinition 事务属性
+
+事务管理器接口 `PlatformTransactionManager` 通过 `getTransaction(TransactionDefinition definition)` 方法来得到一个事务，这个方法里面的参数是 `TransactionDefinition` 类 ，这个类就定义了一些基本的事务属性。
+
+**什么是事务属性呢？** 事务属性可以理解成事务的一些基本配置，描述了事务策略如何应用到方法上。
+
+事务属性包含了 5 个方面：
+
+- 隔离级别
+- 传播行为
+- 回滚规则
+- 是否只读
+- 事务超时
+
+`TransactionDefinition` 接口中定义了 5 个方法以及一些表示事务属性的常量比如隔离级别、传播行为等等
+
+```java
+package org.springframework.transaction;
+
+import org.springframework.lang.Nullable;
+
+public interface TransactionDefinition {
+    int PROPAGATION_REQUIRED = 0;
+    int PROPAGATION_SUPPORTS = 1;
+    int PROPAGATION_MANDATORY = 2;
+    int PROPAGATION_REQUIRES_NEW = 3;
+    int PROPAGATION_NOT_SUPPORTED = 4;
+    int PROPAGATION_NEVER = 5;
+    int PROPAGATION_NESTED = 6;
+    int ISOLATION_DEFAULT = -1;
+    int ISOLATION_READ_UNCOMMITTED = 1;
+    int ISOLATION_READ_COMMITTED = 2;
+    int ISOLATION_REPEATABLE_READ = 4;
+    int ISOLATION_SERIALIZABLE = 8;
+    int TIMEOUT_DEFAULT = -1;
+    // 返回事务的传播行为，默认值为 REQUIRED。
+    int getPropagationBehavior();
+    //返回事务的隔离级别，默认值是 DEFAULT
+    int getIsolationLevel();
+    // 返回事务的超时时间，默认值为-1。如果超过该时间限制但事务还没有完成，则自动回滚事务。
+    int getTimeout();
+    // 返回是否为只读事务，默认值为 false
+    boolean isReadOnly();
+
+    @Nullable
+    String getName();
+}
+```
+
+
+
+#### TransactionStatus 事务状态
+
+`TransactionStatus` 接口用来记录事务的状态 该接口定义了一组方法,用来获取或判断事务的相应状态信息。
+
+`PlatformTransactionManager.getTransaction(…)`方法返回一个 `TransactionStatus` 对象。
+
+**TransactionStatus 接口内容如下：**
+
+```java
+public interface TransactionStatus{
+    boolean isNewTransaction(); // 是否是新的事务
+    boolean hasSavepoint(); // 是否有恢复点
+    void setRollbackOnly();  // 设置为只回滚
+    boolean isRollbackOnly(); // 是否为只回滚
+    boolean isCompleted; // 是否已完成
+}
+```
+
+
+
+### 事务属性详解
+
+实际业务开发中，大家一般都是使用 `@Transactional` 注解来开启事务，但很多人并不清楚这个注解里面的参数是什么意思，有什么用。为了更好的在项目中使用事务管理，强烈推荐好好阅读一下下面的内容。
+
+
+
+#### Spring 事务传播行为
 
 **事务传播行为是为了解决业务层方法之间互相调用的事务问题**。
 
 当事务方法被另一个事务方法调用时，必须指定事务应该如何传播。例如：方法可能继续在现有事务中运行，也可能开启一个新事务，并在自己的事务中运行。
 
-正确的事务传播行为可能的值如下:
+举个例子：我们在 A 类的`aMethod()`方法中调用了 B 类的 `bMethod()` 方法。这个时候就涉及到业务层方法之间互相调用的事务问题。如果我们的 `bMethod()`如果发生异常需要回滚，如何配置事务传播行为才能让 `aMethod()`也跟着回滚呢？这个时候就需要事务传播行为的知识了，如果你不知道的话一定要好好看一下。
 
-**`TransactionDefinition.PROPAGATION_REQUIRED`**
+```java
+@Service
+Class A {
+    @Autowired
+    B b;
+    @Transactional(propagation = Propagation.xxx)
+    public void aMethod {
+        //do something
+        b.bMethod();
+    }
+}
 
-使用的最多的一个事务传播行为，我们平时经常使用的 `@Transactional` 注解默认使用就是这个事务传播行为。如果当前存在事务，则加入该事务；如果当前没有事务，则创建一个新的事务
+@Service
+Class B {
+    @Transactional(propagation = Propagation.xxx)
+    public void bMethod {
+       //do something
+    }
+}
+```
 
-**`TransactionDefinition.PROPAGATION_REQUIRES_NEW`**
+在 `TransactionDefinition` 定义中包括了如下几个表示传播行为的常量：
 
-创建一个新的事务，如果当前存在事务，则把当前事务挂起。也就是说不管外部方法是否开启事务，`Propagation.REQUIRES_NEW` 修饰的内部方法会新开启自己的事务，且开启的事务相互独立，互不干扰
+```java
+public interface TransactionDefinition {
+    int PROPAGATION_REQUIRED = 0;
+    int PROPAGATION_SUPPORTS = 1;
+    int PROPAGATION_MANDATORY = 2;
+    int PROPAGATION_REQUIRES_NEW = 3;
+    int PROPAGATION_NOT_SUPPORTED = 4;
+    int PROPAGATION_NEVER = 5;
+    int PROPAGATION_NESTED = 6;
+    ......
+}
+```
 
-**`TransactionDefinition.PROPAGATION_NESTED`**
+不过，为了方便使用，Spring 相应地定义了一个枚举类：`Propagation`
 
-如果当前存在事务，则创建一个事务作为当前事务的嵌套事务来运行；如果当前没有事务，则该取值等价于`TransactionDefinition.PROPAGATION_REQUIRED`
+```java
+package org.springframework.transaction.annotation;
 
-**`TransactionDefinition.PROPAGATION_MANDATORY`**
+import org.springframework.transaction.TransactionDefinition;
 
-如果当前存在事务，则加入该事务；如果当前没有事务，则抛出异常（mandatory：强制性）这个使用的很少。
+public enum Propagation {
+
+    REQUIRED(TransactionDefinition.PROPAGATION_REQUIRED),
+
+    SUPPORTS(TransactionDefinition.PROPAGATION_SUPPORTS),
+
+    MANDATORY(TransactionDefinition.PROPAGATION_MANDATORY),
+
+    REQUIRES_NEW(TransactionDefinition.PROPAGATION_REQUIRES_NEW),
+
+    NOT_SUPPORTED(TransactionDefinition.PROPAGATION_NOT_SUPPORTED),
+
+    NEVER(TransactionDefinition.PROPAGATION_NEVER),
+
+    NESTED(TransactionDefinition.PROPAGATION_NESTED);
+
+    private final int value;
+
+    Propagation(int value) {
+        this.value = value;
+    }
+
+    public int value() {
+        return this.value;
+    }
+
+}
+
+```
+
+**正确的事务传播行为可能的值如下** ：
+
+**TransactionDefinition.PROPAGATION_REQUIRED**
+
+使用的最多的一个事务传播行为，我们平时经常使用的`@Transactional`注解默认使用就是这个事务传播行为。如果当前存在事务，则加入该事务；如果当前没有事务，则创建一个新的事务。也就是说：
+
+- 如果外部方法没有开启事务的话，`Propagation.REQUIRED`修饰的内部方法会新开启自己的事务，且开启的事务相互独立，互不干扰。
+- 如果外部方法开启事务并且被`Propagation.REQUIRED`的话，所有`Propagation.REQUIRED`修饰的内部方法和外部方法均属于同一事务 ，只要一个方法回滚，整个事务均回滚。
+
+举个例子：如果我们上面的`aMethod()`和`bMethod()`使用的都是`PROPAGATION_REQUIRED`传播行为的话，两者使用的就是同一个事务，只要其中一个方法回滚，整个事务均回滚。
+
+```java
+@Service
+Class A {
+    @Autowired
+    B b;
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void aMethod {
+        //do something
+        b.bMethod();
+    }
+}
+@Service
+Class B {
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void bMethod {
+       //do something
+    }
+}
+```
 
 
 
-若是错误的配置以下 3 种事务传播行为，事务将不会发生回滚：
+**TransactionDefinition.PROPAGATION_REQUIRES_NEW**
 
-- **`TransactionDefinition.PROPAGATION_SUPPORTS`**
+创建一个新的事务，如果当前存在事务，则把当前事务挂起。也就是说不管外部方法是否开启事务，`Propagation.REQUIRES_NEW`修饰的内部方法会新开启自己的事务，且开启的事务相互独立，互不干扰。
 
-  如果当前存在事务，则加入该事务；如果当前没有事务，则以非事务的方式继续运行
+举个例子：如果我们上面的`bMethod()`使用`PROPAGATION_REQUIRES_NEW`事务传播行为修饰，`aMethod`还是用`PROPAGATION_REQUIRED`修饰的话。如果`aMethod()`发生异常回滚，`bMethod()`不会跟着回滚，因为 `bMethod()`开启了独立的事务。但是，如果 `bMethod()`抛出了未被捕获的异常并且这个异常满足事务回滚规则的话,`aMethod()`同样也会回滚，因为这个异常被 `aMethod()`的事务管理机制检测到了。
 
-- **`TransactionDefinition.PROPAGATION_NOT_SUPPORTED`**
+```java
+@Service
+Class A {
+    @Autowired
+    B b;
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void aMethod {
+        //do something
+        b.bMethod();
+    }
+}
 
-  以非事务方式运行，如果当前存在事务，则把当前事务挂起
+@Service
+Class B {
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void bMethod {
+       //do something
+    }
+}
+```
 
-- **`TransactionDefinition.PROPAGATION_NEVER`**
-
-  以非事务方式运行，如果当前存在事务，则抛出异常
 
 
+**TransactionDefinition.PROPAGATION_NESTED**:
 
-### Spring 事务的隔离级别
+如果当前存在事务，就在嵌套事务内执行；如果当前没有事务，就执行与`TransactionDefinition.PROPAGATION_REQUIRED`类似的操作。也就是说：
+
+- 在外部方法开启事务的情况下,在内部开启一个新的事务，作为嵌套事务存在。
+- 如果外部方法无事务，则单独开启一个事务，与 `PROPAGATION_REQUIRED` 类似。
+
+这里还是简单举个例子：如果 `bMethod()` 回滚的话，`aMethod()`也会回滚。
+
+```java
+@Service
+Class A {
+    @Autowired
+    B b;
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void aMethod {
+        //do something
+        b.bMethod();
+    }
+}
+
+@Service
+Class B {
+    @Transactional(propagation = Propagation.NESTED)
+    public void bMethod {
+       //do something
+    }
+}
+```
+
+
+
+**TransactionDefinition.PROPAGATION_MANDATORY**
+
+如果当前存在事务，则加入该事务；如果当前没有事务，则抛出异常。（mandatory：强制性）
+
+这个使用的很少，就不举例子来说了。
+
+
+
+**若是错误的配置以下 3 种事务传播行为，事务将不会发生回滚，这里不对照案例讲解了，使用的很少。**
+
+- `TransactionDefinition.PROPAGATION_SUPPORTS`: 如果当前存在事务，则加入该事务；如果当前没有事务，则以非事务的方式继续运行。
+- `TransactionDefinition.PROPAGATION_NOT_SUPPORTED`: 以非事务方式运行，如果当前存在事务，则把当前事务挂起。
+- `TransactionDefinition.PROPAGATION_NEVER`: 以非事务方式运行，如果当前存在事务，则抛出异常。
+
+> [《太难了~面试官让我结合案例讲讲自己对 Spring 事务传播行为的理解。》](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247486668&idx=2&sn=0381e8c836442f46bdc5367170234abb&chksm=cea24307f9d5ca11c96943b3ccfa1fc70dc97dd87d9c540388581f8fe6d805ff548dff5f6b5b&token=1776990505&lang=zh_CN#rd)
+
+
+
+#### Spring 事务的隔离级别
 
 和事务传播行为这块一样，为了方便使用，Spring 也相应地定义了一个枚举类：**`Isolation`**
 
@@ -466,6 +876,46 @@ public enum Isolation {
 
 
 
+#### 事务超时属性
+
+所谓事务超时，就是指一个事务所允许执行的最长时间，如果超过该时间限制但事务还没有完成，则自动回滚事务。在 `TransactionDefinition` 中以 int 的值来表示超时时间，其单位是秒，默认值为-1，这表示事务的超时时间取决于底层事务系统或者没有超时时间。
+
+
+
+#### 事务只读属性
+
+```java
+package org.springframework.transaction;
+
+import org.springframework.lang.Nullable;
+
+public interface TransactionDefinition {
+    ......
+    // 返回是否为只读事务，默认值为 false
+    boolean isReadOnly();
+
+}
+```
+
+对于只有读取数据查询的事务，可以指定事务类型为 readonly，即只读事务。只读事务不涉及数据的修改，数据库会提供一些优化手段，适合用在有多条数据库查询操作的方法中。
+
+很多人就会疑问了，为什么我一个数据查询操作还要启用事务支持呢？
+
+拿 MySQL 的 innodb 举例子，根据官网 [https://dev.mysql.com/doc/refman/5.7/en/innodb-autocommit-commit-rollback.html](https://dev.mysql.com/doc/refman/5.7/en/innodb-autocommit-commit-rollback.html) 描述：
+
+> MySQL 默认对每一个新建立的连接都启用了`autocommit`模式。在该模式下，每一个发送到 MySQL 服务器的`sql`语句都会在一个单独的事务中进行处理，执行结束后会自动提交事务，并开启一个新的事务。
+
+但是，如果你给方法加上了`Transactional`注解的话，这个方法执行的所有`sql`会被放在一个事务中。如果声明了只读事务的话，数据库就会去优化它的执行，并不会带来其他的什么收益。
+
+如果不加`Transactional`，每条`sql`会开启一个单独的事务，中间被其它事务改了数据，都会实时读取到最新值。
+
+分享一下关于事务只读属性，其他人的解答：
+
+- 如果你一次执行单条查询语句，则没有必要启用事务支持，数据库默认支持 SQL 执行期间的读一致性；
+- 如果你一次执行多条查询语句，例如统计查询，报表查询，在这种场景下，多条查询 SQL 必须保证整体的读一致性，否则，在前条 SQL 查询之后，后条 SQL 查询之前，数据被其他用户改变，则该次整体的统计查询将会出现读数据不一致的状态，此时，应该启用事务支持
+
+
+
 ### @Transactional 常用配置参数
 
 **`@Transactional` 的常用配置参数总结：**
@@ -477,6 +927,44 @@ public enum Isolation {
 | timeout     | 事务的超时时间，默认值为-1（不会超时）。如果超过该时间限制但事务还没有完成，则自动回滚事务 |
 | readOnly    | 指定事务是否为只读事务，默认值为 false                       |
 | rollbackFor | 用于指定能够触发事务回滚的 **异常类型**，并且可以指定多个异常类型 |
+
+
+
+#### `@Transactional` 事务注解原理
+
+面试中在问 AOP 的时候可能会被问到的一个问题。简单说下吧！
+
+我们知道，**`@Transactional` 的工作机制是基于 AOP 实现的，AOP 又是使用动态代理实现的。如果目标对象实现了接口，默认情况下会采用 JDK 的动态代理，如果目标对象没有实现了接口,会使用 CGLIB 动态代理。**
+
+多提一嘴：`createAopProxy()` 方法 决定了是使用 JDK 还是 Cglib 来做动态代理，源码如下：
+
+```java
+public class DefaultAopProxyFactory implements AopProxyFactory, Serializable {
+
+	@Override
+	public AopProxy createAopProxy(AdvisedSupport config) throws AopConfigException {
+		if (config.isOptimize() || config.isProxyTargetClass() || hasNoUserSuppliedProxyInterfaces(config)) {
+			Class<?> targetClass = config.getTargetClass();
+			if (targetClass == null) {
+				throw new AopConfigException("TargetSource cannot determine target class: " +
+						"Either an interface or a target is required for proxy creation.");
+			}
+			if (targetClass.isInterface() || Proxy.isProxyClass(targetClass)) {
+				return new JdkDynamicAopProxy(config);
+			}
+			return new ObjenesisCglibAopProxy(config);
+		}
+		else {
+			return new JdkDynamicAopProxy(config);
+		}
+	}
+  .......
+}
+```
+
+如果一个类或者一个类中的 public 方法上被标注`@Transactional` 注解的话，Spring 容器就会在启动的时候为其创建一个代理类，在调用被`@Transactional` 注解的 public 方法的时候，实际调用的是，`TransactionInterceptor` 类中的 `invoke()`方法。这个方法的作用就是在目标方法之前开启事务，方法执行过程中如果遇到异常的时候回滚事务，方法调用完成之后提交事务。
+
+> `TransactionInterceptor` 类中的 `invoke()`方法内部实际调用的是 `TransactionAspectSupport` 类的 `invokeWithinTransaction()`方法。由于新版本的 Spring 对这部分重写很大，而且用到了很多响应式编程的知识，这里就不列源码了。
 
 
 

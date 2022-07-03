@@ -32,13 +32,17 @@ AQS 提供了一些通用功能的是实现，因此使用 AQS 能简单且高�
 
 ### AQS 原理概览
 
+![image-20220703202328724](https://img-note.langyastudio.com/202207032023816.png?x-oss-process=style/watermark)
+
+
+
 AQS 核心思想是，如果被请求的共享资源空闲，则将当前请求资源的线程设置为有效的工作线程，并且将共享资源设置为锁定状态。如果被请求的共享资源被占用，那么就需要一套线程阻塞等待以及被唤醒时锁分配的机制，这个机制 AQS 是**用 CLH 队列锁实现的，即将暂时获取不到锁的线程加入到队列中**。
 
 > CLH(Craig,Landin,and Hagersten) 队列是一个虚拟的双向队列（虚拟的双向队列即不存在队列实例，仅存在结点之间的关联关系）。AQS 是将每条请求共享资源的线程封装成一个 CLH 锁队列的一个结点（Node）来实现锁的分配
 
 看个 AQS(`AbstractQueuedSynchronizer`) 原理图：
 
-![enter image description here](https://img-note.langyastudio.com/202110191252327.png?x-oss-process=style/watermark)
+![image-20220703202402033](https://img-note.langyastudio.com/202207032024081.png?x-oss-process=style/watermark)
 
 AQS 使用一个 int 成员变量来表示同步状态，通过内置的 FIFO 队列来完成获取资源线程的排队工作。AQS 使用 CAS 对该同步状态进行原子操作实现对其值的修改。
 
@@ -143,9 +147,27 @@ protected boolean isHeldExclusively()//该线程是否正在独占资源。只�
 
 
 
+### JUC 中的应用场景
+
+除了上边 ReentrantLock 的可重入性的应用，AQS 作为并发编程的框架，为很多其他同步工具提供了良好的解决方案。下面列出了 JUC 中的几种同步工具，大体介绍一下 AQS 的应用场景：
+
+| 同步工具               | 同步工具与 AQS 的关联                                        |
+| :--------------------- | :----------------------------------------------------------- |
+| ReentrantLock          | 使用 AQS 保存锁重复持有的次数。当一个线程获取锁时，ReentrantLock 记录当前获得锁的线程标识，用于检测是否重复获取，以及错误线程试图解锁操作时异常情况的处理。 |
+| Semaphore              | 使用 AQS 同步状态来保存信号量的当前计数。tryRelease 会增加计数，acquireShared 会减少计数。 |
+| CountDownLatch         | 使用 AQS 同步状态来表示计数。计数为 0 时，所有的 Acquire 操作（CountDownLatch 的 await 方法）才可以通过。 |
+| ReentrantReadWriteLock | 使用 AQS 同步状态中的 16 位保存写锁持有的次数，剩下的 16 位用于保存读锁的持有次数。 |
+| ThreadPoolExecutor     | Worker 利用 AQS 同步状态实现对独占线程变量的设置（tryAcquire 和 tryRelease）。 |
+
+
+
 ## ReentrantLock
 
 从 Java 5 开始，引入了一个高级的处理并发的 `java.util.concurrent` 包，它提供了大量更高级的并发功能，能大大简化多线程程序的编写。
+
+![image-20220703202138556](https://img-note.langyastudio.com/202207032021649.png?x-oss-process=style/watermark)
+
+
 
 我们知道 Java 语言直接提供了 `synchronized` 关键字用于加锁，但这种锁一是很重，二是获取时必须一直等待，没有额外的尝试机制。
 
@@ -188,6 +210,163 @@ if (lock.tryLock(1, TimeUnit.SECONDS)) {
 上述代码在尝试获取锁的时候，最多等待1秒。如果1秒后仍未获取到锁，`tryLock()` 返回 `false`，程序就可以做一些额外处理，而不是无限等待下去。
 
 所以，使用 `ReentrantLock` 比直接使用 `synchronized` 更安全，线程在 `tryLock()` 失败的时候不会导致死锁。
+
+
+
+下面通过伪代码，进行更加直观的比较：
+
+```java
+// **************************Synchronized的使用方式**************************
+// 1.用于代码块
+synchronized (this) {}
+// 2.用于对象
+synchronized (object) {}
+// 3.用于方法
+public synchronized void test () {}
+// 4.可重入
+for (int i = 0; i < 100; i++) {
+	synchronized (this) {}
+}
+// **************************ReentrantLock的使用方式**************************
+public void test () throw Exception {
+	// 1.初始化选择公平锁、非公平锁
+	ReentrantLock lock = new ReentrantLock(true);
+	// 2.可用于代码块
+	lock.lock();
+	try {
+		try {
+			// 3.支持多种加锁方式，比较灵活; 具有可重入特性
+			if(lock.tryLock(100, TimeUnit.MILLISECONDS)){ }
+		} finally {
+			// 4.手动释放锁
+			lock.unlock()
+		}
+	} finally {
+		lock.unlock();
+	}
+}
+```
+
+
+
+### ReentrantLock 的可重入应用
+
+ReentrantLock 的可重入性是 AQS 很好的应用之一，在了解完上述知识点以后，我们很容易得知 ReentrantLock 实现可重入的方法。在 ReentrantLock 里面，不管是公平锁还是非公平锁，都有一段逻辑。
+
+公平锁：
+
+```java
+// java.util.concurrent.locks.ReentrantLock.FairSync#tryAcquire
+
+if (c == 0) {
+	if (!hasQueuedPredecessors() && compareAndSetState(0, acquires)) {
+		setExclusiveOwnerThread(current);
+		return true;
+	}
+}
+else if (current == getExclusiveOwnerThread()) {
+	int nextc = c + acquires;
+	if (nextc < 0)
+		throw new Error("Maximum lock count exceeded");
+	setState(nextc);
+	return true;
+}
+```
+
+非公平锁：
+
+```java
+// java.util.concurrent.locks.ReentrantLock.Sync#nonfairTryAcquire
+
+if (c == 0) {
+	if (compareAndSetState(0, acquires)){
+		setExclusiveOwnerThread(current);
+		return true;
+	}
+}
+else if (current == getExclusiveOwnerThread()) {
+	int nextc = c + acquires;
+	if (nextc < 0) // overflow
+		throw new Error("Maximum lock count exceeded");
+	setState(nextc);
+	return true;
+}
+```
+
+从上面这两段都可以看到，有一个同步状态 State 来控制整体可重入的情况。State 是 Volatile 修饰的，用于保证一定的可见性和有序性。
+
+```java
+// java.util.concurrent.locks.AbstractQueuedSynchronizer
+
+private volatile int state;
+```
+
+接下来看 State 这个字段主要的过程：
+
+1. State 初始化的时候为 0，表示没有任何线程持有锁
+2. 当有线程持有该锁时，值就会在原来的基础上+1，同一个线程多次获得锁是，就会多次+1，这里就是可重入的概念
+3. 解锁也是对这个字段-1，一直到 0，此线程对锁释放
+
+
+
+### ReentrantLock 与 AQS 的关联
+
+通过上文我们已经了解，ReentrantLock 支持公平锁和非公平锁（关于公平锁和非公平锁的原理分析，可参考《[不可不说的 Java“锁”事](https://mp.weixin.qq.com/s?__biz=MjM5NjQ5MTI5OA==&mid=2651749434&idx=3&sn=5ffa63ad47fe166f2f1a9f604ed10091&chksm=bd12a5778a652c61509d9e718ab086ff27ad8768586ea9b38c3dcf9e017a8e49bcae3df9bcc8&scene=38#wechat_redirect)》），并且 ReentrantLock 的底层就是由 AQS 来实现的。那么 ReentrantLock 是如何通过公平锁和非公平锁与 AQS 关联起来呢？ 我们着重从这两者的加锁过程来理解一下它们与 AQS 之间的关系（加锁过程中与 AQS 的关联比较明显，解锁流程后续会介绍）。
+
+非公平锁源码中的加锁流程如下：
+
+```java
+// java.util.concurrent.locks.ReentrantLock#NonfairSync
+
+// 非公平锁
+static final class NonfairSync extends Sync {
+	...
+	final void lock() {
+		if (compareAndSetState(0, 1))
+			setExclusiveOwnerThread(Thread.currentThread());
+		else
+			acquire(1);
+		}
+  ...
+}
+```
+
+这块代码的含义为：
+
+- 若通过 CAS 设置变量 State（同步状态）成功，也就是获取锁成功，则将当前线程设置为独占线程。
+- 若通过 CAS 设置变量 State（同步状态）失败，也就是获取锁失败，则进入 Acquire 方法进行后续处理。
+
+第一步很好理解，但第二步获取锁失败后，后续的处理策略是怎么样的呢？这块可能会有以下思考：
+
+- 某个线程获取锁失败的后续流程是什么呢？有以下两种可能：
+
+(1) 将当前线程获锁结果设置为失败，获取锁流程结束。这种设计会极大降低系统的并发度，并不满足我们实际的需求。所以就需要下面这种流程，也就是 AQS 框架的处理流程。
+
+(2) 存在某种排队等候机制，线程继续等待，仍然保留获取锁的可能，获取锁流程仍在继续。
+
+- 对于问题 1 的第二种情况，既然说到了排队等候机制，那么就一定会有某种队列形成，这样的队列是什么数据结构呢？
+- 处于排队等候机制中的线程，什么时候可以有机会获取锁呢？
+- 如果处于排队等候机制中的线程一直无法获取锁，还是需要一直等待吗，还是有别的策略来解决这一问题？
+
+带着非公平锁的这些问题，再看下公平锁源码中获锁的方式：
+
+```java
+// java.util.concurrent.locks.ReentrantLock#FairSync
+
+static final class FairSync extends Sync {
+  ...
+	final void lock() {
+		acquire(1);
+	}
+  ...
+}
+```
+
+看到这块代码，我们可能会存在这种疑问：Lock 函数通过 Acquire 方法进行加锁，但是具体是如何加锁的呢？
+
+结合公平锁和非公平锁的加锁流程，虽然流程上有一定的不同，但是都调用了 Acquire 方法，而 Acquire 方法是 FairSync 和 UnfairSync 的父类 AQS 中的核心方法。
+
+对于上边提到的问题，其实在 ReentrantLock 类源码中都无法解答，而这些问题的答案，都是位于 Acquire 方法所在的类 AbstractQueuedSynchronizer 中，也就是本文的核心——AQS。下面我们会对 AQS 以及 ReentrantLock 和 AQS 的关联做详细介绍（相关问题答案会在 2.3.5 小节中解答）。
 
 
 

@@ -10,7 +10,7 @@
 
 发布于 2017 年 9 月 21 日 。作为 Java8 之后 3 年半才发布的新版本，Java 9 带来了很多重大的变化其中最重要的改动是 Java 平台模块系统的引入，其他还有诸如集合、Stream 流
 
-### Java 平台模块系统
+### 模块化系统
 
 Java 平台模块系统是 [Jigsaw Project](https://openjdk.java.net/projects/jigsaw/) 的一部分，把模块化开发实践引入到了 Java 平台中，可以让我们的代码可重用性更好！
 
@@ -57,6 +57,14 @@ jshell 是 Java 9 新增的一个实用工具。为 Java 提供了类似于 Pyth
 
 
 
+### G1 成为默认垃圾回收器
+
+在 Java 8 的时候，默认垃圾回收器是 Parallel Scavenge（新生代）+Parallel Old（老年代）。到了 Java 9, CMS 垃圾回收器被废弃了，**G1（Garbage-First Garbage Collector）**  成为了默认垃圾回收器。
+
+G1 还是在 Java 7 中被引入的，经过两个版本优异的表现成为成为默认垃圾回收器。
+
+
+
 ### 集合增强
 
 增加 了 `List.of()`、`Set.of()`、`Map.of()` 和 `Map.ofEntries()`等工厂方法来创建不可变集合（这部分内容有点参考 Guava 的味道）
@@ -84,6 +92,60 @@ Map<Integer, List<String>> result = list.stream()
 
 System.out.println(result); // {1=[x], 2=[yy], 3=[www]}
 ```
+
+
+
+### String 存储结构优化
+
+Java 8 及之前的版本，`String` 一直是用 `char[]` 存储。在 Java 9 之后，`String` 的实现改用 `byte[]` 数组存储字符串，节省了空间。
+
+```java
+public final class String implements java.io.Serializable,Comparable<String>, CharSequence {
+    // @Stable 注解表示变量最多被修改一次，称为“稳定的”。
+    @Stable
+    private final byte[] value;
+}
+```
+
+
+
+### 接口私有方法
+
+Java 9 允许在接口中使用私有方法。这样的话，接口的使用就更加灵活了，有点像是一个简化版的抽象类。
+
+```java
+public interface MyInterface {
+    private void methodPrivate(){
+    }
+}
+```
+
+
+
+### try-with-resources 增强
+
+在 Java 9 之前，我们只能在 `try-with-resources` 块中声明变量：
+
+```java
+try (Scanner scanner = new Scanner(new File("testRead.txt"));
+    PrintWriter writer = new PrintWriter(new File("testWrite.txt"))) {
+    // omitted
+}
+```
+
+在 Java 9 之后，在 `try-with-resources` 语句中可以使用 effectively-final 变量。
+
+```java
+final Scanner scanner = new Scanner(new File("testRead.txt"));
+PrintWriter writer = new PrintWriter(new File("testWrite.txt"))
+try (scanner;writer) {
+    // omitted
+}
+```
+
+**什么是 effectively-final 变量？** 简单来说就是没有被 `final` 修饰但是值在初始化后从未更改的变量。
+
+正如上面的代码所演示的那样，即使 `writer` 变量没有被显示声明为 `final`，但它在第一次被复制后就不会改变了，因此，它就是 effectively-final 变量。
 
 
 
@@ -164,19 +226,17 @@ objectOptional.or(() -> Optional.of("java")).ifPresent(System.out::println);//ja
 
 
 
-### String 存储结构变更
-
-JDK 8 及之前的版本，`String` 一直是用 `char[]` 存储。在 Java 9 之后，`String` 的实现改用 `byte[]` 数组存储字符串。
-
-
-
 ### 进程 API
 
 Java 9 增加了 `ProcessHandle` 接口，可以对原生进程进行管理，尤其适合于管理长时间运行的进程。
 
 ```java
-System.out.println(ProcessHandle.current().pid());
-System.out.println(ProcessHandle.current().info());
+// 获取当前正在运行的 JVM 的进程
+ProcessHandle currentProcess = ProcessHandle.current();
+// 输出进程的 id
+System.out.println(currentProcess.pid());
+// 输出进程的信息
+System.out.println(currentProcess.info());
 ```
 
 ![](https://img-note.langyastudio.com/202110151752893.png?x-oss-process=style/watermark)
@@ -191,11 +251,13 @@ Java 9 允许为 JDK 和应用配置同样的日志实现。新增了 `System.Lo
 
 
 
-### 反应式流 （ Reactive Streams ）
+### 响应式流 （ Reactive Streams ）
 
 在 Java9 中的 `java.util.concurrent.Flow` 类中新增了反应式流规范的核心接口 。
 
 `Flow` 中包含了 `Flow.Publisher`、`Flow.Subscriber`、`Flow.Subscription` 和 `Flow.Processor` 等 4 个核心接口。Java 9 还提供了`SubmissionPublisher` 作为`Flow.Publisher` 的一个实现。
+
+> [Java 9 揭秘（17. Reactive Streams ）- 林本托 ](https://www.cnblogs.com/IcanFixIt/p/7245377.html) 
 
 
 
@@ -215,23 +277,9 @@ Java 9 允许为 JDK 和应用配置同样的日志实现。新增了 `System.Lo
 
 
 
-### 接口私有方法
-
-Java 9 允许在接口中使用私有方法。
-
-```java
-public interface MyInterface {
-    private void methodPrivate(){
-
-    }
-}
-```
-
-
-
 ### Java9 其它新特性
 
-- **try-with-resources 增强** ：在 try-with-resources 语句中可以使用 effectively-final 变量（什么是 effectively-final 变量，见这篇文章：[《Effectively Final Variables in Java》](https://ilkinulas.github.io/programming/java/2016/03/27/effectively-final-java.html)
+- **`CompletableFuture`类增强** ：新增了几个新的方法（`completeAsync` ，`orTimeout` 等）
 - 类 `CompletableFuture` 中增加了几个新的方法（`completeAsync` ，`orTimeout` 等）
 - **Nashorn 引擎的增强** ：Nashorn 从 Java8 开始引入的 JavaScript 引擎，Java9 对 Nashorn 做了些增强，实现了一些 ES6 的新特性（Java 11 中已经被弃用）。
 - **I/O 流的新特性** ：增加了新的方法来读取和复制 `InputStream` 中包含的数据

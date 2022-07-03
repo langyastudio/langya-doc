@@ -253,22 +253,24 @@ Maven Helper 主要用来分析 **Maven 项目的相关依赖**，可以帮助�
 
 ## Other
 
-| 名称                                                         | 说明                                                 |
-| ------------------------------------------------------------ | ---------------------------------------------------- |
-| Alibaba Cloud Toolkit                                        | 云运营                                               |
-|                                                              |                                                      |
-| MybatisLogFormat                                             | Extract the SQL and fill the parameters into the SQL |
-| RoboPOJOGenerator                                            | json转object                                         |
-| Java Stream Debugger                                         | Java Stream 调试器                                   |
-| VisualVM Launcher                                            | Java 性能分析神器                                    |
-| [Momo Code Sec Inspector](https://github.com/momosecurity/momo-code-sec-inspector-java) | 代码安全审计                                         |
-| Checkstyle-IDEA                                              | 代码风格检查                                         |
-| stackoverflow                                                | 快速跳转到 stackoverflow                             |
-|                                                              |                                                      |
-| CodeGlance                                                   | 微型地图快速导航                                     |
-| [Theme](https://plugins.jetbrains.com/search?tags=Theme)     | IDEA主题                                             |
-| Grep Console                                                 | 控制台输出美化                                       |
-| Rainbow Brackets                                             | 彩虹括号                                             |
+| 名称                                                         | 说明                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Alibaba Cloud Toolkit                                        | 云运营                                                       |
+|                                                              |                                                              |
+| MybatisLogFormat                                             | Extract the SQL and fill the parameters into the SQL         |
+| RoboPOJOGenerator                                            | json转object                                                 |
+| gson-format / GsonFormatPlus                                 | JSON转对象（`option + s` (Mac) 或 `alt + s` (win)）          |
+| Java Stream Debugger                                         | Java Stream 调试器                                           |
+| camel-case                                                   | 命名格式切换（`shift + option + u` (mac) / `shift + alt + u` (win) ） |
+| VisualVM Launcher                                            | Java 性能分析神器                                            |
+| [Momo Code Sec Inspector](https://github.com/momosecurity/momo-code-sec-inspector-java) | 代码安全审计                                                 |
+| Checkstyle-IDEA                                              | 代码风格检查                                                 |
+| stackoverflow                                                | 快速跳转到 stackoverflow                                     |
+|                                                              |                                                              |
+| CodeGlance                                                   | 微型地图快速导航                                             |
+| [Theme](https://plugins.jetbrains.com/search?tags=Theme)     | IDEA主题                                                     |
+| Grep Console                                                 | 控制台输出美化                                               |
+| Rainbow Brackets                                             | 彩虹括号                                                     |
 
 
 

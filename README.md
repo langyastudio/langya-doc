@@ -215,7 +215,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 ### Druid
 
-> 数据库连接池方面，国内使用 druid 最多。目前有号称速度最快的 hikari 数据库连接池，以及老掉牙的 dbcp 和c3p0
+> 数据库连接池方面，国内使用 druid 最多。目前有号称速度最快的 hikariCP 数据库连接池，以及老掉牙的 dbcp 和c3p0
 
 - [Druid 实战](./docs/database/druid/druid-intro.md)
 
@@ -230,7 +230,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 ### 数据仓库
 
 > 现在的企业，数据量都非常大，数据仓库是必须的
-> 搜索方面，solr 比较成熟，稳定性更好一些，但实时搜索方面不如 es
+> 搜索方面，solr 比较成熟，稳定性更好一些，但实时搜索方面不如 Elasticsearch
 > 列式存储方面，基于 Hadoop 的 hbase，使用最是广泛；基于 LSM 的 leveldb 写入性能优越，但目前主要是作为嵌入式引擎使用多一些
 >
 > tidb 是国产新贵，兼容 mysql 协议；时序数据库方面，opentsdb 用在超大型监控系统多一些
@@ -244,6 +244,8 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 > mysql 通过 binlog 进行同步，对 mysql 来说 canal 是国内用的最多的方案。canal、maxwell 等工具，都支持将要同步的数据写入到 mq 中进行后续处理，方便了很多
 >
 > 对于 ETL（抽取、清洗、转换）来说，datax、logstash、sqoop 等，都是这样的工具
+>
+> Flinkx 基于 Flink 的分布式数据同步工具
 
 
 
@@ -255,7 +257,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 >
 > 堆内缓存使用默认的 caffeine。guava 的 LoadingCache、ehcache、JetCache 都是些熟面孔
 >
-> 分布式缓存来说，优先选择的就是 `redis`（cluster集群）。由于 redis 是单线程的，并不适合高耗时操作。所以对于一些数据量比较大的缓存，比如图片、视频等，使用老牌的 memcached 效果会好的多
+> 分布式缓存来说，优先选择的就是 **redis**（cluster集群，还可使用**Redisson**框架）。由于 redis 是单线程的，并不适合高耗时操作。所以对于一些数据量比较大的缓存，比如图片、视频等，使用老牌的 memcached 效果会好的多
 
 **Redis**
 
@@ -372,8 +374,10 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 > 注册中心默认的 eureka 不再维护，consul 已经成为首选，**nacos** 带有后台，比较适合国人使用习惯
 > 熔断组件官方的 hystrix 不再维护，推荐阿里的 **sentinel** or  resilience4j
 > 调用链推荐 jaeger or **skywalking**，spring cloud 集成的 sleuth+zipkin 功能稍弱，甚至不如传统侵入式的 cat
-> 配置中心推荐 nacos or apollo
+> 配置中心推荐 **nacos** or apollo
 > 网关方面，使用最多的就是 nginx；对于 spring cloud 来说，zuul 系列推荐使用 zuul2，zuul1 是多线程阻塞的有硬伤。spring-cloud-gateway 是 spring cloud 亲生的
+>
+> Spring Boot Admin 可以管理和监控 Spring Boot 应用程序
 
 - [spring cloud 入门总结](https://juejin.cn/post/6844904007975043079)
 - [Spring Cloud Alibaba 介绍](./docs/architecture/microservice/cloud-alibaba-intro.md)

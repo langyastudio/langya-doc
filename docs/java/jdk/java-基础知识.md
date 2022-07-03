@@ -109,6 +109,22 @@ JRE 是 Java 运行时环境。它是运行已编译 Java 程序所需的所有�
 5. Oracle JDK 不会为即将发布的版本提供长期支持，用户每次都必须通过更新到最新版本获得支持来获取最新版本；
 6. Oracle JDK 使用 BCL/OTN 协议获得许可，而 OpenJDK 根据 GPL v2 许可获得许可。
 
+
+
+既然 Oracle JDK 这么好，那为什么还要有 OpenJDK？
+
+答：
+
+1. OpenJDK 是开源的，开源意味着你可以对它根据你自己的需要进行修改、优化，比如 Alibaba 基于 OpenJDK 开发了 **Dragonwell8**：[https://github.com/alibaba/dragonwell8](https://github.com/alibaba/dragonwell8)
+
+2. OpenJDK 是商业免费的（这也是为什么通过 yum 包管理器上默认安装的 JDK 是 OpenJDK 而不是 Oracle JDK）。虽然 Oracle JDK 也是商业免费（比如 JDK 8），但并不是所有版本都是免费的。
+
+3. OpenJDK 更新频率更快。Oracle JDK 一般是每 6 个月发布一个新版本，而 OpenJDK 一般是每 3 个月发布一个新版本。（现在你知道为啥 Oracle JDK 更稳定了吧，先在 OpenJDK 试试水，把大部分问题都解决掉了才在 Oracle JDK 上发布）
+
+基于以上这些原因，OpenJDK 还是有存在的必要的！
+
+
+
 🌈 拓展一下：
 
 - BCL 协议（Oracle Binary Code License Agreement）： 可以使用JDK（支持商用），但是不能进行修改。
@@ -1482,7 +1498,15 @@ assert x >= 0 : "x must >= 0";
 
 
 
-**注意：** 当 try 语句和 finally 语句中都有 return 语句时，在方法返回之前，finally 语句的内容将被执行，并且 finally 语句的返回值将会覆盖原始的返回值。如下：
+**注意：** **不要在 finally 语句块中使用 return!**  当 try 语句和 finally 语句中都有 return 语句时，try 语句块中的 return 语句会被忽略。这是因为 try 语句中的 return 返回值会先被暂存在一个本地变量中，当执行到 finally 语句中的 return 之后，这个本地变量的值就变为了 finally 语句中的 return 返回值。
+
+[jvm 官方文档](https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html#jvms-4.10.2.5)中有明确提到：
+
+> If the `try` clause executes a _return_, the compiled code does the following:
+>
+> 1. Saves the return value (if any) in a local variable.
+> 2. Executes a _jsr_ to the code for the `finally` clause.
+> 3. Upon return from the `finally` clause, returns the value saved in the local variable.
 
 ```java
 public class Test {
