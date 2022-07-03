@@ -674,13 +674,24 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 ### 团队
 
--  [程序员职业发展三重门](./docs/manage/team/articles/程序员职业发展三重门.md)
--  [如何面试程序员](./docs/manage/team/interview/如何面试程序员.md)
--  [新入职一家公司如何快速进入工作状态](./docs/manage/team/articles/新入职一家公司如何快速进入工作状态.md)
--  [高级别开发同学的七条建议](./docs/manage/team/articles/高级别开发同学的七条建议.md)
--  [大龄程序员所经历的面试的历炼和思考](./docs/manage/team/articles/大龄程序员所经历的面试的历炼和思考.md)
--  [java 如何高薪](./docs/manage/team/interview/java如何高薪.md)
--  [35 岁出路](./docs/manage/team/articles/35岁出路.md)
+- 高级程序员
+
+  - [高级别开发同学的七条建议](./docs/manage/team/advanced-programmer/高级别开发同学的七条建议.md)
+
+- 好文系列
+
+  -  [程序员职业发展三重门](./docs/manage/team/articles/程序员职业发展三重门.md)
+  -  [新入职一家公司如何快速进入工作状态](./docs/manage/team/articles/新入职一家公司如何快速进入工作状态.md)
+  -  [大龄程序员所经历的面试的历炼和思考](./docs/manage/team/articles/大龄程序员所经历的面试的历炼和思考.md)
+  -  [35 岁出路](./docs/manage/team/articles/35岁出路.md)
+
+- 面试
+
+  [如何面试程序员](./docs/manage/team/interview/如何面试程序员.md)
+
+  [java 如何高薪](./docs/manage/team/interview/java如何高薪.md)
+
+- 出书
 
 
 
