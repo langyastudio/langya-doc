@@ -239,3 +239,9 @@ systemctl start docker.service
 ### 控制容器系统资源占用
 
 在使用 `docker create` 命令创建容器或使用 `docker run` 创建并启动容器的时候，可以使用 `-c|--cpu-shares[=0]` 参数来调整容器使用 CPU 的权重；使用 `-m|--memory[=MEMORY]` 参数来调整容器使用内存的大小。
+
+
+
+## 其他
+
+如使用 marathon+mesos vs k8s
