@@ -39,27 +39,17 @@ System.out.println(a == b);// false
 
 ## BigDecimal 的用处
 
+> 这是因为 `equals()` 方法不仅仅会比较值的大小（value）还会比较精度（scale），而 `compareTo()` 方法比较的时候会忽略精度
+
 《阿里巴巴 Java 开发手册》中提到：**浮点数之间的等值判断，基本数据类型不能用==来比较，包装数据类型不能用 equals 来判断。**
 
 ![](https://img-note.langyastudio.com/202202181452868.png?x-oss-process=style/watermark)
 
 
 
-具体原因我们在上面已经详细介绍了，这里就不多提了，我们下面直接上实例：
+具体原因我们在上面已经详细介绍了，这里就不多提了。
 
-```java
-float a = 1.0f - 0.9f;
-float b = 0.9f - 0.8f;
-System.out.println(a);// 0.100000024
-System.out.println(b);// 0.099999964
-System.out.println(a == b);// false
-```
-
-从输出结果就可以看出发生精度丢失的问题。
-
-
-
-想要解决这个问题也很简单，直接使用 `BigDecimal` 来定义浮点数的值，再进行浮点数的运算操作即可。
+想要解决浮点数运算精度丢失这个问题，可以直接使用 `BigDecimal` 来定义浮点数的值，然后再进行浮点数的运算操作即可。
 
 ```java
 BigDecimal a = new BigDecimal("1.0");
@@ -69,9 +59,7 @@ BigDecimal c = new BigDecimal("0.8");
 BigDecimal x = a.subtract(b);
 BigDecimal y = b.subtract(c);
 
-System.out.println(x); /* 0.1 */
-System.out.println(y); /* 0.1 */
-System.out.println(Objects.equals(x, y)); /* true */
+System.out.println(x.compareTo(y));// 0
 ```
 
 
