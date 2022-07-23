@@ -18,7 +18,6 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 - [java 基础知识](./docs/java/jdk/java-基础知识.md)
 - [java 面向对象](./docs/java/jdk/java-面向对象.md)
-- [java IO 流](./docs/java/jdk/java-io流.md)
 - [java reflection 反射详解](./docs/java/jdk/reflection.md)
 - [java generics 泛型详解](./docs/java/jdk/generics.md)
 - [java enum 枚举详解](./docs/java/jdk/enum.md)
@@ -29,12 +28,19 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 **扩展**
 
 - [java 常见关键字](./docs/java/jdk/java-常见关键字.md)
-- [java IO 模型](./docs/java/jdk/io-模型.md)
 - [java BIO NIO AIO 你了解吗](./docs/java/jdk/bio-nio-aio.md)
 - [java BigDecimal 如何解决精度损失的问题](./docs/java/jdk/bigdecimal.md)
 - [java 代理模式](./docs/java/jdk/代理模式.md)
 - [java security 加密解密详解](./docs/java/jdk/security.md)
 - [java junit 测试框架](./docs/java/jdk/junit.md)
+
+
+
+### IO
+
+- [java IO 流](./docs/java/io/java-io流.md)
+- [java IO 模型](./docs/java/io/io-模型.md)
+- [Java IO 设计模式](./docs/java/io/io-设计模式.md)
 
 
 
