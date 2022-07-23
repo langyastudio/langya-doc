@@ -491,6 +491,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 - [网络基础知识](./docs/cs-basic/network/network-intro.md)
 - [HTTPS tls详解](./docs/cs-basic/network/https-tls.md)
+- [HTTP 状态码](./docs/cs-basic/network/http-状态码.md)
 - [HTTP 缓存](./docs/cs-basic/network/http-缓存.md)
 - [chrome80 cookie 跨域 samesite 错误](./docs/cs-basic/network/issue/chrome80-cookie跨域samesite错误.md)
 
