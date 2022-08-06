@@ -72,7 +72,7 @@
 
 ### 技术经验
 
-![img](https://img-note.langyastudio.com/202202091053671.jpeg?x-oss-process=style/watermark)![img](https://pic1.zhimg.com/80/v2-186fbfe7077850b95cb3e1ae6f6812b1_720w.jpg?source=1940ef5c)
+![img](https://img-note.langyastudio.com/202202091053671.jpeg?x-oss-process=style/watermark)
 
 - 重要程度：⭐⭐⭐⭐⭐
 - 内容介绍：如果你说问你源码、机制是造飞机，那技术的落地才是你真正的本事。这里一部分是框架、架构的搭建，另外一部分是源码和核心组件的使用。也就是你的核心框架源码学习，是否能做到技术迁移运用到你的项目中，做出可落地的程序。学习、沉淀、积累，这更像一盘大棋！

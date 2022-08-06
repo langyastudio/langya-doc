@@ -320,6 +320,39 @@ git commit -m "comment"
 
 
 
+## .gitmodules
+
+在 Git 中你可以用子模块 `submodule` 来管理这些项目，`submodule` 允许你将一个 Git 仓库当作另外一个 Git 仓库的子目录。这允许你克隆另外一个仓库到你的项目中并且保持你的提交相对独立。
+
+- 递归克隆整个项目
+
+  ```bash
+  git clone https://github.com/xxx/xxx.git assets --recursive 
+  ```
+
+![image-20220804141458294](https://img-note.langyastudio.com/202208041414452.png?x-oss-process=style/watermark)
+
+- 添加子模块
+
+  将远程项目 `https://github.com/xxx/xxx.git` 克隆到本地 `assets` 文件夹
+
+  ```bash
+  git submodule add https://github.com/xxx/xxx.git assets
+  ```
+
+- 更新项目内子模块到最新版本
+
+  ```bash
+  git submodule update
+  ```
+
+- 更新子模块为远程项目的最新版本
+  ```bash
+  git submodule update --remote
+  ```
+
+
+
 ## sourcetree克隆代码失败
 
 报错如下：
@@ -355,3 +388,4 @@ git clone xxxx
 - [Generating a new SSH key and adding it to the ssh-agent](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 - [一个好的 Git 提交消息，出自 Linus 之手](https://github.com/torvalds/subsurface-for-dirk/blob/a48494d2fbed58c751e9b7e8fbff88582f9b2d02/README#L88)
 - [git commit 规范指南](https://www.jianshu.com/p/201bd81e7dc9)
+- [git 子模块](https://www.jianshu.com/p/9000cd49822c)
