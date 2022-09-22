@@ -16,6 +16,10 @@ tomcat的配置参数奇多，但想要达到优化效果，我们并不需要�
 
 ## 3个参数搞定并发配置
 
+![image-20220908124238505](https://img-note.langyastudio.com/202209081242634.png?x-oss-process=style/watermark)
+
+![image-20220908124410135](https://img-note.langyastudio.com/202209081244243.png?x-oss-process=style/watermark)
+
 作为一个能承接高并发互联网请求的Web容器，首当其冲的当然是海量请求的冲击。幸运的是Tomcat支持NIO，我们可以通过调整线程数和并发配置，让它表现出最佳的性能。
 
 - `maxThreads` -- tomcat接收客户端请求的最大线程数，也就是同时处理任务的个数，它的默认大小为`200`；一般来说，在高并发的I/O密集型应用中，这个值设置为`1000`左右比较合理

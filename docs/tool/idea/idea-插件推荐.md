@@ -88,6 +88,8 @@ SonarLint 帮助你发现**代码的错误和漏洞**，就像是代码拼写检
 | resultMap中column提示与检测(2.7.2)                           | ✘        | ✔      |
 | Mybatis xml代码格式化(2.8.2)                                 | ✘        | ✔      |
 
+
+
 #### 配置数据库
 
 - 配置数据库 数据库名一定要填 数据库无法连接请切换驱动的版本
@@ -117,15 +119,44 @@ SonarLint 帮助你发现**代码的错误和漏洞**，就像是代码拼写检
 
 
 
-**配置好后的效果**
-
-![writeSql](https://gejun123456.coding.net/p/MyBatisCodeHelper-Pro/d/MyBatisCodeHelper-Pro/git/raw/master/screenshots/writeSql.gif)
-
-
-
 #### 生成XML
 
 ![image-20210420113011225](https://img-note.langyastudio.com/20210420113013.png?x-oss-process=style/watermark)
+
+
+
+#### 配置字段
+
+- 替换字段中的字符
+
+  如下图所示，可以通过正则表达式来修改字段的字符，将 `F_` 替换为 空字符串
+
+  ![image-20220905182711819](https://img-note.langyastudio.com/202209051827886.png?x-oss-process=style/watermark)
+
+- 定制列
+
+  可以通过设置菜单中的 ProjectConfig 配置转换关系，如：将 F_ 开头的移除
+
+  ```java
+  osp:import org.apache.commons.lang3.StringUtils;
+  
+  public class ConverterImpl {
+      public String convertColumnNameToPropertyName(String columnName) {
+          // TODO: fill content in method, you can use method from commonslang3 and guava
+          if(StringUtils.startsWith(columnName, "F_")){
+              return StringUtils.substring(columnName, 2);
+          }       
+  
+          return columnName;
+      }
+  }
+  ```
+
+  
+
+  ![image-20220905183308820](https://img-note.langyastudio.com/202209051833893.png?x-oss-process=style/watermark)
+
+
 
 
 
@@ -256,10 +287,12 @@ Maven Helper 主要用来分析 **Maven 项目的相关依赖**，可以帮助�
 | 名称                                                         | 说明                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Alibaba Cloud Toolkit                                        | 云运营                                                       |
+| arthas idea                                                  | 基于IDEA开发的Arthas命令生成插件                             |
 |                                                              |                                                              |
 | MybatisLogFormat                                             | Extract the SQL and fill the parameters into the SQL         |
 | RoboPOJOGenerator                                            | json转object                                                 |
 | gson-format / GsonFormatPlus                                 | JSON转对象（`option + s` (Mac) 或 `alt + s` (win)）          |
+| MapStruct support                                            | 基于 Java 注解的对象属性映射工具                             |
 | Java Stream Debugger                                         | Java Stream 调试器                                           |
 | camel-case                                                   | 命名格式切换（`shift + option + u` (mac) / `shift + alt + u` (win) ） |
 | VisualVM Launcher                                            | Java 性能分析神器                                            |

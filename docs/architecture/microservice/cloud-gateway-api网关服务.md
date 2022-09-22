@@ -21,6 +21,27 @@
 
 ![图片](https://img-note.langyastudio.com/202201061139967.webp?x-oss-process=style/watermark)
 
+![图片](https://img-note.langyastudio.com/202208311019779.png?x-oss-process=style/watermark)
+
+这张图展示了一个多层 Gateway 架构，其中有一个总的 Gateway 接入所有的流量(**流量网关** )，并分发给不同的子系统，还有第二级 Gateway 用于做各个子系统的接入 Gateway(**业务网关** )。
+
+
+
+## 常见网关
+
+- **Nginx+lua** ：OpenResty、Kong、Orange、Abtesting gateway 等
+- **Java** ：Zuul/Zuul2、Spring Cloud Gateway、Kaazing KWG、gravitee、Dromara soul 等
+- **Go** ：Janus、fagongzi、Grpc-gateway
+- **Dotnet** ：Ocelot
+- **NodeJS** ：Express Gateway、Micro Gateway
+
+按照使用数量、成熟度等来划分，主流的有 5个：
+
+- OpenResty
+- Kong
+- Zuul、Zuul2
+- Spring Cloud Gateway
+
 
 
 ## GateWay 介绍
@@ -718,3 +739,5 @@ public class VersionServiceInstanceListSupplierConfiguration {
 [隐私接口禁止外部访问](https://mp.weixin.qq.com/s?__biz=MzAwMTk4NjM1MA==&mid=2247493894&idx=1&sn=eedad2851638c9ac9b8215adc5a0987d&chksm=9ad3f347ada47a5199bce3225969a24a0ddfe9a063d8a8a5838d3fea85ef885bd9b2887d4ce8&token=1863605670&lang=zh_CN#rd)
 
 [实现网关的灰度发布](https://mp.weixin.qq.com/s?__biz=MzAwMTk4NjM1MA==&mid=2247491931&idx=1&sn=16faf7f21b8606569dbc68242c94b570&chksm=9ad3fb1aada4720c33a937e9311e5cf5776256fe706afcb31da2c4a9757605a570f36137f0a2&scene=178&cur_album_id=1418244755364134912#rd)
+
+[5 种 API 网关技术选型](https://mp.weixin.qq.com/s/KWEH5qBCLW8WXa6S55SNkw)

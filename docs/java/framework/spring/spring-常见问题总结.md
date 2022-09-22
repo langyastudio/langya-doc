@@ -465,7 +465,7 @@ Spring/SpringBoot 模块下专门有一篇是讲 Spring 事务的，总结的非
   
           transactionTemplate.execute(new TransactionCallbackWithoutResult() {
               @Override
-              protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+              protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) 			{
   
                   try {
   
@@ -495,7 +495,7 @@ Spring/SpringBoot 模块下专门有一篇是讲 Spring 事务的，总结的非
             } catch (Exception e) {
                 transactionManager.rollback(status);
             }
-  }
+  	}
   ```
 
   
@@ -504,7 +504,7 @@ Spring/SpringBoot 模块下专门有一篇是讲 Spring 事务的，总结的非
 
   在 XML 配置文件中配置或者直接基于注解（推荐使用） : 实际是通过 AOP 实现（基于 `@Transactional` 的全注解方式使用最多）
 
-  使用 `@Transactional`注解进行事务管理的示例代码如下：
+  使用 `@Transactional` 注解进行事务管理的示例代码如下：
 
   ```java
   @Transactional(propagation = Propagation.REQUIRED)
@@ -968,32 +968,40 @@ public class DefaultAopProxyFactory implements AopProxyFactory, Serializable {
 
 
 
-### Spring AOP 自调用问题
+### Spring AOP 自调用问题 - 事务失效
 
-若同一类中的其他没有 `@Transactional` 注解的方法内部调用有 `@Transactional` 注解的方法，有`@Transactional` 注解的方法的事务会失效。
+- 若同一类中的其他没有 `@Transactional` 注解的方法内部调用有 `@Transactional` 注解的方法，有`@Transactional` 注解的方法的事务会失效。
 
-这是由于 `Spring AOP` 代理的原因造成的，因为只有当 `@Transactional` 注解的方法在类以外被调用的时候，Spring 事务管理才生效。
+  这是由于 `Spring AOP` 代理的原因造成的，因为只有当 `@Transactional` 注解的方法在类以外被调用的时候，Spring 事务管理才生效。
 
-`MyService` 类中的 `method1()` 调用 `method2()` 就会导致 `method2()` 的事务失效。
+  `MyService` 类中的 `method1()` 调用 `method2()` 就会导致 `method2()` 的事务失效。
 
-```java
-@Service
-public class MyService {
+    ```java
+    @Service
+    public class MyService {
+  
+    private void method1() {
+         method2();
+         //......
+    }
+    @Transactional
+     public void method2() {
+         //......
+      }
+    }
+    ```
 
-private void method1() {
-     method2();
-     //......
-}
-@Transactional
- public void method2() {
-     //......
-  }
-}
-```
+​		解决办法就是避免同一类中自调用或者使用 AspectJ 取代 Spring AOP 代理。
 
-解决办法就是避免同一类中自调用或者使用 AspectJ 取代 Spring AOP 代理。
+- 如果直接调用，不通过对象调用，也是会失效的。因为 Spring 事务是通过 AOP 实现的
 
+-  `@Transactional`  只有作用到 `public` 方法上才会生效
 
+- 被 `@Transactional`  注解的方法所在的类必须被 Spring 管理
+
+- 底层使用的数据库必须支持事务，否则不会生效
+
+  
 
 ### rollbackFor 注解
 

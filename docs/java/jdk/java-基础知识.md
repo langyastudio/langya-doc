@@ -210,6 +210,26 @@ Java 中的注释有三种：
 
 在我们编写代码的时候，如果代码量比较少，我们自己或者团队其他成员还可以很轻易地看懂代码，但是当项目结构一旦复杂起来，我们就需要用到注释了。注释并不会执行(编译器在编译代码之前会把代码中的所有注释抹掉,字节码中不保留注释)，是我们程序员写给自己看的，注释是你的代码说明书，能够帮助看代码的人快速地理清代码之间的逻辑关系。因此，在写程序的时候随手加上注释是一个非常好的习惯。
 
+| 标签          | 描述                                                   | 示例                                                         |
+| ------------- | ------------------------------------------------------ | ------------------------------------------------------------ |
+| @author       | 标识一个类的作者，一般用于类注释                       | @author description                                          |
+| @deprecated   | 指名一个过期的类或成员，表明该类或方法不建议使用       | @deprecated description                                      |
+| {@docRoot}    | 指明当前文档根目录的路径                               | Directory Path                                               |
+| @exception    | 可能抛出异常的说明，一般用于方法注释                   | @exception exception-name explanation                        |
+| {@inheritDoc} | 从直接父类继承的注释                                   | Inherits a comment from the immediate surperclass.           |
+| {@link}       | 插入一个到另一个主题的链接                             | {@link name text}                                            |
+| {@linkplain}  | 插入一个到另一个主题的链接，但是该链接显示纯文本字体   | Inserts an in-line link to another topic.                    |
+| @param        | 说明一个方法的参数，一般用于方法注释                   | @param parameter-name explanation                            |
+| @return       | 说明返回值类型，一般用于方法注释，不能出现再构造方法中 | @return explanation                                          |
+| @see          | 指定一个到另一个主题的链接                             | @see anchor                                                  |
+| @serial       | 说明一个序列化属性                                     | @serial description                                          |
+| @serialData   | 说明通过 writeObject() 和 writeExternal() 方法写的数据 | @serialData description                                      |
+| @serialField  | 说明一个 ObjectStreamField 组件                        | @serialField name type description                           |
+| @since        | 说明从哪个版本起开始有了这个函数                       | @since release                                               |
+| @throws       | 和 @exception 标签一样.                                | The @throws tag has the same meaning as the @exception tag.  |
+| {@value}      | 显示常量的值，该常量必须是 static 属性。               | Displays the value of a constant, which must be a static field. |
+| @version      | 指定类的版本，一般用于类注释                           | @version info                                                |
+
 
 
 《Clean Code》这本书明确指出：

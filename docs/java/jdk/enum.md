@@ -98,6 +98,10 @@ public int getDeliveryTimeInDays() {
 
 ## 枚举类型巧用
 
+> 本质上，JVM 并不支持语法糖，语法糖只存在于**编译期**。当编译器将 .java 源文件编译成 .class 字节码文件时，会进行**解语法糖**的操作，来还原最原始的基础语法结构。
+>
+> 我们所熟悉的编程语言中几乎都会包含语法糖，当然 JAVA 也不例外。JAVA 中的语法糖包含**条件编译**、**断言**、**switch 支持 String 与枚举**、**可变参数**、**自动装箱/拆箱**、**枚举**、**内部类**、**泛型擦除**、**增强for循环**、**lambda表达式**、**try-with-resources**等等
+
 你可以通过在枚举类型中定义属性,方法和构造函数让它变得更加强大。
 
 下面，让我们扩展上面的示例，实现从比萨的一个阶段到另一个阶段的过渡，并了解如何摆脱之前使用的if语句和switch语句：
@@ -163,6 +167,83 @@ public void givenPizaOrder_whenReady_thenDeliverable() {
     Pizza testPz = new Pizza();
     testPz.setStatus(Pizza.PizzaStatus.READY);
     assertTrue(testPz.isDeliverable());
+}
+```
+
+
+
+状态转换：
+
+```java
+public enum OrderStatus{
+    NO_PAY("未支付",0){
+        @Override
+        public Boolean canChange(OrderStatus orderStatus) {
+            switch (orderStatus){
+                case PAY:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+    },
+    PAY("已支付",1){
+        @Override
+        public Boolean canChange(OrderStatus orderStatus) {
+            //因为退款接口一般都会有延迟，所以会先转化为“退款中”状态
+            switch (orderStatus){
+                case REFUNDING:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+    },
+    REFUNDING("退款中",2){
+        @Override
+        public Boolean canChange(OrderStatus orderStatus) {
+            switch (orderStatus){
+                case REFUNDED:
+                case FAIL_REFUNDED:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+    },
+    REFUNDED("退款成功",3),
+    FAIL_REFUNDED("退款失败",4),
+    ;
+
+    private final String name;
+    private final int status;
+
+    private OrderStatus(String name,int status){
+        this.name = name;
+        this.status = status;
+    }
+
+    //自定义转换方法
+    public Boolean canChange(OrderStatus orderStatus){
+        return false;
+    }
+}
+```
+
+调用方法：
+
+```java
+public class EnumTest {
+
+    public static void main(String[] args) {
+        Boolean aBoolean = OrderStatus.NO_PAY.canChange(OrderStatus.PAY);
+        String statusStr = aBoolean?"可以":"不可以";
+        System.out.println("是否可以完成状态转换："+ statusStr);
+
+        Boolean flag = OrderStatus.REFUNDED.canChange(OrderStatus.FAIL_REFUNDED);
+        String flagStr = flag?"可以":"不可以";
+        System.out.println("是否可以完成状态转换："+ flagStr);
+    }
 }
 ```
 

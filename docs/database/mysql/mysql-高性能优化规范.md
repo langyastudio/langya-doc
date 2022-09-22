@@ -486,3 +486,9 @@ where create_time >= '20190101' and create_time < '20190102'
 
 - 程序使用数据库账号只能在一个 DB 下使用，不准跨库
 - 程序使用的账号原则上不准有 drop 权限
+
+
+
+## 其他参考
+
+[聊聊数据库建表的15个小技巧](https://mp.weixin.qq.com/s/NM-aHaW6TXrnO6la6Jfl5A)
