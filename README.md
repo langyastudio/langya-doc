@@ -182,10 +182,6 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 - [数据库基础知识](./docs/database/database-intro.md)
 
-- [SQLite 数据类型和如何添加注释](./docs/database/sqlite/sqlite-数据类型和注释.md)
-
-- [大数据有哪些](./docs/database/大数据有哪些.md)
-
 - [国产数据库适配](./docs/database/国产数据库适配.md)
 
 - [SQL 优化文章汇总](./docs/database/sql-优化)
@@ -242,13 +238,36 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 
 
-### 数据仓库
+### SQLite
+
+[SQLite 数据类型和如何添加注释](./docs/database/sqlite/sqlite-数据类型和注释.md)
+
+
+
+## 数据仓库
 
 > 现在的企业，数据量都非常大，数据仓库是必须的
 > 搜索方面，solr 比较成熟，稳定性更好一些，但实时搜索方面不如 Elasticsearch
 > 列式存储方面，基于 Hadoop 的 hbase，使用最是广泛；基于 LSM 的 leveldb 写入性能优越，但目前主要是作为嵌入式引擎使用多一些
 >
 > tidb 是国产新贵，兼容 mysql 协议；时序数据库方面，opentsdb 用在超大型监控系统多一些
+
+- [大数据入门](./docs/bigdata/bigdata-intro.md)
+- [大数据有哪些](./docs/bigdata/大数据有哪些.md)
+
+### OLAP
+
+- [ClickHouse Doris 对比与选型](./docs/bigdata/clickhouse&doris-对比与选型.md)
+- [OLAP 运维设计](./docs/bigdata/olap-运维设计.md)
+
+**Clickhouse**
+
+- [Clickhouse 基础知识](./docs/bigdata/clickhouse/clickhouse-intro.md)
+- [Clickhouse 数据库引擎&表引擎](./docs/bigdata/clickhouse/clickhouse-引擎.md)
+- [Clickhouse 如何对接接口协议进行开发](./docs/bigdata/clickhouse/clickhouse-接口.md)
+- [Clickhouse SQL语句与函数大全](./docs/bigdata/clickhouse/clickhouse-语句SQL.md)
+- [Clickhouse 常见配置与操作](./docs/bigdata/clickhouse/clickhouse-操作.md)
+- [Clickhouse 性能如何优化](./docs/bigdata/clickhouse/clickhouse-性能.md)
 
 
 
@@ -261,6 +280,11 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 > 对于 ETL（抽取、清洗、转换）来说，datax、logstash、sqoop 等，都是这样的工具
 >
 > Flinkx 基于 Flink 的分布式数据同步工具
+
+**Flink**
+
+- [Flink 基础知识](./docs/bigdata/flink/flink-intro.md)
+- [Flink CDC 基础知识](./docs/bigdata/flink/flink-cdc-intro.md)
 
 
 
