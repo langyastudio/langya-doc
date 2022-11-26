@@ -435,6 +435,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [降级&熔断](./docs/architecture/high-availability/降级&熔断.md)
 - [排队](./docs/architecture/high-availability/排队.md)
 - [限流](./docs/architecture/high-availability/限流.md)
+- [灰度发布](./docs/architecture/high-availability/灰度发布.md)
 - [灾备设计&异地多活](./docs/architecture/high-availability/灾备设计&异地多活.md)
 
 
