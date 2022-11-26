@@ -413,6 +413,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 - [读写分离&分库分表](./docs/architecture/high-performance/读写分离&分库分表.md)
 - [负载均衡](./docs/architecture/high-performance/负载均衡.md)
+- [零拷贝](./docs/architecture/high-performance/零拷贝.md)
 
 
 
@@ -420,8 +421,12 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 > 内核参数优化、jvm优化、网络参数优化、事务优化、数据库优化、池化等
 
-- [5秒到1秒 记一次效果“非常”显著的性能优化](https://mp.weixin.qq.com/s/7Pr5iX3KE08h32AytBuNqQ)
+- [服务器性能优化](./docs/architecture/performance-optimization/服务器性能优化.md)
+- [十万行Excel插入数据库](./docs/architecture/performance-optimization/十万行Excel插入数据库.md)
+- [api-接口性能优化](./docs/architecture/performance-optimization/api-接口性能优化.md)
+- [java-长尾请求hack工具](./docs/architecture/performance-optimization/java-长尾请求hack工具.md)
 - [php-性能压榨](./docs/architecture/performance-optimization/php-性能压榨.md)
+- [5秒到1秒 记一次效果“非常”显著的性能优化](https://mp.weixin.qq.com/s/7Pr5iX3KE08h32AytBuNqQ)
 
 
 
