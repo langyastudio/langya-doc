@@ -361,7 +361,7 @@ git commit -m "comment"
 remote: HTTP Basic: Access denied fatal: Authentication failed for 
 ```
 
-解决方案：
+解决方案 1：
 
 ```bash
 #清除密码
@@ -370,6 +370,12 @@ git config --system --unset credential.helper
 #使用命令行clone
 git clone xxxx
 ```
+
+解决方案 2：
+
+Open Sourcetree, in the right click icon Settings (Repository settings) ->Remotes -> Select Origin and Edit:
+
+Set URL/Path in the following format: **` https://<token>@<git_url>.git`**
 
 
 

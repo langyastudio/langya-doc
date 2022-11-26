@@ -348,9 +348,21 @@ FTP 是基于客户—服务器（C/S）模型而设计的，在客户端与 FTP
 
 
 
-### 滑动窗口 vs 流量控制
+### 流量控制
+
+重传这件事本身对性能影响是比较严重的，所以是**下下策**。
+
+因为数据发送方和接收方处理数据能力可能不同，因此如果可以根据双方的能力去调整发送的数据量就好了，于是就有了**发送和接收窗口**，基本上从名字就能看出它的作用，比如**接收窗口的大小**就是指，接收方当前**能接收的数据量大小**，**发送窗口的大小**就指发送方当前能发的数据量大小。TCP根据窗口的大小去控制自己发送的数据量，这样就能大大减少丢包的概率。
+
+![图片](https://img-note.langyastudio.com/202211121720187.png?x-oss-process=style/watermark)
+
+
+
+### 滑动窗口
 
 TCP 利用滑动窗口实现流量控制。流量控制是为了**控制发送方发送速率，保证接收方来得及接收**。接收方发送的确认报文中的窗口字段可以用来控制发送方窗口大小，从而影响发送方的发送速率。将窗口字段设置为 0，则发送方不能发送数据。
+
+![图片](https://img-note.langyastudio.com/202211121722707.png?x-oss-process=style/watermark)
 
 
 
@@ -373,6 +385,20 @@ TCP 的拥塞控制采用了四种算法，即 **慢开始** 、 **拥塞避免*
 * **快重传与快恢复**
 
   在 TCP/IP 中，快速重传和恢复（fast retransmit and recovery，FRR）是一种拥塞控制算法，它能快速恢复丢失的数据包。没有 FRR，如果数据包丢失了，TCP 将会使用定时器来要求传输暂停。在暂停的这段时间内，没有新的或复制的数据包被发送。有了 FRR，如果接收机接收到一个不按顺序的数据段，它会立即给发送机发送一个重复确认。如果发送机接收到三个重复确认，它会假定确认件指出的数据段丢失了，并立即重传这些丢失的数据段。有了 FRR，就**不会因为重传时要求的暂停被耽误**。当有单独的数据包丢失时，快速重传和恢复（FRR）能最有效地工作。当有多个数据信息包在某一段很短的时间内丢失时，它则不能很有效地工作。
+
+
+
+**流量控制**针对的是**单个连接**数据处理能力的控制，**拥塞控制**针对的是**整个网络环境**数据处理能力的控制。
+
+![图片](https://img-note.langyastudio.com/202211121722172.png?x-oss-process=style/watermark)
+
+
+
+### 重传机制
+
+长时间等不到对方的确认，TCP 就会重新发一次消息
+
+![图片](https://img-note.langyastudio.com/202211121718794.png?x-oss-process=style/watermark)
 
 
 
@@ -531,4 +557,4 @@ http://usr:pass@www.example.jp:80/dir/index.html?uid=1#ch1
 * [https://blog.csdn.net/qq_16209077/article/details/52718250](https://blog.csdn.net/qq_16209077/article/details/52718250)
 * [https://blog.csdn.net/zixiaomuwu/article/details/60965466](https://blog.csdn.net/zixiaomuwu/article/details/60965466)
 * [https://blog.csdn.net/turn\_\_back/article/details/73743641](https://blog.csdn.net/turn__back/article/details/73743641)
-* <https://mp.weixin.qq.com/s/GICbiyJpINrHZ41u_4zT-A?>
+* https://mp.weixin.qq.com/s/GICbiyJpINrHZ41u_4zT-A

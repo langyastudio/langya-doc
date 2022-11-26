@@ -48,6 +48,8 @@ Innodb **支持事务，支持行级锁**，更好的恢复性，高并发下性
 
 可以用历史数据归档（应用于日志数据），分库分表（应用于业务数据）等手段来控制数据量大小
 
+> 索引结构不会影响单表最大行数，2000万也只是推荐值，超过了这个值可能会导致 B + 树层级更高，影响查询性能
+
 
 
 ### 谨慎使用 MySQL 分区表
@@ -131,6 +133,16 @@ UNSIGNED INT 0~4294967295
 ```
 
 VARCHAR(N) 中的 N 代表的是字符数，而不是字节数，使用 UTF8 存储 255 个汉字 Varchar(255)=765 个字节。**过大的长度会消耗更多的内存。**
+
+
+
+### varchar255 vs varchar256
+
+With a maximum length of 255 characters, the DBMS can choose to use **a single byte** to indicate the length of the data in the field. If the limit were 256 or greater, **two bytes** would be needed.
+
+char, varchar 类型的值，会有一个长度标识位来存值长度。当定义 varchar 长度小于等于 255 时，长度标识位需要一个字节；当大于 255 时，长度标识位需要两个字节。
+
+> `L` + 1 bytes if column values require 0 – 255 bytes, `L` + 2 bytes if values may require more than 255 bytes
 
 
 

@@ -306,25 +306,39 @@ public class RabbitAutoConfiguration {
 
 ![](https://img-note.langyastudio.com/202207031918569.png?x-oss-process=style/watermark)
 
+
+
 第二步，引入 Spring Boot 相关依赖
 
 ![](https://img-note.langyastudio.com/202207031918378.png?x-oss-process=style/watermark)
+
+
 
 第三步，创建`ThreadPoolAutoConfiguration`
 
 ![](https://img-note.langyastudio.com/202207031918949.png?x-oss-process=style/watermark)
 
+
+
 第四步，在`threadpool-spring-boot-starter`工程的 resources 包下创建`META-INF/spring.factories`文件
 
 ![](https://img-note.langyastudio.com/202207031919034.png?x-oss-process=style/watermark)
+
+
 
 最后新建工程引入`threadpool-spring-boot-starter`
 
 ![](https://img-note.langyastudio.com/202207031919916.png?x-oss-process=style/watermark)
 
+
+
 测试通过！！！
 
 ![](https://img-note.langyastudio.com/202207031919802.png?x-oss-process=style/watermark)
+
+
+
+> [SpringBoot的starter到底是什么](https://mp.weixin.qq.com/s/lSl8z2FhXqkcN0ch9FmWSA)
 
 
 

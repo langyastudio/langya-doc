@@ -222,6 +222,22 @@ RGB 16 - C4ECC9
 
 
 
+### 关闭系统休眠
+
+通过**管理员**的方式打开命令行窗口，执行如下命令：
+
+```bash
+powercfg -h off
+```
+
+
+
+### 系统更新缓存
+
+![image-20221023084023806](https://img-note.langyastudio.com/202210230840964.png?x-oss-process=style/watermark)
+
+
+
 ### 企业微信双开
 
 **修改注册表**

@@ -8,6 +8,8 @@
 
 掌握这些快捷键/小技巧，看源码的效率提升一个等级！
 
+
+
 ## 查看当前类的层次结构
 
 | 使用频率 | 相关快捷键                               |
@@ -65,7 +67,16 @@ public interface BeanDefinition extends AttributeAccessor, BeanMetadataElement {
 | ⭐⭐⭐⭐⭐    | 见下文     |
 
 - 当前文件下检索 ： `Ctrl + F` (Win) / `Command + F` （Mac）
+
 - 全局的文本检索 : `Ctrl + Shift + F` (Win) / `Command + Shift + F` （Mac）
+
+  - 搜索 jar 中内容
+
+    ![image-20220929204835042](https://img-note.langyastudio.com/202209292048137.png?x-oss-process=style/watermark)
+  
+  - class 文件必须关联源码才能搜其文本
+  
+    ![image-20220929210526848](https://img-note.langyastudio.com/202209292105924.png?x-oss-process=style/watermark)
 
 
 

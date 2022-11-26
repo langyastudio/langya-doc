@@ -711,7 +711,17 @@ bind
 
 ### 多数据库支持
 
-如果配置了 databaseIdProvider，你就可以在动态代码中使用名为 “_databaseId” 的变量来为不同的数据库构建特定的语句。比如下面的例子：
+MyBatis 可以根据不同的数据库厂商执行不同的语句，这种多厂商的支持是基于映射语句中的 `databaseId` 属性。 MyBatis 会加载不带 `databaseId` 属性和带有匹配当前数据库 `databaseId` 属性的所有语句。如果同时找到带有 `databaseId` 和不带 `databaseId` 的相同语句，则后者会被舍弃，如下所示，只会执行上面的一条SQL语句：
+
+```xml
+<select id="getAllProduct" resultType="product" databaseId="mysql">
+         SELECT * FROM product
+</select>
+
+<select id="getAllProduct" resultType="product">
+         SELECT * FROM product
+</select>
+```
 
 ```xml
 <insert id="insert">
@@ -725,6 +735,19 @@ bind
   </selectKey>
   insert into users values (#{id}, #{name})
 </insert>
+```
+
+为支持多厂商特性需要在 mybatis-config.xml 文件中加入 `databaseIdProvider` 即可：
+
+```xml
+<!--https://mybatis.org/mybatis-3/zh/configuration.html#-->
+<databaseIdProvider type="DB_VENDOR">
+    <property name="Oracle" value="oracle"/>
+    <property name="MySQL" value="mysql"/>
+    <property name="ClickHouse" value="ck"/>
+    <property name="DB2" value="db2"/>
+    <property name="PostgreSQL" value="pg"/>
+</databaseIdProvider>
 ```
 
 
@@ -1097,105 +1120,3 @@ public class ApiController
 
 ![image-20210903173947164](https://img-note.langyastudio.com/20210903173947.png?x-oss-process=style/watermark)
 
-
-
-## mybaits plus
-
-- 只做增强不做改变，引入它不会对现有工程产生影响，如丝般顺滑
-
-- 只需简单配置，即可快速进行单表 CRUD 操作，从而节省大量时间
-
-- 代码生成、物理分页、性能分析等功能一应俱全
-
-
-
-### 依赖
-
-```xml
-<dependency>
-    <groupId>com.baomidou</groupId>
-    <artifactId>mybatis-plus-boot-starter</artifactId>
-    <version>3.4.2</version>
-</dependency>
-```
-
-
-
-### 配置
-
-```yml
-mybatis-plus:
-  global-config:
-    db-config:
-      #表名前缀
-      table-prefix: a_
-      #逻辑删除
-      logic-not-delete-value: null
-      logic-delete-value: now()
-      logic-delete-field: delete_time
-  configuration:
-    use-deprecated-executor: false
-```
-
-
-
-### 使用
-
-https://mybatis.plus/guide
-
-https://mybatis.plus/guide/faq.html
-
-
-
-**注解**
-
-@TableId
-
-- 描述：主键注解
-
-| 属性  |  类型  | 必须指定 |   默认值    |    描述    |
-| :---: | :----: | :------: | :---------: | :--------: |
-| value | String |    否    |     ""      | 主键字段名 |
-| type  |  Enum  |    否    | IdType.NONE |  主键类型  |
-
-IdType
-
-|     值      |                             描述                             |
-| :---------: | :----------------------------------------------------------: |
-|    AUTO     |                         数据库ID自增                         |
-|    NONE     | 无状态,该类型为未设置主键类型(注解里等于跟随全局,全局里约等于 INPUT) |
-|    INPUT    |                    insert前自行set主键值                     |
-|  ASSIGN_ID  | 分配ID(主键类型为Number(Long和Integer)或String)(since 3.3.0),使用接口`IdentifierGenerator`的方法`nextId`(默认实现类为`DefaultIdentifierGenerator`雪花算法) |
-| ASSIGN_UUID | 分配UUID,主键类型为String(since 3.3.0),使用接口`IdentifierGenerator`的方法`nextUUID`(默认default方法) |
-
-
-
-@TableField
-
-- 描述：字段注解(非主键)
-
-fill - FieldFill
-
-|      值       |         描述         |
-| :-----------: | :------------------: |
-|    DEFAULT    |      默认不处理      |
-|    INSERT     |    插入时填充字段    |
-|    UPDATE     |    更新时填充字段    |
-| INSERT_UPDATE | 插入和更新时填充字段 |
-
-
-
-@TableLogic
-
-- 描述：表字段逻辑处理注解（逻辑删除）
-
-|  属性  |  类型  | 必须指定 | 默认值 |     描述     |
-| :----: | :----: | :------: | :----: | :----------: |
-| value  | String |    否    |   ""   | 逻辑未删除值 |
-| delval | String |    否    |   ""   |  逻辑删除值  |
-
-
-
-@Version
-
-- 描述：乐观锁注解、标记 `@Verison` 在字段上

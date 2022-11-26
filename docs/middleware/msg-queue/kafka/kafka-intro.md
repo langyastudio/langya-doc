@@ -245,5 +245,6 @@ acks 的默认值即为1，代表我们的消息被leader副本接收之后就�
 
 ### Reference
 
-- Kafka 官方文档： https://kafka.apache.org/documentation/
+- https://kafka.apache.org/documentation/
+- https://mp.weixin.qq.com/s/SFQSjtd21-CuKuZX3iYqnw
 - 极客时间—《Kafka核心技术与实战》第11节：无消息丢失配置怎么实现？

@@ -908,19 +908,19 @@ $ tar [-z|-j|-J] [xv] [-f 已有的 tar 文件] [-C 目录]    ==解压缩
 示例：查看自己的进程
 
 ```sh
-## ps -l
+$ ps -l
 ```
 
 示例：查看系统所有进程
 
 ```sh
-## ps aux
+$ ps aux
 ```
 
 示例：查看特定的进程
 
 ```sh
-## ps aux | grep threadx
+$ ps aux | grep threadx
 ```
 
 **pstree**
@@ -930,7 +930,7 @@ $ tar [-z|-j|-J] [xv] [-f 已有的 tar 文件] [-C 目录]    ==解压缩
 示例：查看所有进程树
 
 ```sh
-## pstree -A
+$ pstree -A
 ```
 
 **top**
@@ -940,7 +940,7 @@ $ tar [-z|-j|-J] [xv] [-f 已有的 tar 文件] [-C 目录]    ==解压缩
 示例：两秒钟刷新一次
 
 ```sh
-## top -d 2
+$ top -d 2
 ```
 
 **netstat**
@@ -950,7 +950,9 @@ $ tar [-z|-j|-J] [xv] [-f 已有的 tar 文件] [-C 目录]    ==解压缩
 示例：查看特定端口的进程
 
 ```sh
-## netstat -anp | grep port
+$ lsof -i:端口
+or
+$ netstat -tunlp|grep 端口号
 ```
 
 
@@ -1374,6 +1376,21 @@ dmtsai lines: 5 columns: 9
 #### sudo
 
 sudo 允许一般用户使用 root 可执行的命令，不过只有在 /etc/sudoers 配置文件中添加的用户才能使用该指令。
+
+- su == sudo -s
+- su - == sudo -i
+
+sudo -s：
+
+1. 使用当前用户的环境变量
+2. 不跳转切换用户后的目录
+3. 切换到超级管理员或者目标用户的权限
+
+**sudo -i：**
+
+1. 使用root或者目标用户用户的环境变量
+2. 切换到 /root或者目标用户的home目录
+3. 切换到超级管理员或者目标用户的权限
 
 
 

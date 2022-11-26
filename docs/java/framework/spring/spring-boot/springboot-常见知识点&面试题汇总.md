@@ -725,3 +725,12 @@ public class ScheduledTasks {
 ```
 
 单纯依靠 `@Scheduled` 注解 还不行，我们还需要在 SpringBoot 中我们只需要在启动类上加上`@EnableScheduling` 注解，这样才可以启动定时任务。`@EnableScheduling` 注解的作用是发现注解 `@Scheduled` 的任务并在后台执行该任务。
+
+
+
+### 扩展
+
+#### [Spring Boot 升级常见问题](https://mp.weixin.qq.com/s/-1zO2HDjB54_Zt2NJ_OaRA)
+
+#### [聊聊Spring中最常用的11个扩展点](https://mp.weixin.qq.com/s/dIv3FoLQuZRKpJNqo5H0LQ)
+

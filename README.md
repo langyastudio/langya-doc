@@ -294,6 +294,9 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [rocketmq 基础知识](./docs/middleware/msg-queue/rocketmq/rocketmq-intro.md)
 - [rocketmq 常见问题](./docs/middleware/msg-queue/rocketmq/rocketmq-常见问题.md)
 
+**kafka**
+
+- [kafka 基础知识](./docs/middleware/msg-queue/kafka/kafka-intro.md)
 
 **websocket**
 
@@ -548,12 +551,14 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 >
 > 如果在线上实时分析，有 arthas 和 perf 两款工具
 
-- [java 性能问题排查](./docs/devops/troubleshoot/java-性能问题排查.md)
-- [jadx 反编译工具](./docs/devops/troubleshoot/jadx.md)
+- [java 性能问题排查](./docs/devops/debug/java-性能问题排查.md)
+- [jadx 反编译工具](./docs/devops/debug/jadx.md)
 
 
 
 ### 运维
+
+- [运维工具](./docs/devops/devops-tools.md)
 
 > 服务器一般采用稳定性较好的 centos，并配备 ansible工具进行支持
 >
