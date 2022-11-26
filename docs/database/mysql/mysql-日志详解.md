@@ -8,6 +8,10 @@
 
 ![](https://img-note.langyastudio.com/202111231111318.png?x-oss-process=style/watermark)
 
+## SQL 如何入库的
+
+![图片](https://img-note.langyastudio.com/202208311100681.gif)
+
 
 
 ## redo log
@@ -295,6 +299,14 @@
 
 
 
+## binlog vs redo log
+
+- binlog 是逻辑日志，记录的是对哪一个表的哪一行做了什么修改；redo log 是物理日志，记录的是对哪个数据页中的哪个记录做了什么修改，如果你还不了解数据页，你可以理解成对磁盘上的哪个数据做了修改
+- binlog 是追加写；redo log 是循环写，日志文件有固定大小，会覆盖之前的数据
+- binlog 是 Server 层的日志；redo log 是 InnoDB 的日志。如果不使用 InnoDB 引擎，是没有 redo log 的
+
+
+
 ## 总结
 
 > 这部分内容为 JavaGuide 的补充：
@@ -302,6 +314,26 @@
 MySQL InnoDB 引擎使用 **redo log(重做日志)** 保证事务的**持久性**，使用 **undo log(回滚日志)** 来保证事务的**原子性**。
 
 `MySQL` 数据库的**主备、主主、主从**都离不开 `binlog`，需要依靠 `binlog` 来同步数据，保证数据一致性。
+
+- Buffer Pool 是 MySQL 进程管理的一块内存空间，有减少磁盘 IO 次数的作用
+
+- redo log 是 InnoDB 存储引擎的一种日志，主要作用是**崩溃恢复**，有三种刷盘策略，有innodb_flush_log_at_trx_commit 参数控制，推荐设置成 2
+
+- undo log 是 InnoDB 存储引擎的一种日志，主要作用是**回滚**
+
+- binlog 是 MySQL Server 层的一种日志，主要作用是**归档**
+
+- MySQL 挂了有两种情况
+
+  - MySQL挂了，操作系统也挂了，也就是常说的服务器宕机了。这种情况 Buffer Pool 里面的数据会全部丢失，操作系统的 os cache 里面的数据也会丢失
+
+  - MySQL挂了，操作系统没有挂。这种情况 Buffer Pool 里面的数据会全部丢失，操作系统的 os cache 里面的数据不会丢失
+
+    
+
+  
+
+![图片](https://img-note.langyastudio.com/202208311057330.png?x-oss-process=style/watermark)
 
 
 
@@ -318,3 +350,4 @@ MySQL InnoDB 引擎使用 **redo log(重做日志)** 保证事务的**持久性*
 
 - [CURD 这么多年，你有了解过 MySQL 的架构设计吗？](https://mp.weixin.qq.com/s/R-1km7r0z3oWfwYQV8iiqA)
 - [浅谈 MySQL InnoDB 的内存组件](https://mp.weixin.qq.com/s/7Kab4IQsNcU_bZdbv_MuOg)
+- [MySQL为什么需要binlog、redo log和undo log](https://mp.weixin.qq.com/s/CB2j_D3N8CneWsTvcmiuLg)

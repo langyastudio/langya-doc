@@ -118,6 +118,10 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 **mybatis**
 
 - [Mybatis 常见问题总结](./docs/java/framework/mybatis/mybatis-interview.md)
+- [Mybatis 动态数据源](./docs/java/framework/mybatis/dynamic-datasource.md)
+- [Mybatis 基础知识](./docs/java/framework/mybatis/mybatis-intro.md)
+- [Mybatis Plus](./docs/java/framework/mybatis/mybatis-plus.md)
+- [pagehelper](./docs/java/framework/mybatis/pagehelper.md)
 
 
 
@@ -125,6 +129,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 - [SSH 框架已经过时了吗](http://mp.weixin.qq.com/s?__biz=Mzg5MjYzNTA4Ng==&mid=2247484277&idx=1&sn=11c270bbcfa7b6f9e23ef0b0db0b1ae6&chksm=c03a51d4f74dd8c2dd44bde08b6e59ebc22ad9d416fd226ec23f921f29e5d8a2ea075d46bc79&scene=21#wechat_redirect)
 - [spring 常见问题总结](./docs/java/framework/spring/spring-常见问题总结.md)
+- [spring 性能调优](./docs/java/framework/spring/spring-性能调优.md)
 - [spring 注解详解](./docs/java/framework/spring/spring-注解详解.md)
 - [spring5 新特性与增强的功能](./docs/java/framework/spring/spring/spring5-新特性与增强.md)
 - [spring IOC 容器详解](./docs/java/framework/spring/spring/spring-ioc.md)
@@ -272,10 +277,12 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 **Redis**
 
 - [redis 基础知识](./docs/middleware/cache/redis/redis-intro.md)
+- [redis 工具](./docs/middleware/cache/redis/redis-工具.md)
 - [redis 缓存读写策略](./docs/middleware/cache/redis/redis-缓存读写策略.md)
+- [redis 内存碎片是什么](./docs/middleware/cache/redis/redis-内存碎片.md)
+- [redis bigkey](./docs/middleware/cache/redis/redis-bigkey.md)
 - [redis 除了做缓存，还可以怎么用？](http://mp.weixin.qq.com/s?__biz=Mzg5MjYzNTA4Ng==&mid=2247484620&idx=1&sn=ac71f68713aa2a1bec3bf7382f2198b8&chksm=c03a566df74ddf7b5572b92756746e5758ab17fe28062a015272c150c8e1387ddab3b68c3897&scene=21#wechat_redirect)
 - [缓存如何确保数据的一致性](http://mp.weixin.qq.com/s?__biz=Mzg5MjYzNTA4Ng==&mid=2247484329&idx=1&sn=032f2ffb00ee9dd24de51d958fed789a&chksm=c03a5108f74dd81e4ac9712b4e89c4fb3c331bba3bb8adf39a79b904a342e52028f0835b8231&scene=21#wechat_redirect)
-- [redis 内存碎片是什么](./docs/middleware/cache/redis/redis-内存碎片.md)
 - [redis停止服务报错 NOAUTH Authentication required 导致关机异常慢](https://langyastudio.blog.csdn.net/article/details/88555828)
 
 
@@ -309,6 +316,12 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 > quartz 是 java 中比较古老的调度方案，分布式调度采用数据库锁的方式，管理界面需要自行开发。相对来说 xxl-job 更加轻量好用；elastic-job-cloud 应用比较广泛，但系统运维复杂，学习成本较高
 
 - [定时任务 你了解吗](./docs/middleware/task-scheduling/定时任务.md)
+
+
+
+### 存储
+
+- [MinIO 入门](./docs/middleware/store/minio-intro.md)
 
 
 
@@ -463,6 +476,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [jwt 身份认证](./docs/architecture/system-design/security/jwt-身份认证.md)
 - [web 常见安全漏洞](./docs/architecture/system-design/security/web-常见安全漏洞.md)
 - [代码混淆](./docs/architecture/system-design/security/代码混淆.md)
+- [api接口暴露](./docs/architecture/system-design/security/api接口暴露.md)
 
 
 
