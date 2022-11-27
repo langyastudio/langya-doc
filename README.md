@@ -495,6 +495,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 > web 安全（SQL注入、XSS、CSRF、DDOS、脚本注入、漏洞、验证码）、隐私信息保护、加密解密、证书体系、网络隔离、内外网隔离、跳板机、授权认证（OAuth、SSO、JWT）等
 
 - [认证&授权基础知识](./docs/architecture/system-design/security/认证授权.md)
+- [权限系统设计](./docs/architecture/system-design/security/权限系统设计.md)
 - [隐私信息保护](./docs/architecture/system-design/security/隐私信息.md)
 - [敏感词过滤](./docs/architecture/system-design/security/敏感词过滤.md)
 - [jwt 身份认证](./docs/architecture/system-design/security/jwt-身份认证.md)

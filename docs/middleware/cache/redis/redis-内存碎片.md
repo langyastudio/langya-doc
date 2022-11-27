@@ -8,7 +8,7 @@
 
 举个例子：操作系统为你分配了 32 字节的连续内存空间，而你存储数据实际只需要使用 24 字节内存空间，那这多余出来的 8 字节内存空间如果后续没办法再被分配存储其他数据的话，就可以被称为内存碎片。
 
-![内存碎片](https://guide-blog-images.oss-cn-shenzhen.aliyuncs.com/github/javaguide/memory-fragmentation.png)
+![内存碎片](https://img-note.langyastudio.com/202211262237368.png?x-oss-process=style/watermark)
 
 Redis 内存碎片虽然不会影响 Redis 性能，但是会增加内存消耗。
 
@@ -60,7 +60,7 @@ void *zmalloc(size_t size) {
 
 这个在 Redis 官方文档中也有对应的原话:
 
-![](https://guide-blog-images.oss-cn-shenzhen.aliyuncs.com/github/javaguide/redis-docs-memory-optimization.png)
+![](https://img-note.langyastudio.com/202211262237918.png?x-oss-process=style/watermark)
 
 文档地址：https://redis.io/topics/memory-optimization 。
 
@@ -70,7 +70,7 @@ void *zmalloc(size_t size) {
 
 使用 `info memory` 命令即可查看 Redis 内存相关的信息。下图中每个参数具体的含义，Redis 官方文档有详细的介绍：https://redis.io/commands/INFO 。
 
-![](https://guide-blog-images.oss-cn-shenzhen.aliyuncs.com/github/javaguide/redis-info-memory.png)
+![](https://img-note.langyastudio.com/202211262237896.png?x-oss-process=style/watermark)
 
 
 
