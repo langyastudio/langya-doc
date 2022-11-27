@@ -319,6 +319,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 > mqtt 具体来说是一种协议，主要用在物联网方面，能够双向通信，如 VerneMQ
 
 - [消息队列基础知识](./docs/middleware/msg-queue/msg-queue-intro.md)
+- [web实时消息推送](./docs/middleware/msg-queue/web实时消息推送.md)
 
 **RocketMQ**
 
