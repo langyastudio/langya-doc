@@ -415,6 +415,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [paxos&raft 算法](./docs/architecture/distributed-system/theory/cap&base-理论.md)
 - [gossip](./docs/architecture/distributed-system/theory/gossip.md)
 - [分布式 id](./docs/architecture/distributed-system/分布式-id.md)
+- [分布式锁](./docs/architecture/distributed-system/分布式锁.md)
 - [分布式事务](./docs/architecture/distributed-system/分布式-transactions.md)
 - [网关](./docs/architecture/distributed-system/网关.md)
 
