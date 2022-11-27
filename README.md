@@ -33,6 +33,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [java 代理模式](./docs/java/jdk/代理模式.md)
 - [java security 加密解密详解](./docs/java/jdk/security.md)
 - [java junit 测试框架](./docs/java/jdk/junit.md)
+- [java SPI](./docs/java/jdk/spi.md)
 - [java unsafe魔法类详解](./docs/java/jdk/unsafe.md)
 
 
