@@ -69,6 +69,10 @@ https://github.com/ClickHouse/clickhouse-jdbc/tree/master
 
 **Driver Class**: `com.clickhouse.jdbc.ClickHouseDriver`
 
+```ini
+spring.datasource.clickhouse.drive-class-name=com.clickhouse.jdbc.ClickHouseDriver
+```
+
 > `ru.yandex.clickhouse.ClickHouseDriver` has been deprecated and everything under `ru.yandex.clickhouse` will be removed in 0.3.3
 
 
@@ -110,6 +114,8 @@ ClickHouseConnection conn = ds.getConnection("default", "");
 
 
 #### [Build with Maven](https://github.com/ClickHouse/clickhouse-jdbc/tree/master#build-with-maven)
+
+> 因为 0.3.2-patch2 以上，要求 ClickHouse 服务器是 21+ 的版本
 
 Use `mvn -DskipITs clean verify` to compile and generate packages if you're using JDK 8. 
 
