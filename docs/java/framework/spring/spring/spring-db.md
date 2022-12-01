@@ -587,9 +587,9 @@ public class UserService {
 
 ## Transactional
 
+> **声明式事务有一个局限，那就是他的最小粒度要作用在方法上**！所以大家在用的时候要格外格外注意大事务的问题，尽量避免在事务中做一些无关数据库的操作，比如 RPC 远程调用、文件解析等，都是血泪的教训啊！！
+
 Spring 提供的声明式事务极大地方便了在数据库中使用事务，正确使用声明式事务的关键在于确定好事务边界，理解事务传播级别。
-
-
 
 Spring 提供了一个 `PlatformTransactionManager` 来表示事务管理器，所有的事务都由它负责管理。而事务由`TransactionStatus `表示。如果手写事务代码，使用`try...catch`如下：
 

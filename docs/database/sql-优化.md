@@ -16,6 +16,46 @@
 
 
 
+### 深分页问题
+
+深分页问题，为什么会慢？我们看下这个SQL
+
+```sql
+select id,name,balance from account where create_time> '2020-09-19' limit 100000,10;
+```
+
+`limit 100000,10`意味着会扫描`100010`行，丢弃掉前`100000`行，最后返回`10`行。即使`create_time`，也会回表很多次。
+
+我们可以通过**标签记录法和延迟关联法**来优化深分页问题。
+
+
+
+#### 标签记录法
+
+> 就是标记一下上次查询到哪一条了，下次再来查的时候，从该条开始往下扫描。就好像看书一样，上次看到哪里了，你就折叠一下或者夹个书签，下次来看的时候，直接就翻到啦。
+
+假设上一次记录到`100000`，则SQL可以修改为：
+
+```sql
+select  id,name,balance FROM account where id > 100000 limit 10;
+```
+
+这样的话，后面无论翻多少页，性能都会不错的，因为命中了`id`主键索引。但是这种方式有局限性：**需要一种类似连续自增的字段。**
+
+
+
+#### 延迟关联法
+
+延迟关联法，就是把条件转移到主键索引树，然后减少回表。优化后的SQL如下：
+
+```sql
+select  acct1.id,acct1.name,acct1.balance FROM account acct1 INNER JOIN (SELECT a.id FROM account a WHERE a.create_time > '2020-09-19' limit 100000, 10) AS acct2 on acct1.id= acct2.id;
+```
+
+**优化思路就是**，先通过`idx_create_time`二级索引树查询到满足条件的主键ID，再与原表通过主键ID内连接，这样后面直接走了主键索引了，同时也减少了回表。
+
+
+
 ### count(*) 为什么会慢
 
 > https://mp.weixin.qq.com/s/5037NgbeJd69CAo_3snmrA

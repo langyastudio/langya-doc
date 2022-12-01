@@ -1,3 +1,7 @@
+ClickHouse 瓶颈主要在并发上不去，那么对于重要业务，可以选择**多副本和多活集群**，多副本集群多个节点挂会导致业务不可用，可以启动了多活集群的方案，一份数据推多个集群，统一服务查询时，根据集群配置分配不同比例下发查询到各个集群，大小查询分开，把查点的和查列表的分开，查一天和查一个月的分开，提升服务整体 QPS。
+
+
+
 ## 如何测试
 
 测试查询效率时，需要**先清除查询缓存**，再进行测试，具体脚本如下：
@@ -605,6 +609,12 @@ SELECT timestamp, url FROM table WHERE visitor_id = 1001
 
 
 ## [主键索引最佳实践](https://clickhouse.com/docs/zh/guides/improving-query-performance/sparse-primary-indexes)
+
+
+
+## 物化视图
+
+异步物化视图，在原有的分布式表和本地表中把需要去重的字段类型更改为 AggregateFunction(uniq, String)，uniq 还可以设置为 uniqCombined, uniqCombined64, uniqHLL12, uniqExact。根据业务需要选择不同的精度，聚合数据后 insert的时候 uniqState(A)，查询时使用 uniqMerge(A)，从明细到聚合物化视图，大约可以减少 70% 的数据量，提高查询性能，进一步提高聚合程度的话，可以设置单指标表，查询时 join。
 
 
 

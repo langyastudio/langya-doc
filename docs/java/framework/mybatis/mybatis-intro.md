@@ -781,7 +781,7 @@ PS：以上源码分析比较简单，在真正的源码大佬面前可能过不
 
 ### MyBatis的功能架构是什么样的
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/PMZOEonJxWcS8g3Glx7ibcJiaV20mkibH38eraRa1F7b61ab89pJAxDoz5FziaG4iaicZYcrHaH6zXWD7PAo8YU2yveg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)MyBatis功能架构
+![图片](https://img-note.langyastudio.com/202212011618201.png?x-oss-process=style/watermark)MyBatis功能架构
 
 我们一般把Mybatis的功能架构分为三层：
 

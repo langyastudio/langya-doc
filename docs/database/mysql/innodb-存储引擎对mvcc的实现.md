@@ -240,6 +240,7 @@ private:
 ## 参考
 
 - **《MySQL 技术内幕 InnoDB 存储引擎第 2 版》**
+- https://mp.weixin.qq.com/s/NS3jw5Ka8yEqWzHZ4eSnyw
 - [Innodb 中的事务隔离级别和锁的关系](https://tech.meituan.com/2014/08/20/innodb-lock.html)
 - [MySQL 事务与 MVCC 如何实现的隔离级别](https://blog.csdn.net/qq_35190492/article/details/109044141)
 - [InnoDB 事务分析-MVCC](https://leviathan.vip/2019/03/20/InnoDB%E7%9A%84%E4%BA%8B%E5%8A%A1%E5%88%86%E6%9E%90-MVCC/)

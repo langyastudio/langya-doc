@@ -259,6 +259,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 ### OLAP
 
 - [ClickHouse Doris 对比与选型](./docs/bigdata/clickhouse&doris-对比与选型.md)
+- [大厂为什么使用 ClickHouse](./docs/bigdata/大厂为什么使用clickhouse.md)
 - [OLAP 运维设计](./docs/bigdata/olap-运维设计.md)
 
 **Clickhouse**
@@ -493,6 +494,14 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [resultful api](./docs/architecture/system-design/basic/resultful-api.md)
 
 #### [设计模式](./docs/architecture/system-design/design-patterns/README.md)
+
+
+
+### 样例
+
+- [定时&过期任务](./docs/architecture/sample/定时&过期任务.md)
+
+
 
 #### 安全
 
