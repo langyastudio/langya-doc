@@ -237,6 +237,8 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 [mongodb 实战入门](./docs/database/mongodb/mongodb-实战入门.md)
 
+[mongodb 和数据库双写](./docs/database/mongodb/mongodb和数据库双写.md)
+
 
 
 ### SQLite
