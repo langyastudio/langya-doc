@@ -336,6 +336,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 - [消息队列基础知识](./docs/middleware/msg-queue/msg-queue-intro.md)
 - [web实时消息推送](./docs/middleware/msg-queue/web实时消息推送.md)
+- [图解 Kafka vs RabbitMQ vs RocketMQ 的差异](./docs/middleware/msg-queue/图解Kafka&RabbitMQ&RocketMQ的差异.md)
 
 **RocketMQ**
 
