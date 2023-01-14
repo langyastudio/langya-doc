@@ -824,6 +824,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 - [Android IOS浏览器不自动播放视频](http://mp.weixin.qq.com/s?__biz=Mzg5MjYzNTA4Ng==&mid=2247484017&idx=1&sn=b4e030a618cb0bd7184a452ef75d1440&chksm=c03a50d0f74dd9c6bc2603e66ad62db7597b1d0061234958c61bc59ef9a040d755bc8aea6d6a&scene=21#wechat_redirect)
 - [微信分享链接如何定制缩略图和标题](http://mp.weixin.qq.com/s?__biz=Mzg5MjYzNTA4Ng==&mid=2247484012&idx=1&sn=8ed50e1f525339e68963ff4627384bba&chksm=c03a50cdf74dd9dbd2820bd2c8de8b83b74f3e7aa9ba3dde6fe04d97c88510529bd2c865118a&scene=21#wechat_redirect)
+- [Web Storage 存储类型对比](./docs/web/web/web-storage.md)
 
   
 
