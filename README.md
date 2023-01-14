@@ -241,6 +241,12 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 
 
+## Kingbase
+
+[Kingbase 实战入门](./docs/database/kingbase/kingbase-intro.md)
+
+
+
 ### SQLite
 
 [SQLite 数据类型和如何添加注释](./docs/database/sqlite/sqlite-数据类型和注释.md)
