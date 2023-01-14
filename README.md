@@ -462,6 +462,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 - [读写分离&分库分表](./docs/architecture/high-performance/读写分离&分库分表.md)
 - [负载均衡](./docs/architecture/high-performance/负载均衡.md)
+- [池化技术](./docs/architecture/high-performance/池化技术.md)
 - [零拷贝](./docs/architecture/high-performance/零拷贝.md)
 - [CDN](./docs/architecture/high-performance/cdn.md)
 
