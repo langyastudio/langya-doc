@@ -504,6 +504,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [java-长尾请求hack工具](./docs/architecture/performance-optimization/java-长尾请求hack工具.md)
 - [php-性能压榨](./docs/architecture/performance-optimization/php-性能压榨.md)
 - [5秒到1秒 记一次效果“非常”显著的性能优化](https://mp.weixin.qq.com/s/7Pr5iX3KE08h32AytBuNqQ)
+- [serialization 序列化](./docs/architecture/performance-optimization/serialization-序列化.md)
 
 
 
@@ -666,6 +667,7 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [docker 镜像仓库](./docs/devops/docker/docker-镜像仓库.md)
 - [docker 同主机/host 容器间网络互联互通](./docs/devops/docker/docker-网络.md)
 - [docker 配置与调试](./docs/devops/docker/docker-配置与调试.md)
+- [docker 管理工具](./docs/devops/docker/docker-管理工具.md)
 
   
 
