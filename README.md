@@ -321,6 +321,12 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 
 
+**caffeine**
+
+[caffeine 基础知识](./docs/middleware/cache/caffeine/caffeine-intro.md)
+
+
+
 ### 消息队列
 
 > 一个大型的分布式系统，通常都会异步化，走消息总线
