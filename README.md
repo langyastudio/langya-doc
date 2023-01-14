@@ -201,6 +201,8 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 
 - [mysql-隐式转换导致的索引失效](./docs/database/mysql/mysql-隐式转换导致的索引失效.md)
 
+- [mysql-索引结构为什么使用B+树](./docs/database/mysql/mysql-索引结构为什么使用B+树.md)
+
 - [mysql 事务隔离级别](./docs/database/mysql/mysql-事务隔离级别.md)
 
 - [mysql 常见函数](./docs/database/mysql/mysql-函数.md)
@@ -315,6 +317,9 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [redis 缓存读写策略](./docs/middleware/cache/redis/redis-缓存读写策略.md)
 - [redis 内存碎片是什么](./docs/middleware/cache/redis/redis-内存碎片.md)
 - [redis bigkey](./docs/middleware/cache/redis/redis-bigkey.md)
+- [redis cluster 如何解决数据量过大的问题](./docs/middleware/cache/redis/redis-cluster-数据量过大.md)
+- [redis 哨兵模型如何进行故障转移](./docs/middleware/cache/redis/redis-哨兵故障转移.md)
+- [redis 如何解决内存不足的问题](./docs/middleware/cache/redis/redis-内存不足.md)
 - [redis 除了做缓存，还可以怎么用？](http://mp.weixin.qq.com/s?__biz=Mzg5MjYzNTA4Ng==&mid=2247484620&idx=1&sn=ac71f68713aa2a1bec3bf7382f2198b8&chksm=c03a566df74ddf7b5572b92756746e5758ab17fe28062a015272c150c8e1387ddab3b68c3897&scene=21#wechat_redirect)
 - [缓存如何确保数据的一致性](http://mp.weixin.qq.com/s?__biz=Mzg5MjYzNTA4Ng==&mid=2247484329&idx=1&sn=032f2ffb00ee9dd24de51d958fed789a&chksm=c03a5108f74dd81e4ac9712b4e89c4fb3c331bba3bb8adf39a79b904a342e52028f0835b8231&scene=21#wechat_redirect)
 - [redis停止服务报错 NOAUTH Authentication required 导致关机异常慢](https://langyastudio.blog.csdn.net/article/details/88555828)
