@@ -455,6 +455,16 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 >
 > Spring Boot Admin 可以管理和监控 Spring Boot 应用程序
 
+**基础知识**
+
+- [服务注册与发现](./docs/architecture/microservice/governance/服务注册与发现.md)
+- [服务配置](./docs/architecture/microservice/governance/服务配置.md)
+- [日志管理](./docs/architecture/microservice/governance/日志管理.md)
+
+
+
+**实战演练**
+
 - [spring cloud 入门总结](https://juejin.cn/post/6844904007975043079)
 - [Spring Cloud Alibaba 介绍](./docs/architecture/microservice/cloud-alibaba-intro.md)
 - [nacos 服务注册与发现 看这一篇就够了](./docs/architecture/microservice/cloud-alibaba-nacos-0-服务注册&发现.md)
@@ -466,6 +476,9 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [RocketMQ 如何快速实现微服务消息机制](./docs/architecture/microservice/cloud-alibaba-rocketmq.md)
 - [Seata 彻底解决分布式事务问题](./docs/architecture/microservice/cloud-alibaba-seata-分布式事务.md)
 - [Spring Boot Admin 最简单的微服务应用监控](./docs/architecture/microservice/boot-admin-微服务应用监控.md)
+- [apollo 配置中心](./docs/architecture/microservice/apollo-配置中心.md)
+- [consul 注册中心](./docs/architecture/microservice/consul-注册中心.md)
+- [Prometheus 监控管理](./docs/architecture/microservice/prometheus-监控.md)
 
 
 

@@ -1,4 +1,4 @@
-源码地址：[https://github.com/langyastudio/langya-tech/tree/master/spring-cloud](https://github.com/langyastudio/langya-tech/tree/master/spring-cloud)
+> 源码地址：[https://github.com/langyastudio/langya-tech/tree/master/spring-cloud](https://github.com/langyastudio/langya-tech/tree/master/spring-cloud)
 
 ## [Spring Boot Admin](https://github.com/codecentric/spring-boot-admin) 简介
 
