@@ -17,7 +17,7 @@
 ### 登录阿里云 Docker Registry
 
 ```bash
-$ sudo docker login --username=hacfin registry.cn-hangzhou.aliyuncs.com
+$ sudo docker login --username=xxxx registry.cn-hangzhou.aliyuncs.com
 ```
 用于登录的用户名为阿里云账号全名，密码为开通服务时设置的密码。
 
@@ -28,7 +28,7 @@ $ sudo docker login --username=hacfin registry.cn-hangzhou.aliyuncs.com
 ### 将镜像推送到Registry
 
 ```bash
-$ sudo docker login --username=hacfin registry.cn-hangzhou.aliyuncs.com
+$ sudo docker login --username=xxx registry.cn-hangzhou.aliyuncs.com
 $ sudo docker tag [ImageId] registry.cn-hangzhou.aliyuncs.com/d-cloud/srs:[镜像版本号]
 $ sudo docker push registry.cn-hangzhou.aliyuncs.com/d-cloud/srs:[镜像版本号]
 ```
@@ -72,15 +72,4 @@ $ sudo docker push registry.cn-hangzhou.aliyuncs.com/d-cloud/srs:0.7-20201216
 
 
 
-> 阿里云web平台仓库的账户密码
-https://signin.aliyun.com/hacfin.onaliyun.com/login.htm
-用户登录名称 docker@hacfin.onaliyun.com
-登录密码 xxxxxx
-目前仓库存储在杭州节点下：https://cr.console.aliyun.com/cn-hangzhou/instances/repositories
-
----
-
-
-
-
-
+> 目前仓库存储在杭州节点下：https://cr.console.aliyun.com/cn-hangzhou/instances/repositories

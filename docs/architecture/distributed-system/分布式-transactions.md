@@ -342,6 +342,7 @@ RocketMQ 的事务消息方案中，如果消息队列挂掉，数据库事务�
 
 为了进一步学习，精选了一些不错的文章（中文）供小伙伴参考。
 
+- [分布式事务理论](https://dtm.pub/practice/theory.html)
 - [阿里终面：分布式事务原理](https://mp.weixin.qq.com/s?__biz=Mzg2OTA0Njk0OA==&mid=2247494827&idx=1&sn=aa5d7401d53b1ca61b5e49462262bd22&chksm=cea1a360f9d62a761dff15a682f69fcacdd5b70a8afc4e1114cc7f6704b31d9aa3ad82ae5233&token=2092405348&lang=zh_CN#rd)
 - [微服务中的分布式事务方案](https://jeremyxu2010.github.io/2020/03/微服务中的分布式事务方案/#heading-3)
 

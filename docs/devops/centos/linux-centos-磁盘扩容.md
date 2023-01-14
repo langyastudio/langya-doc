@@ -6,80 +6,80 @@
 
 - 查看CentOS的系统版本
 
-![img](https://img2018.cnblogs.com/blog/1331300/201911/1331300-20191102162556682-2071306105.png)
+![img](https://img-note.langyastudio.com/202212080845591.png?x-oss-process=style/watermark)
 
 - 查看分区
 
 df -h (centos-home和centos-root每人的名字可能不一样) 
 
-![img](https://img2018.cnblogs.com/blog/1331300/201911/1331300-20191102162702551-1230891453.png)
+![img](https://img-note.langyastudio.com/202212080845380.png?x-oss-process=style/watermark)
 
 - 备份home分区文件
 
 tar cvf /tmp/home.tar /home
 
- ![img](https://img2018.cnblogs.com/blog/1331300/201911/1331300-20191102162802705-672530806.png)
+ ![img](https://img-note.langyastudio.com/202212080845283.png?x-oss-process=style/watermark)
 
 - 卸载/home，如果无法卸载，先终止使用/home文件系统的进程
 
 umount /home （卸载）
 
-![img](https://img2018.cnblogs.com/blog/1331300/201911/1331300-20191102162921675-1937771980.png)
+![img](https://img-note.langyastudio.com/202212080845289.png?x-oss-process=style/watermark)
 
 卸载时，发现/home在使用中，所以先终止。
 
 fuser -km /home/（终止）
 
-![img](https://img2018.cnblogs.com/blog/1331300/201911/1331300-20191102163022448-794866552.png)
+![img](https://img-note.langyastudio.com/202212080845247.png?x-oss-process=style/watermark)
 
 再次卸载，没有报错，表示成功。
 
-![img](https://img2018.cnblogs.com/blog/1331300/201911/1331300-20191102163104165-1425005239.png)
+![img](https://img-note.langyastudio.com/202212080845669.png?x-oss-process=style/watermark)
 
 - 删除/home所在的lv
 
 lvremove /dev/mapper/centos-home
 
-![img](https://img2018.cnblogs.com/blog/1331300/201911/1331300-20191102163208770-1205102138.png)
+![img](https://img-note.langyastudio.com/202212080845750.png?x-oss-process=style/watermark)
 
 - 扩展/root所在的lv
 
 lvextend -L +100G /dev/mapper/centos-root
 
-![img](https://img2018.cnblogs.com/blog/1331300/201911/1331300-20191102163307969-346247801.png)
+![img](https://img-note.langyastudio.com/202212080845970.png?x-oss-process=style/watermark)
 
 - 扩展/root文件系统
 
 xfs_growfs /dev/mapper/centos-root
 
-![img](https://img2018.cnblogs.com/blog/1331300/201911/1331300-20191102163359398-1215559212.png)
+![img](https://img-note.langyastudio.com/202212080845767.png?x-oss-process=style/watermark)
 
 - 重新创建home lv （创建时计算好剩余的磁盘容量，建议比剩余小1G左右）
 
 lvcreate -L 41G -n /dev/mapper/centos-home 
 
-![img](https://img2018.cnblogs.com/blog/1331300/201911/1331300-20191102163539117-464165311.png)
+![img](https://img-note.langyastudio.com/202212080845413.png?x-oss-process=style/watermark)
 
 - 创建文件系统
 
 mkfs.xfs /dev/mapper/centos-home
 
-![img](https://img2018.cnblogs.com/blog/1331300/201911/1331300-20191102163703387-1689795594.png)
+![img](https://img-note.langyastudio.com/202212080845600.png?x-oss-process=style/watermark)
 
 - 挂载home
 
 mount /dev/mapper/centos-home
 
-![img](https://img2018.cnblogs.com/blog/1331300/201911/1331300-20191102163753324-716500128.png)
+![img](https://img-note.langyastudio.com/202212080845250.png?x-oss-process=style/watermark)
 
 - home文件恢复
 
 tar xvf /tmp/home.tar -C /home/
 
-![img](https://img2018.cnblogs.com/blog/1331300/201911/1331300-20191102163848459-986915311.png)
+![img](https://img-note.langyastudio.com/202212080845793.png?x-oss-process=style/watermark)
 
 - 再次使用df -h查看系统磁盘大小
 
-![img](https://img2018.cnblogs.com/blog/1331300/201911/1331300-20191102163941754-944626860.png)
+![img](https://img-note.langyastudio.com/202212080845407.png?x-oss-process=style/watermark)
 
 可以看到home下面100G的磁盘容量已经转移到root下面了，至此，转移任务结束。此为在CentOS7.2系统下测试使用的，在CentOS6版本下还没测试过。

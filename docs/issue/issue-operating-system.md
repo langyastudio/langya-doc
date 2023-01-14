@@ -28,7 +28,7 @@ rpm -qi centos-release
 mv /etc/yum.repos.d /etc/yum.repos.d.backup
 
 #2.设置新的yum目录
-mkdir /etc/yum.repos.
+mkdir /etc/yum.repos.d
 
 #3.安装wget（我没安装，也没事，可能是我以前安装过）
 yum install -y wget
@@ -62,6 +62,18 @@ yum makecache
 ```shell
 sed -i 's/\r$//' mocha.sh
 ```
+
+
+
+### 修改 ssh 端口后提示 Bind to port 20 on 0.0.0.0 failed: Permission denied
+
+- selinux 未关闭
+
+修改 /etc/selinux/config 配置文件，`SELINUX=enforcing` 改为 `SELINUX=disabled`
+
+- 防火墙
+
+`systemctl stop firewalld.service` 关闭防火墙服务  or `systemctl disable firewalld.service` 永久关闭防火墙
 
 
 
@@ -235,6 +247,13 @@ powercfg -h off
 ### 系统更新缓存
 
 ![image-20221023084023806](https://img-note.langyastudio.com/202210230840964.png?x-oss-process=style/watermark)
+
+
+
+### Synology 同步文件图标不显示
+
+在运行里输入regedit，回车找到注册表中的 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ShellIconOverlayIdentifiers\
+检查是否有 5 个角标文件有在 “01UnsuppModule” 上面有几个键。如果 5 个或超过 5 个就删除掉一些。
 
 
 

@@ -482,17 +482,36 @@ Linux 文件系统的结构层次鲜明，就像一棵倒立的树，最顶层�
 
 另外，[shell.how](https://www.shell.how/) 这个网站可以用来解释常见命令的意思，对你学习 Linux 基本命令以及其他常用命令（如 Git、NPM）。
 
+### crontab
+
 
 
 ![img](https://img-note.langyastudio.com/20210708134753.png?x-oss-process=style/watermark)
 
-- nload -m -u m
+
+
+### 监控
+
+- nload
+
+```bash
+#安装
+yum install epel-release -y
+yum install nload -y
+
+#使用
+nload -m -u m
+```
 
 - htop
 
-- du -sh * 
+```bash
+#安装
+yum install htop -y
 
-  看所有文件夹的大小
+#使用
+htop
+```
 
 
 
@@ -709,6 +728,16 @@ example: find . -name "shadow*"
 -perm mode  ：搜索权限等于 mode 的文件
 -perm -mode ：搜索权限包含 mode 的文件
 -perm /mode ：搜索权限包含任一 mode 的文件
+```
+
+
+
+### 文件夹大小
+
+- 看所有文件夹的大小
+
+```bash
+du -sh * 
 ```
 
 

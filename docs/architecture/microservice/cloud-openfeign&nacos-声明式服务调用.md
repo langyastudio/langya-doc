@@ -177,3 +177,5 @@ public class OpenFeignConfig {
 [使用Feign的一些问题以及如何解决](https://mp.weixin.qq.com/s?__biz=MzAwMTk4NjM1MA==&mid=2247499532&idx=1&sn=3e1fdfaa339480b3b09632155e03a60a&chksm=9ad3e54dada46c5ba536975726b4c7dbba6f4010da8ffe80be0724171fbb0b9039843faf5d7f&token=1863605670&lang=zh_CN#rd)
 
 [Feign传递Access_Token](https://mp.weixin.qq.com/s?__biz=MzAwMTk4NjM1MA==&mid=2247484278&idx=1&sn=8386577cefc184c4945ec3f448e972c4&chksm=9ad01937ada790210ec86d2c3231108e9378f3ef86941e07e1ac21ea91c6804c55a27810b96b&token=1863605670&lang=zh_CN#rd)
+
+[一个注解优雅的实现 Feign 的重试调用](https://mp.weixin.qq.com/s/9p_uBRzDu5q70hzHpPY3Xg)

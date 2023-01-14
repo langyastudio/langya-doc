@@ -70,6 +70,12 @@
 
 
 
+### 代码提示不区分大小写
+
+![image-20230104135732054](https://img-note.langyastudio.com/202301041357239.png?x-oss-process=style/watermark)
+
+
+
 ### java代码cannot find declaration to go to
 
 ﻿﻿使用 IntelliJ IDEA 直接打开以前写的 web 测试项目，发现 java 的源码没有高亮显示，且不能使用 ctrl + 单击进行目标类跳转操作。哪怕安装并配置了 JDK，也不能在项目中直接查看声明的原类。
