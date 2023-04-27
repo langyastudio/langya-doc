@@ -50,3 +50,9 @@ URL模板:       jdbc:kingbase8://{host}:{port}/{database}
 
 ![image-20221221091752784](https://img-note.langyastudio.com/202212210917832.png?x-oss-process=style/watermark)
 
+
+
+## 注意事项
+
+- oracle 模式，大小写敏感，建表字段不添加引号
+- 数据库配置查询返回大写 (kingbase.conf 文件补充配置)  `enable_upper_colname=on`

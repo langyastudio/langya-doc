@@ -16,6 +16,37 @@
 
 
 
+### MyBatis批量插入
+
+> https://mp.weixin.qq.com/s/N8z8QUsmcUD1QUWeMZHfkg
+
+如果有使用 jdbc 的 Batch 性能方面的需求，要将 **rewriteBatchedStatements** 设置为 true，这样能提高很多性能。
+
+| 批量保存方式                            | 数据量（条） | 耗时（ms） |
+| :-------------------------------------- | :----------- | :--------- |
+| 单条循环插入                            | 1000         | 121011     |
+| mybatis-plus saveBatch                  | 1000         | 59927      |
+| mybatis-plus saveBatch(添加rewtire参数) | 1000         | 2589       |
+| 手动拼接sql                             | 1000         | 2275       |
+| jdbc executeBatch                       | 1000         | 55663      |
+| jdbc executeBatch(添加rewtire参数)      | 1000         | 324        |
+
+那为什么默认不给这个参数设置为 true 呢？
+
+所谓的 rewrite 其实就是将一批插入拼接成 `insert into xxx values (a),(b),(c)...`这样一条语句的形式然后执行，这样一来跟拼接 sql 的效果是一样的。
+
+原来是这样的：
+
+- 如果批量语句中的某些语句失败，则默认重写会导致所有语句都失败
+
+- 批量语句的某些语句参数不一样，则默认重写会使得查询缓存未命中
+
+> https://mp.weixin.qq.com/s/AX2EoZcxxZCst179rLAd-Q
+>
+> 如果 MyBatis 需要进行批量插入，推荐使用 ExecutorType.BATCH 的插入方式，如果非要使用的插入的话，需要将每次插入的记录控制在 20~50 左右
+
+
+
 ### 深分页问题
 
 深分页问题，为什么会慢？我们看下这个SQL

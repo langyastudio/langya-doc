@@ -779,6 +779,12 @@ public class AppConfig {
 > @PropertySource 支持 XML 格式和 properties 格式，不支持Spring Boot下的 YAML 格式
 >
 > 当有多个外部配置时，可以用 @PropertySources 指定
+>
+> 如果想支持YAML：
+>
+> https://blog.csdn.net/qq_37960603/article/details/122971803 
+>
+> https://blog.csdn.net/feinifi/article/details/127580474
 
 
 

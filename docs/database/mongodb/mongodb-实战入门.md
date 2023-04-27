@@ -792,3 +792,5 @@ public class ApiController
 [MongoDB 快速入门，掌握这些刚刚好！](http://www.macrozheng.com/#/reference/mongodb_start)
 
 [MongoDB 都有哪些使用的业务场景](https://cloud.tencent.com/developer/article/1583307)
+
+[万字详解，吃透 MongoDB！](https://mp.weixin.qq.com/s/T_oxRwDp8W-OgLwb9AbdCw)

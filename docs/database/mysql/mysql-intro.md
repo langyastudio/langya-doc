@@ -165,3 +165,4 @@ MVCC 可以看作是行级锁的一个升级，可以有效减少加锁操作，
 
 - 《高性能 MySQL》
 - https://www.omnisci.com/technical-glossary/relational-database
+- [MySQL 自增主键一定是连续的吗](https://mp.weixin.qq.com/s/HvA4zdF4VOYrs2DQ93rfYg)

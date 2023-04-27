@@ -16,17 +16,36 @@
 
 
 
+## [maven](https://so.csdn.net/so/search?q=maven&spm=1001.2101.3001.7020) repositories 报错，修改 Settings 不生效
+
+- 删除 **.idea** 文件夹
+- File -> Settings -> Build,Execution,Deployment -> Remote Jar Repositories
+
+移除无效的仓库
+
+![image-20230413213711939](https://img-note.langyastudio.com/202304132137001.png?x-oss-process=style/watermark)
+
+-  点击 File -> Invalidate Caches。重启等待，重新建立索引
+
+![image-20230413214456344](https://img-note.langyastudio.com/202304132144376.png?x-oss-process=style/watermark)
+
+- 删除索引
+
+![image-20230414103533767](https://img-note.langyastudio.com/202304141035819.png?x-oss-process=style/watermark)
+
+
+
 ## Could not transfer artifact xxx from/to maven-default-http-blocker (http://0.0.0.0/)
 
 maven 构建项目的时候遇到了 Could not transfer artifact xxxxxx:pom:1.1-SNAPSHOT from/to maven-default-http-blocker (http://0.0.0.0/): Blocked mirror for repositories: [nexus-118 (http://xxxxxx.com:8081/repository/maven-public/, default, releases+snapshots)] 错误
 
 **问题原因：**
 
-maven 高版本配置了不能直接访问 http 的库
+maven **高版本**配置了不能直接访问 http 的库
 
 **解决方案：**
 
-把 blocked 配置为 FALSE 就行了
+把 blocked 配置为 FALSE 就行了 or 使用低版本的 Maven
 
 ```xml
 <mirror>

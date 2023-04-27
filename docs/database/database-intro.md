@@ -256,6 +256,12 @@
 
 
 
+## MySQL千亿级数据线上平滑扩容实战
+
+https://mp.weixin.qq.com/s/Sop5bxyWNWPq5ANF6fQ6yA
+
+
+
 ## 参考
 
 * <https://blog.csdn.net/rl529014/article/details/48391465>

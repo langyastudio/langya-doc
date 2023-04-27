@@ -18,7 +18,82 @@ ONBOOT 属性改成 yes，并且加一个 DNS1=114.114.114.114
 
 
 
+### 中标麒麟 Not Found
+
+https://download.docker.com/linux/centos/7.6-4.el7.ns7.05.lic.adv/x86_64/stable/repodata/repomd.xml: [Errno 14] HTTPS Error 404 - Not Found
+正在尝试其它镜像。
+
+releasever 最后的结果是 **Version+Release** 的组合 **7.6-4.el7.ns7.05.lic.adv，**导致无法找到，奇怪的是，本来应该只取 Version 的，不知为何这中标麒麟也加上了 release，无奈之下，手动改了源的 releasever 变量替换为固定的 **7.6**
+
+**解决方案：**
+
+将源如 `docker-ce.repo` 文件中 `$releasever` 改为 `7.6`
+
+> https://www.jianshu.com/p/8b6062afa9aa
+
+
+
+### 中标麒麟 container-selinux的依赖过低
+
+![image-20230208091529066](https://img-note.langyastudio.com/202302080915406.png?x-oss-process=style/watermark)
+
+**解决方案：**
+
+阿里云镜像地址：https://mirrors.aliyun.com/centos/7/extras/x86_64/Packages/，直接在 centos7.6 的包里下载最新的即可：
+
+- container-selinux 
+- slirp4netns 
+- fuse-overlayfs 依赖 fuse3-libs
+
+```bash
+wget https://mirrors.aliyun.com/centos/7/extras/x86_64/Packages/fuse3-libs-3.6.1-4.el7.x86_64.rpm
+rpm -ivh fuse3-libs-3.6.1-4.el7.x86_64.rpm
+
+wget https://mirrors.aliyun.com/centos/7/extras/x86_64/Packages/fuse-overlayfs-0.7.2-6.el7_8.x86_64.rpm
+rpm -ivh fuse-overlayfs-0.7.2-6.el7_8.x86_64.rpm
+
+wget https://mirrors.aliyun.com/centos/7/extras/x86_64/Packages/slirp4netns-0.4.3-4.el7_8.x86_64.rpm
+rpm -ivh slirp4netns-0.4.3-4.el7_8.x86_64.rpm
+
+wget https://mirrors.aliyun.com/centos/7/extras/x86_64/Packages/container-selinux-2.107-1.el7_6.noarch.rpm
+rpm -ivh container-selinux-2.107-1.el7_6.noarch.rpm
+```
+
+> 下载命令： `wget xxx.rpm`
+> 安装命令： `rpm -ivh xxx.rpm`
+>
+> https://www.jianshu.com/p/8b6062afa9aa
+
+
+
+### 中标麒麟 Cannot open self /usr/local/bin/docker-compose
+
+```bash
+# 删除原来不能执行的/usr/local/bin/docker-compose
+sudo rm /usr/local/bin/docker-compose
+
+# 下载安装docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+# 添加权限
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
+or
+
+```bash
+choose the way of downloading the file ,
+visit this https://github.com/docker/compose/releases website and choose file to download
+docker-compose-Linux-x86_64 7.67 MB
+docker-compose-Windows-x86_64.exe 5.97 MB
+then rename as docker-compose and copy into /usr/local/bin/
+```
+
+
+
 ### 为 repo ‘base’ 下载元数据失败
+
+> 中标麒麟的需要执行如下步骤后，将 ns7-adv.repo 源重新构建
 
 ```bash
 #查看版本号
@@ -254,6 +329,16 @@ powercfg -h off
 
 在运行里输入regedit，回车找到注册表中的 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ShellIconOverlayIdentifiers\
 检查是否有 5 个角标文件有在 “01UnsuppModule” 上面有几个键。如果 5 个或超过 5 个就删除掉一些。
+
+
+
+### OpenVPN 连接多个地址
+
+打开 设备管理器 界面，通过点击 操作->添加过时硬件，在弹出的界面中**手动**添加同样的网络适配器即可。
+
+![image-20230306203011686](https://img-note.langyastudio.com/202303062030920.png?x-oss-process=style/watermark)
+
+
 
 
 

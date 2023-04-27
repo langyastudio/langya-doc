@@ -256,6 +256,8 @@ private:
 ## 参考
 
 - **《MySQL 技术内幕 InnoDB 存储引擎第 2 版》**
+- [这个 SQL 语句加了哪些锁](https://mp.weixin.qq.com/s/Pi_SLqs3lwA7vWcT6lVv5g)
+- [57张图，搞定MySQL锁](https://mp.weixin.qq.com/s/ryi3_FXIwIEOhe5reX5WKg)
 - https://mp.weixin.qq.com/s/NS3jw5Ka8yEqWzHZ4eSnyw
 - [Innodb 中的事务隔离级别和锁的关系](https://tech.meituan.com/2014/08/20/innodb-lock.html)
 - [MySQL 事务与 MVCC 如何实现的隔离级别](https://blog.csdn.net/qq_35190492/article/details/109044141)

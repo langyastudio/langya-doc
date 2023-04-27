@@ -21,6 +21,18 @@ new ArrayList<V>( Collection<V> )
 
 
 
+#### local class incompatible: stream classdesc serialVersionUID = xxx, local class serialVersionUID = xxxx
+
+由于序列化与反序列化采用 **Class 类结构不一致**导致的异常。例如：旧版本与新版本应用程序共用了相同 Key 的 Redis 进行了不同 Class 类结构的编解码操作，引发异常。
+
+可行解决方案如下：
+
+- 所有产品统一升级到最新版本
+- 独立 Redis，防止其他产品影响
+- 修改每个产品 Redis 前缀，防止其他产品影响
+
+
+
 #### 文件的最后更新时间戳会丢失毫秒精度
 
 https://mp.weixin.qq.com/s/Nm-yXgKlKbsiKKRistPzvw

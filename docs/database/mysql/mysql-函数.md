@@ -85,3 +85,4 @@
 ### 更多 MySQL 函数
 
 - 请查看访问：[MySQL 函数](https://www.begtut.com/sql/sql-ref-mysql.html)
+- [MySQL中这14个小玩意，让人眼前一亮](https://mp.weixin.qq.com/s/_0umF8IBEzf9IHW2-e_LTQ)
