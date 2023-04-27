@@ -505,6 +505,9 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 - [php-性能压榨](./docs/architecture/performance-optimization/php-性能压榨.md)
 - [5秒到1秒 记一次效果“非常”显著的性能优化](https://mp.weixin.qq.com/s/7Pr5iX3KE08h32AytBuNqQ)
 - [serialization 序列化](./docs/architecture/performance-optimization/serialization-序列化.md)
+- [3招将吞吐量提升了一倍](./docs/architecture/performance-optimization/3招将吞吐量提升了一倍.md)
+- [7min到40s-SpringBoot启动优化实践](./docs/architecture/performance-optimization/7min到40s-SpringBoot启动优化实践.md)
+- [10种神级性能优化手段](./docs/architecture/performance-optimization/10种神级性能优化手段.md)
 
 
 
@@ -645,8 +648,11 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 >
 > 如果在线上实时分析，有 arthas 和 perf 两款工具
 
-- [java 性能问题排查](./docs/devops/debug/java-性能问题排查.md)
-- [jadx 反编译工具](./docs/devops/debug/jadx.md)
+- [java 性能问题排查](./docs/devops/oom-cpu/java-性能问题排查.md)
+- [jadx 反编译工具](./docs/devops/oom-cpu/jadx.md)
+- [arthas 线上分析工具](./docs/devops/oom-cpu/arthas.md)
+- [jvisualvm](./docs/devops/oom-cpu/jvisualvm.md)
+- [常见内存溢出与CPU爆满问题](./docs/devops/oom-cpu/oom&cpu.md)
 
 
 
