@@ -266,3 +266,9 @@ void testNegative() {
     });
 }
 ```
+
+
+
+## 参考
+
+[那些年，我们写过的无效单元测试](https://mp.weixin.qq.com/s/R4ZKWcB4TMFAiQlnIRqNeQ)

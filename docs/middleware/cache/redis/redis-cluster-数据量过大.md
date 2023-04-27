@@ -37,7 +37,7 @@
 
 Redis Cluster 通过 **分片（Sharding）** 来进行数据管理，提供 **主从复制（Master-Slave Replication）、故障转移（Failover）** 等开箱即用的功能，可以非常方便地帮助我们**解决 Redis 大数据量缓存以及 Redis 服务高可用的问题**。
 
-Redis Cluster 这种方案可以很方便地进行 **横向拓展（Scale Out）**，内置了开箱即用的解决方案。当 Redis Cluster 的处理能力达到瓶颈无法满足系统要求的时候，直接动态添加 Redis 节点到集群中即可。根据官方文档中的介绍，**Redis Cluster 支持扩展到 1000 个节点**。反之，当 Redis Cluster 的处理能力远远满足系统要求，同样可以动态删除集群中 Redis 节点，节省资源。
+Redis Cluster 这种方案可以很方便地进行 **横向拓展（Scale Out）**，内置了开箱即用的解决方案。当 Redis Cluster 的处理能力达到瓶颈无法满足系统要求的时候，直接动态添加 Redis 节点到集群中即可。根据官方文档中的介绍，**Redis 的目标是 Redis Cluster 支持扩展到 1000 个节点，但实际应用估计能到 200 就不错了**。反之，当 Redis Cluster 的处理能力远远满足系统要求，同样可以动态删除集群中 Redis 节点，节省资源。
 
 ![img](https://www.yuque.com/api/filetransfer/images?url=https%3A%2F%2Fguide-blog-images.oss-cn-shenzhen.aliyuncs.com%2Fgithub%2Fjavaguide%2Fdatabase%2Fredis%2Fredis-cluster%2Fredis-scale-out.png&sign=4f407532c59d139da1d21835bbbc395a8bc2950c9de766b034b9f01d74872300)
 

@@ -164,6 +164,116 @@ public class StrategyUseService implements ApplicationContextAware{
 
 
 
+## 服务定位器模式
+
+> https://mp.weixin.qq.com/s/huwL9OAcvAMGObmMf5dcgw
+
+- 让我们定义我们的服务定位器接口`ParserFactory`， 它有一个接受内容类型参数并返回`Parser`的方法
+
+```java
+public interface ParserFactory {
+  Parser getParser(ContentType contentType);
+}
+```
+
+- 我们配置`ServiceLocatorFactoryBean`使用`ParserFactory`作为服务定位器接口，`ParserFactory`这个接口不需要写实现类
+
+```java
+@Configuration
+public class ParserConfig {
+    
+  @Bean("parserFactory")
+  public FactoryBean serviceLocatorFactoryBean() {
+    ServiceLocatorFactoryBean factoryBean = new ServiceLocatorFactoryBean();
+    // 设置服务定位接口   
+    factoryBean.setServiceLocatorInterface(ParserFactory.class);
+    return factoryBean;
+  }
+
+}
+```
+
+- 设置解析器Bean的名称为类型名称，方便服务定位
+
+```java
+// 设置bean的名称和类型一致
+@Component("CSV")
+public class CSVParser implements Parser { .. }
+@Component("JSON")
+public class JSONParser implements Parser { .. }
+@Component("XML")
+public class XMLParser implements Parser { .. }
+```
+
+- 修改枚举, 添加XML
+
+```java
+public enum ContentType {
+  JSON,
+  CSV,
+  XML
+}
+```
+
+- 最后用客户端调用，直接根据类型调用对应的解析器，没有了`switch case`
+
+```java
+@Service
+public class Client {
+  private ParserFactory parserFactory;
+  @Autowired
+  public Client(ParserFactory parserFactory) {
+    this.parserFactory = parserFactory;
+  }
+  public List getAll(ContentType contentType) {
+    ..
+    // 关键点，直接根据类型获取
+    return parserFactory
+        .getParser(contentType)  
+        .parse(reader);
+  }
+  ..
+}
+```
+
+**嘿嘿，我们已经成功地实现了我们的目标。现在再加新的类型，我们只要扩展添加新的解析器就行，再也不用修改客户端了，满足开闭原则。**
+
+如果你觉得Bean的名称直接使用类型怪怪的，这边可以建议你按照下面的方式来。
+
+```java
+public enum ContentType {
+  JSON(TypeConstants.JSON_PARSER),
+  CSV(TypeConstants.CSV_PARSER),
+  XML(TypeConstants.XML_PARSER);
+  private final String parserName;
+  ContentType(String parserName) {
+    this.parserName = parserName;
+  }
+  
+  @Override
+  public String toString() {
+    return this.parserName;
+  }
+  public interface TypeConstants {
+    
+    String CSV_PARSER = "csvParser";
+    String JSON_PARSER = "jsonParser";
+    String XML_PARSER = "xmlParser"; 
+  }
+}
+
+@Component(TypeConstants.CSV_PARSER)
+public class CSVParser implements Parser { .. }
+@Component(TypeConstants.JSON_PARSER)
+public class JSONParser implements Parser { .. }
+@Component(TypeConstants.XML_PARSER)
+public class XMLParser implements Parser { .. }
+```
+
+- **服务定位器模式**消除了客户端对具体实现的依赖。以下引自 `Martin Fowler` 的文章总结了核心思想：“服务定位器背后的基本思想是拥有一个知道如何获取应用程序可能需要的所有服务的对象。因此，此应用程序的服务定位器将有一个在需要时返回“服务”的方法。”
+
+![图片](https://img-note.langyastudio.com/202302110023556.png?x-oss-process=style/watermark)
+
 ## 责任链模式
 
 ### 业务场景
@@ -887,7 +997,7 @@ fileResolveFactory.resolve();
 
 ## 单例模式
 
-### 6.1 业务场景
+### 业务场景
 
 单例模式，**保证一个类仅有一个实例**，并提供一个访问它的全局访问点。 I/O与数据库的连接,一般就用单例模式实现de的。Windows里面的Task Manager（任务管理器）也是很典型的单例模式。
 

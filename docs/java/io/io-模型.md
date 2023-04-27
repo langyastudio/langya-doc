@@ -120,7 +120,33 @@ AIO 也就是 NIO 2。Java 7 中引入了 NIO 的改进版 NIO 2, 它是异步 I
 
 
 
-参考：
+### io_uring
+
+现在，io_uring 已经能够挑战 NIO 的，功能非常强大。io_uring 在2019加入了 Linux 内核，目前 5.1+ 的内核，可以采用这个功能。
+
+NIO 依然有大量的系统调用，那就是 Epoll 的 epoll_ctl。另外，获取到网络事件之后，还需要把 socket 的数据进行存取，这也是一次系统调用。虽然相对于 BIO 来说，上下文切换次数已经减少很多，但它仍然花费了比较多的时间在切换之上。
+
+IO 只负责对发生在fd描述符上的事件进行通知。事件的获取和通知部分是非阻塞的，但收到通知之后的操作，却是阻塞的。即使使用多线程去处理这些事件，它依然是阻塞的。
+
+如果能把这些系统调用都放在操作系统里完成，那么就可以节省下这些系统调用的时间，io_uring 就是干这个的。
+
+![图片](https://img-note.langyastudio.com/202303031934200.png?x-oss-process=style/watermark)
+
+
+
+如图，用户态和内核态共享提交队列（submission queue）和完成队列（completion queue），这两条队列通过mmap共享，高效且安全。
+
+（SQ）给内核源源不断的布置任务，然后从另外一条队列（CQ）获取结果；内核则按需进行 epoll()，并在一个线程池中执行就绪的任务。
+
+用户态支持Polling模式，不会发生中断，也就没有系统调用，通过轮询即可消费事件；内核态也支持Polling模式，同样不会发生上下文切换。
+
+可以看出关键的设计在于，内核通过一块和用户共享的内存区域进行消息的传递，可以绕过Linux 的 syscall 机制。
+
+rocksdb、ceph等应用，已经在尝试这些功能，随着内核io_uring的成熟，相信网络编程在效率上会更上一层楼。
+
+
+
+## 参考
 
 - 《深入拆解 Tomcat & Jetty》
 - 如何完成一次 IO：[https://llc687.top/post/如何完成一次-io/](https://llc687.top/post/如何完成一次-io/)
@@ -128,3 +154,4 @@ AIO 也就是 NIO 2。Java 7 中引入了 NIO 的改进版 NIO 2, 它是异步 I
 - 10 分钟看懂， Java NIO 底层原理：https://www.cnblogs.com/crazymakercircle/p/10225159.html
 - IO 模型知多少 | 理论篇：https://www.cnblogs.com/sheng-jie/p/how-much-you-know-about-io-models.html
 - 《UNIX 网络编程 卷 1；套接字联网 API 》6.2 节 IO 模型
+- [io_uring，干翻 nio！](https://mp.weixin.qq.com/s/Mcv7meWsNAPyyyAOHDlFRg)

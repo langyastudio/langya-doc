@@ -109,6 +109,8 @@ memcached 是分布式缓存最开始兴起的那会，比较常用的。后来�
 
 ## redis 数据结构
 
+[40 张图，拿捏 Redis 数据结构](https://mp.weixin.qq.com/s/WhS2jSzHHf_iOjcSa3-a8w)
+
 你可以自己本机安装 redis 或者通过 redis 官网提供的[在线 redis 环境](https://try.redis.io/)。
 
 ![try-redis](https://img-note.langyastudio.com/202111231612923.png?x-oss-process=style/watermark)

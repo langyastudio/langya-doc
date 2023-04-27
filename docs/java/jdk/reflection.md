@@ -341,3 +341,10 @@ boolean isClassPresent(String name) {
 }
 ```
 
+
+
+### 注意
+
+反射的功能很强大，但它是通过解析字节码实现的，性能就不是很理想。
+
+现实中有很多对反射的优化方法，比如把反射执行的过程（比如 Method）缓存起来，使用复用来加快反射速度。Java 7.0 之后，加入了新的包 `java.lang.invoke`，同时加入了新的 JVM 字节码指令 invokedynamic，用来支持从 JVM 层面，直接通过字符串对目标方法进行调用。

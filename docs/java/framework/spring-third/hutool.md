@@ -16,7 +16,7 @@ https://www.hutool.cn/docs/#/
 
 #### BeanUtils
 
-Bean 间赋值
+**Bean 间赋值**
 
 ```java
 //copyProperties(Object source, Object target)
@@ -25,7 +25,7 @@ BeanUtils.copyProperties(sourDto, desModel);
 
 
 
-实体类转Map
+**实体类转Map**
 
 ```java
 public static Map<String, Object> beanToMap(Object object)
@@ -34,6 +34,16 @@ public static Map<String, Object> beanToMap(Object object)
     return JSON.parseObject(jsonStr);
 }
 ```
+
+
+
+**性能对比**
+
+> [为什么大厂都不推荐使用BeanUtils](https://mp.weixin.qq.com/s/UMK2OMKQiTjP3cfqKL111Q)
+
+![image-20230218003653731](https://img-note.langyastudio.com/202302180036806.png?x-oss-process=style/watermark)
+
+性能走势 --> `spring cglib BeanCopier` 优于 `spring copyProperties` 优于 `apache PropertyUtils` 优于 `apache BeanUtils`
 
 
 

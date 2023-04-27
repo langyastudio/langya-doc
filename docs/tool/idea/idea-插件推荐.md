@@ -160,7 +160,7 @@ SonarLint 帮助你发现**代码的错误和漏洞**，就像是代码拼写检
 
 
 
-## SequenceDiagram 时序图
+## Sequence Diagram 时序图
 
 序列图（Sequence Diagram）是一种 [UML](https://zh.m.wikipedia.org/wiki/UML) 行为图，表示系统执行某个方法/操作（如登录操作）时，**对象之间的顺序调用关系**。常用于阅读源码、梳理业务逻辑等。
 
