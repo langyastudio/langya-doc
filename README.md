@@ -77,10 +77,14 @@ GitHub Pages：https://langyastudio.github.io/langya-doc
 > 多线程、线程安全、AQS、锁、并发容器、原子类、ABA 问题、伪共享等
 
 - [java 并发基础知识](./docs/java/concurrent/java-并发基础知识.md)
+
 - [java 线程池详解](./docs/java/concurrent/线程池.md)
+
 - [java 线程池最佳实践](./docs/java/concurrent/线程池最佳实践.md)
 
+- [线程池-异常处理](./docs/java/concurrent/线程池-异常处理.md)
 
+  
 
 **扩展**
 
