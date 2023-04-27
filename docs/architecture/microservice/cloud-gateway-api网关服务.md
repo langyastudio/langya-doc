@@ -363,8 +363,6 @@ public class GatewayRequestFilter implements GlobalFilter {
 
 源码地址：[https://github.com/langyastudio/langya-tech/tree/master/spring-cloud](https://github.com/langyastudio/langya-tech/tree/master/spring-cloud)
 
-
-
 使用 Nacos Discovery Starter 、 Spring Cloud Gateway Starter 完成 Spring Cloud 服务路由。
 
 - [Nacos](https://github.com/alibaba/Nacos) 是阿里巴巴开源的一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台
@@ -422,6 +420,14 @@ spring:
 
     #spring cloud gateway config
     gateway:
+      discovery:
+        locator:
+          #设为true便开启通过服务中心的自动根据 serviceId 创建路由的功能
+          enabled: true 
+          #服务名使用小写
+          lowerCaseServiceId: true 
+          #网关访问时应用名作为上下文
+          filters[0]: PreserveHostHeader
       routes:
         - id: nacos-gateway  
           uri: lb://nacos-discovery-provider

@@ -496,7 +496,10 @@ Linux 文件系统的结构层次鲜明，就像一棵倒立的树，最顶层�
 
 ```bash
 #安装
+#如果安装失败，使用:
+#yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 yum install epel-release -y
+
 yum install nload -y
 
 #使用
@@ -507,7 +510,7 @@ nload -m -u m
 
 ```bash
 #安装
-yum install htop -y
+yum install ncurses htop -y
 
 #使用
 htop
@@ -1376,9 +1379,13 @@ dmtsai lines: 5 columns: 9
 
 在关机前需要先使用 who 命令查看有没有其它用户在线
 
+
+
 **sync**
 
 为了加快对磁盘文件的读写速度，位于内存中的文件数据不会立即同步到磁盘，因此关机之前需要先进行 sync 同步操作
+
+
 
 **shutdown**
 

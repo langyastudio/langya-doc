@@ -61,7 +61,7 @@ HTTP 协议比原生接口受到更多的限制，但拥有更好的兼容性，
 
 ### JDBC 驱动
 
-https://github.com/ClickHouse/clickhouse-jdbc/tree/master
+https://github.com/ClickHouse/clickhouse-jdbc/tree/main
 
 
 
@@ -70,7 +70,13 @@ https://github.com/ClickHouse/clickhouse-jdbc/tree/master
 **Driver Class**: `com.clickhouse.jdbc.ClickHouseDriver`
 
 ```ini
-spring.datasource.clickhouse.drive-class-name=com.clickhouse.jdbc.ClickHouseDriver
+spring
+  datasource:
+    clickhouse:
+      url: jdbc:clickhouse://192.168.249.4:8123/default?health_check_interval=5000
+      username: default
+      password: clickhouse
+      driver-class-name: com.clickhouse.jdbc.ClickHouseDriver
 ```
 
 > `ru.yandex.clickhouse.ClickHouseDriver` has been deprecated and everything under `ru.yandex.clickhouse` will be removed in 0.3.3

@@ -155,7 +155,33 @@ config.addChangeListener(new ConfigChangeListener() {
 });
 ```
 
-#### 
+
+
+### 配置文件加载顺序
+
+> https://mp.weixin.qq.com/s/z-AXOX6C0hT8SXUqO3W1mw
+>
+> apollo.bootstrap.enabled=true，将 Apollo 的配置加载提前到了 FeignClient 加载前
+
+apollo 配置的加载顺序会有三种情况：
+
+| apollo.bootstrap.enabled | apollo.bootstrap.eagerLoad.enabled | 对应SpringBoot的运行阶段 |
+| :----------------------- | :--------------------------------- | :----------------------- |
+| True                     | True                               | prepareEnvironment       |
+| True                     | False                              | prepareContext           |
+| False                    | False                              | refreshContext           |
+
+这里简单介绍下这三种情况对应的 Springboot 运行阶段分别负责的功能是：
+
+- prepareEnvironment，是最早加载配置的地方，bootstrap.yml 配置、系统启动参数中的环境变量都会在这个阶段被加载
+
+- prepareContext，主要对上下文做初始化，如设置 bean 名字命名器、设置加载 .class 文件加载器等
+
+- refreshContext，该阶段主要负责对 bean 容器进行加载，括扫描文件得到 BeanDefinition 和 BeanFactory 工厂、Bean 工厂生产 Bean 对象、对 Bean 对象再进行属性注入等工作
+
+![img](https://img-note.langyastudio.com/202304200738519.png?x-oss-process=style/watermark)
+
+
 
 ### [网络策略](https://www.apolloconfig.com/#/zh/deployment/distributed-deployment-guide?id=_14-网络策略)
 
